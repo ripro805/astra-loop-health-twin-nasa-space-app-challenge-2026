@@ -1,0 +1,29 @@
+{
+  "name": "astra-loop",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ASTRA-LOOP: Closed-Loop Astronaut Health Twin for Long-Duration Deep-Space Missions",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev:api & npm run dev:web",
+    "dev:web": "npm run dev --workspace=apps/web",
+    "dev:api": "npm run dev --workspace=apps/api",
+    "build": "npm run build --workspaces",
+    "build:web": "npm run build --workspace=apps/web",
+    "build:api": "npm run build --workspace=apps/api",
+    "seed": "npm run seed --workspace=apps/api",
+    "lint": "npm run lint --workspaces"
+  },
+  "keywords": [
+    "astronaut-health",
+    "digital-twin",
+    "closed-loop",
+    "deep-space",
+    "nasa-space-apps"
+  ],
+  "author": "ASTRA-LOOP Engineering Team",
+  "license": "MIT"
+}

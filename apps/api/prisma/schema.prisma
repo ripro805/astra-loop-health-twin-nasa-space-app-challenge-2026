@@ -1,0 +1,135 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Astronaut {
+  id              String   @id @default(cuid())
+  name            String
+  missionDay      Int
+  calibrationDone Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  healthMetrics   HealthMetric[]
+  radiationEvents RadiationEvent[]
+  checkIns        CheckIn[]
+  countermeasures Countermeasure[]
+  alerts          Alert[]
+}
+
+model HealthMetric {
+  id             String   @id @default(cuid())
+  astronautId    String
+  timestamp      DateTime
+  missionDay     Int      @default(1)
+
+  heartRate      Float?
+  hrv            Float?
+  sleepHours     Float?
+  activity       Float?
+  mood           Float?
+  fatigue        Float?
+  stress         Float?
+  reactionTimeMs Float?
+  voiceCadence   Float?
+
+  dataSource     String   @default("WEARABLE_BIO_SENSOR")
+  isSynthetic    Boolean  @default(true)
+
+  astronaut      Astronaut @relation(fields: [astronautId], references: [id], onDelete: Cascade)
+
+  @@index([astronautId])
+  @@index([timestamp])
+  @@index([missionDay])
+}
+
+model RadiationEvent {
+  id             String   @id @default(cuid())
+  astronautId    String
+  timestamp      DateTime
+  missionDay     Int      @default(1)
+  doseRate       Float
+  cumulativeDose Float
+  eventType      String
+  severity       String
+
+  astronaut      Astronaut @relation(fields: [astronautId], references: [id], onDelete: Cascade)
+
+  @@index([astronautId])
+  @@index([timestamp])
+  @@index([missionDay])
+}
+
+model CheckIn {
+  id             String   @id @default(cuid())
+  astronautId    String
+  timestamp      DateTime
+  missionDay     Int      @default(1)
+
+  mood           Float?
+  fatigue        Float?
+  stress         Float?
+  reactionTimeMs Float?
+  voiceAvailable Boolean  @default(false)
+  voiceCadence   Float?
+  notes          String?
+
+  astronaut      Astronaut @relation(fields: [astronautId], references: [id], onDelete: Cascade)
+
+  @@index([astronautId])
+  @@index([missionDay])
+}
+
+model Countermeasure {
+  id             String   @id @default(cuid())
+  astronautId    String
+  type           String
+  recommendation String
+  reason         String   @default("Detected physiological deviation from baseline")
+  startedAt      DateTime @default(now())
+  evaluationAt   DateTime?
+  status         String   @default("ACTIVE")
+
+  astronaut      Astronaut @relation(fields: [astronautId], references: [id], onDelete: Cascade)
+  outcomes       CountermeasureOutcome[]
+
+  @@index([astronautId])
+  @@index([status])
+}
+
+model CountermeasureOutcome {
+  id               String   @id @default(cuid())
+  countermeasureId String
+  targetMetric     String   @default("sleepHours")
+  beforeScore      Float?
+  afterScore       Float?
+  effect           Float?
+  confidence       Float?
+  result           String
+  evaluatedAt      DateTime @default(now())
+
+  countermeasure   Countermeasure @relation(fields: [countermeasureId], references: [id], onDelete: Cascade)
+
+  @@index([countermeasureId])
+}
+
+model Alert {
+  id          String   @id @default(cuid())
+  astronautId String
+  timestamp   DateTime @default(now())
+  domain      String
+  severity    String
+  title       String
+  explanation String
+  confidence  Float
+
+  astronaut   Astronaut @relation(fields: [astronautId], references: [id], onDelete: Cascade)
+
+  @@index([astronautId])
+  @@index([timestamp])
+}

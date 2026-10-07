@@ -1,0 +1,99 @@
+ASTRA-LOOP — Detailed Presentation Video Script
+
+[Opening visual: dark space-themed background, NASA-inspired UI, title "ASTRA-LOOP" with subtitle "Closed-Loop Astronaut Health Twin"]
+
+Narrator:
+"In long-duration deep-space missions, astronauts are not only dealing with isolation and distance from Earth—they are dealing with a constantly changing body, a changing environment, and a growing risk of health deterioration. Traditional monitoring tools often give fragmented updates. They tell us what happened, but not what is likely to happen next. That gap is exactly what ASTRA-LOOP was built to solve."
+
+[Scene: mission dashboard with health metrics, z-scores, risk indicators, radiation watch, mission day timeline]
+
+Narrator:
+"ASTRA-LOOP is a closed-loop astronaut health twin. It collects mission health signals, compares them against each astronaut’s own history, predicts potential risks, suggests actions, and helps evaluate whether those actions actually improved the situation."
+
+[Scene: animated loop graphic: SENSE → UNDERSTAND → PREDICT → ACT → LEARN]
+
+Narrator:
+"The system follows a continuous five-step loop: sense what is happening, understand the change, predict the likely future state, act with the right countermeasure, and learn from the outcome. This makes the platform more than a dashboard—it becomes a decision-support tool for mission operations."
+
+[Scene: dashboard showing astronaut vitals, sleep, HRV, reaction time, voice cadence, radiation exposure]
+
+Narrator:
+"At the center of the project is the astronaut health twin. It monitors multiple data streams such as heart and cardiovascular health, sleep behavior, activity, voice and behavioral patterns, and radiation exposure. Instead of comparing the astronaut to a generic average, the system compares them to their own personal baseline over recent days and weeks. That means the model is more accurate, more human-centered, and more mission-relevant."
+
+[Scene: highlight risk score and anomaly chart]
+
+Narrator:
+"When one metric starts drifting, ASTRA-LOOP identifies the deviation in context. It evaluates whether changes are unusual, whether the risk is increasing, and which aspects of the astronaut’s physiology are most affected. This gives mission teams a clearer understanding of whether risk is rising slowly, suddenly, or only under a specific condition."
+
+[Scene: radiation monitor and alert card]
+
+Narrator:
+"The project also includes a radiation watch module. During deep-space exploration, radiation exposure can affect sleep, cognition, recovery, and emotional stability. ASTRA-LOOP tracks these changes over a 72-hour period and highlights patterns that could indicate a delayed impact after a solar event or a dose spike."
+
+[Scene: countermeasures table with recommended actions and rankings]
+
+Narrator:
+"One of the most important features is the countermeasure engine. When the system detects a rising risk, it can recommend actions such as sleep phase adjustment, workload modulation, hydration guidance, behavioral changes, or recovery support. Each option is ranked based on its expected effectiveness, urgency, and estimated benefit. This helps mission operators move from passive monitoring to informed intervention."
+
+[Scene: before/after comparison and learning panel]
+
+Narrator:
+"After a countermeasure is applied, the system does not stop there. It evaluates the response and asks the question: Did the intervention help? By comparing the before and after pattern, the platform measures improvements and feeds that insight back into the learning loop. This is a critical part of making decisions more evidence-based over time."
+
+[Scene: what-if simulation panel]
+
+Narrator:
+"The platform also supports what-if analysis. Mission teams can simulate scenarios such as increased radiation exposure, delayed sleep, or reduced recovery time, and immediately see how the astronaut’s projected health status could change. This makes the system useful not only for current emergencies, but also for proactive planning."
+
+[Scene: offline mode indicator and local queue system]
+
+Narrator:
+"In a real space mission, connectivity is unpredictable. ASTRA-LOOP is designed with offline-first behavior in mind. It can store data locally, queue actions, and synchronize when the connection is restored. That ensures continuity and resilience in challenging mission conditions."
+
+[Scene: architecture diagram with web app, API, database, Prisma, Postgres]
+
+Narrator:
+"From a technical perspective, the project combines a modern web front end with a dedicated API layer and a PostgreSQL database. The application is built in a modular structure, making it easier to scale, maintain, and extend. The data layer is modeled around mission health information, risk predictions, and countermeasure tracking, while the front end presents the information in a clean, mission-ready interface."
+
+[Scene: mission control UI with tabs for Today, Twin, Radiation, Countermeasures, Check-in, What Changed]
+
+Narrator:
+"The user experience is centered on operational clarity. Users can view today’s health overview, compare changes in the astronaut’s condition, review radiation risks, assess countermeasures, and examine the health twin forecast. The result is a system that supports both quick decisions and deeper analysis."
+
+[Scene: closing with title and mission impact]
+
+Narrator:
+"ASTRA-LOOP represents a vision for the future of space medicine: a proactive, intelligent health monitoring system that supports astronauts before problems become critical. By combining personal baselines, predictive modeling, operational decision support, and adaptive learning, the project brings us closer to safer and more resilient long-duration exploration missions."
+
+[Final on-screen text: "ASTRA-LOOP | Safer missions through predictive health intelligence"]
+
+Narrator:
+"Thank you."
+
+----------------------------------------
+Detailed shot-by-shot plan for video editing:
+
+1. 0:00–0:15 — Opening title sequence with deep-space visuals and mission branding
+2. 0:15–0:45 — Problem statement: health risks during long-duration missions
+3. 0:45–1:15 — Explain the ASTRA-LOOP loop: sense, understand, predict, act, learn
+4. 1:15–2:00 — Show dashboard metrics and baseline comparison
+5. 2:00–2:45 — Radiation watch and anomaly detection
+6. 2:45–3:30 — Countermeasure recommendations and ranking
+7. 3:30–4:15 — Before/after impact and learning loop
+8. 4:15–5:00 — What-if simulation and offline resilience
+9. 5:00–5:45 — Technical architecture and project stack
+10. 5:45–6:15 — Closing impact statement and final title
+
+----------------------------------------
+Short 60-second version:
+
+"ASTRA-LOOP is a closed-loop astronaut health twin designed for long-duration deep-space missions. It monitors key health signals, compares them to each astronaut’s personal baseline, predicts future risk, recommends countermeasures, and evaluates whether the intervention improved the astronaut’s condition. The system includes radiation monitoring, health trend analysis, what-if simulations, and offline-first support for mission resilience. Built with a modern web front end, API layer, and PostgreSQL database, ASTRA-LOOP helps turn complex biomedical data into actionable decision support for safer space exploration."
+
+----------------------------------------
+Tips for presentation delivery:
+
+- Use a calm, confident voice with a slightly futuristic tone.
+- Keep visuals clean and technical, with space-themed color accents.
+- Emphasize the value of proactive healthcare and mission safety.
+- Include product screenshots from the dashboard to make the pitch more tangible.
+- If presenting to judges or stakeholders, focus on real-world impact, technical quality, and resilience under mission constraints.
