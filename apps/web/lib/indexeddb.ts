@@ -1,8 +1,16 @@
 import { openDB, DBSchema, IDBPDatabase } from 'idb';
 
-interface QueuedItem {
+export type OfflineActionType =
+  | 'CHECK_IN'
+  | 'CHECK_IN_V2'
+  | 'COUNTERMEASURE_START'
+  | 'ROUTINE_TASK_COMPLETE'
+  | 'IMAGE_CAPTURE'
+  | 'ESCALATION_ACK';
+
+export interface QueuedItem {
   id: string;
-  type: 'CHECK_IN' | 'COUNTERMEASURE_START';
+  type: OfflineActionType;
   payload: any;
   createdAt: string;
 }
@@ -25,7 +33,7 @@ interface AstraLoopDB extends DBSchema {
 }
 
 const DB_NAME = 'astra-loop-db';
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 
 let dbPromise: Promise<IDBPDatabase<AstraLoopDB>> | null = null;
 
@@ -46,7 +54,7 @@ function getDB() {
   return dbPromise;
 }
 
-export async function queueOfflineAction(type: 'CHECK_IN' | 'COUNTERMEASURE_START', payload: any): Promise<string> {
+export async function queueOfflineAction(type: OfflineActionType, payload: any): Promise<string> {
   const db = await getDB();
   const id = `queue_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
   const item: QueuedItem = {

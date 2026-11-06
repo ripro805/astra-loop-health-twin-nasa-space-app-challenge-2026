@@ -1,20 +1,33 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Orbit, Wifi, WifiOff, Clock, Sliders, Menu } from 'lucide-react';
+import { Orbit, Wifi, WifiOff, Clock, Sliders, Menu, Globe } from 'lucide-react';
 import { SyntheticBadge } from '../common/SyntheticBadge';
 import { DemoControlModal } from './DemoControlModal';
+import { EnvironmentSelectorModal } from './EnvironmentSelectorModal';
 import { useOfflineSync } from '../../hooks/useOfflineSync';
+import { Environment } from '@astra-loop/shared';
 
 interface TopBarProps {
   missionDay?: number;
+  environment?: Environment;
   onToggleSidebar?: () => void;
   onRefresh?: () => void;
 }
 
-export const TopBar: React.FC<TopBarProps> = ({ missionDay = 61, onToggleSidebar, onRefresh }) => {
+export const TopBar: React.FC<TopBarProps> = ({
+  missionDay = 61,
+  environment,
+  onToggleSidebar,
+  onRefresh,
+}) => {
   const [isDemoOpen, setIsDemoOpen] = useState(false);
+  const [isEnvModalOpen, setIsEnvModalOpen] = useState(false);
   const { isOffline, pendingCount } = useOfflineSync();
+
+  const envType = environment?.type || 'SPACECRAFT';
+  const commDelay = environment?.commsDelayMinutes ?? 14.3;
+  const gravity = environment?.gravityG ?? 0.0;
 
   return (
     <>
@@ -40,14 +53,14 @@ export const TopBar: React.FC<TopBarProps> = ({ missionDay = 61, onToggleSidebar
                   ASTRA-LOOP
                 </span>
                 <span className="hidden sm:inline text-[10px] font-mono tracking-widest text-slate-400 uppercase -mt-0.5">
-                  Autonomous Health Twin
+                  Autonomous Health Twin v2
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Center: Mission Day & Ground Telemetry Delay */}
-          <div className="hidden md:flex items-center gap-4 font-mono text-xs">
+          {/* Center: Mission Day, Environment & Comms Delay */}
+          <div className="hidden md:flex items-center gap-3 font-mono text-xs">
             <div className="flex items-center gap-2 rounded border border-slate-800 bg-surface px-3 py-1">
               <span className="text-slate-400 font-sans">MISSION DAY:</span>
               <span className="text-sky-300 font-bold text-sm tracking-widest">
@@ -55,9 +68,19 @@ export const TopBar: React.FC<TopBarProps> = ({ missionDay = 61, onToggleSidebar
               </span>
             </div>
 
-            <div className="flex items-center gap-2 text-slate-400 text-[11px]">
+            <button
+              onClick={() => setIsEnvModalOpen(true)}
+              className="flex items-center gap-1.5 rounded border border-indigo-500/40 bg-indigo-950/40 px-2.5 py-1 text-indigo-300 hover:bg-indigo-900/40 transition text-xs"
+              title="Click to switch exploration environment"
+            >
+              <Globe className="w-3.5 h-3.5 text-indigo-400" />
+              <span className="font-bold">{envType}</span>
+              <span className="text-indigo-400/80">({gravity}g)</span>
+            </button>
+
+            <div className="flex items-center gap-1.5 text-slate-400 text-[11px]">
               <Clock className="w-3.5 h-3.5 text-slate-500" />
-              <span>14.3m Earth Delay (DTN)</span>
+              <span>{commDelay}m DTN Lag</span>
             </div>
           </div>
 
@@ -101,6 +124,13 @@ export const TopBar: React.FC<TopBarProps> = ({ missionDay = 61, onToggleSidebar
         isOpen={isDemoOpen}
         onClose={() => setIsDemoOpen(false)}
         onRefresh={onRefresh}
+      />
+
+      <EnvironmentSelectorModal
+        isOpen={isEnvModalOpen}
+        onClose={() => setIsEnvModalOpen(false)}
+        currentType={envType}
+        onEnvironmentChanged={onRefresh}
       />
     </>
   );

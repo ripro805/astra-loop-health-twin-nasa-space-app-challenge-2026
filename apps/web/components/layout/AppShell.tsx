@@ -5,14 +5,21 @@ import { TopBar } from './TopBar';
 import { Sidebar } from './Sidebar';
 import { OfflineBanner } from '../common/OfflineBanner';
 import { SyntheticBadge } from '../common/SyntheticBadge';
+import { Environment } from '@astra-loop/shared';
 
 interface AppShellProps {
   children: React.ReactNode;
   missionDay?: number;
+  environment?: Environment;
   onRefresh?: () => void;
 }
 
-export const AppShell: React.FC<AppShellProps> = ({ children, missionDay = 61, onRefresh }) => {
+export const AppShell: React.FC<AppShellProps> = ({
+  children,
+  missionDay = 61,
+  environment,
+  onRefresh,
+}) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
@@ -23,6 +30,7 @@ export const AppShell: React.FC<AppShellProps> = ({ children, missionDay = 61, o
       {/* Primary Mission Control Top Bar */}
       <TopBar
         missionDay={missionDay}
+        environment={environment}
         onToggleSidebar={() => setIsSidebarOpen((prev) => !prev)}
         onRefresh={onRefresh}
       />

@@ -4,7 +4,20 @@ import React from 'react';
 import { DomainMetricSummary } from '@astra-loop/shared';
 import { StatusBadge } from '../common/StatusBadge';
 import { ConfidenceBadge } from '../common/ConfidenceBadge';
-import { TrendingUp, TrendingDown, Minus, AlertTriangle, Heart, Moon, Brain, Dumbbell, ShieldAlert } from 'lucide-react';
+import {
+  TrendingUp,
+  TrendingDown,
+  Minus,
+  AlertTriangle,
+  Heart,
+  Moon,
+  Brain,
+  Dumbbell,
+  ShieldAlert,
+  Activity,
+  Wind,
+  Shield,
+} from 'lucide-react';
 
 interface DomainCardProps {
   summary: DomainMetricSummary;
@@ -23,6 +36,12 @@ export const DomainCard: React.FC<DomainCardProps> = ({ summary }) => {
         return <Dumbbell className="w-4 h-4 text-sky-400" />;
       case 'Immune':
         return <ShieldAlert className="w-4 h-4 text-emerald-400" />;
+      case 'Metabolic':
+        return <Activity className="w-4 h-4 text-orange-400" />;
+      case 'Environment':
+        return <Wind className="w-4 h-4 text-cyan-400" />;
+      default:
+        return <Shield className="w-4 h-4 text-slate-400" />;
     }
   };
 
@@ -81,8 +100,16 @@ export const DomainCard: React.FC<DomainCardProps> = ({ summary }) => {
     );
   }
 
+  const isCritical = summary.absoluteStatus === 'CRITICAL' || summary.status === 'ATTENTION';
+
   return (
-    <div className="rounded-xl border border-surface-border bg-surface p-5 space-y-4 shadow hover:border-slate-700 transition">
+    <div
+      className={`rounded-xl border p-5 space-y-4 shadow transition ${
+        isCritical
+          ? 'border-red-500/60 bg-red-950/20 ring-1 ring-red-500/30'
+          : 'border-surface-border bg-surface hover:border-slate-700'
+      }`}
+    >
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
@@ -91,7 +118,21 @@ export const DomainCard: React.FC<DomainCardProps> = ({ summary }) => {
             {summary.domain}
           </h3>
         </div>
-        <StatusBadge status={summary.status} size="sm" />
+
+        <div className="flex items-center gap-1.5">
+          {summary.absoluteStatus && summary.absoluteStatus !== 'NORMAL' && (
+            <span
+              className={`rounded px-1.5 py-0.5 text-[9px] font-mono font-bold uppercase ${
+                summary.absoluteStatus === 'CRITICAL'
+                  ? 'bg-red-900/80 text-red-200 border border-red-700'
+                  : 'bg-amber-900/80 text-amber-200 border border-amber-700'
+              }`}
+            >
+              ABS: {summary.absoluteStatus}
+            </span>
+          )}
+          <StatusBadge status={summary.status} size="sm" />
+        </div>
       </div>
 
       {/* Main Measurement */}
@@ -120,7 +161,10 @@ export const DomainCard: React.FC<DomainCardProps> = ({ summary }) => {
       <div className="pt-2 border-t border-slate-800/80 flex items-center justify-between">
         <ConfidenceBadge confidence={summary.confidence} />
         {summary.notes && (
-          <span className="text-[10px] text-slate-500 font-sans truncate max-w-[140px]" title={summary.notes}>
+          <span
+            className="text-[10px] text-slate-500 font-sans truncate max-w-[140px]"
+            title={summary.notes}
+          >
             {summary.notes}
           </span>
         )}

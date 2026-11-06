@@ -5,17 +5,20 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
   LayoutDashboard,
-  GitCompare,
-  ClipboardCheck,
+  User,
+  BookOpen,
+  CalendarCheck,
+  Stethoscope,
+  Award,
   Radiation,
   GitBranch,
   ShieldAlert,
   Sparkles,
-  History,
-  Users,
-  Info,
-  X,
+  FileText,
+  ClipboardCheck,
+  GitCompare,
   Repeat,
+  X,
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -25,15 +28,18 @@ interface SidebarProps {
 
 const NAV_ITEMS = [
   { href: '/today', label: 'TODAY', icon: LayoutDashboard, badge: 'HERO' },
-  { href: '/what-changed', label: 'WHAT CHANGED', icon: GitCompare },
-  { href: '/check-in', label: 'CHECK-IN', icon: ClipboardCheck },
+  { href: '/body', label: 'HUMAN BODY', icon: User, badge: 'INTERACTIVE' },
+  { href: '/learn', label: 'KNOWLEDGE HUB', icon: BookOpen, badge: '5 HAZARDS' },
+  { href: '/routine', label: 'DAILY SCHEDULE', icon: CalendarCheck, badge: 'TASKS' },
+  { href: '/guidance', label: 'TREATMENT WIZARD', icon: Stethoscope, badge: 'CLINICAL' },
+  { href: '/progress', label: 'XP & BADGES', icon: Award, badge: 'GAME' },
   { href: '/radiation', label: 'RADIATION WATCH', icon: Radiation, badge: '72H' },
   { href: '/twin', label: 'TWIN & FORECAST', icon: GitBranch },
   { href: '/countermeasures', label: 'COUNTERMEASURES', icon: ShieldAlert, badge: 'LEARN' },
   { href: '/what-if', label: 'WHAT-IF SIMULATOR', icon: Sparkles },
-  { href: '/timeline', label: 'MISSION TIMELINE', icon: History },
-  { href: '/crew', label: 'CREW & PRIVACY', icon: Users },
-  { href: '/about', label: 'ABOUT / METHOD', icon: Info },
+  { href: '/report', label: 'SURGEON REPORT', icon: FileText, badge: 'DTN' },
+  { href: '/check-in', label: 'CHECK-IN', icon: ClipboardCheck },
+  { href: '/what-changed', label: 'WHAT CHANGED', icon: GitCompare },
 ];
 
 export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => {
