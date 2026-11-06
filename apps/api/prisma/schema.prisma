@@ -3,43 +3,95 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
+model Environment {
+  id                      String      @id @default(cuid())
+  type                    String      @default("SPACECRAFT") // SPACECRAFT | STATION | ROVER | MOON_BASE | MARS_BASE
+  name                    String
+  description             String      @default("Deep Space Exploration Transit Habitat")
+  gravityG                Float       @default(0.0)
+  radiationShieldingFactor Float      @default(1.0) // 1.0 = standard hull, 0.4 = storm shelter, 0.7 = lunar regolith
+  crewSize                Int         @default(4)
+  commsDelayMinutes       Float       @default(14.3) // One-way speed-of-light delay
+  nominalCabinCO2ppm      Float       @default(1800.0)
+  nominalCabinTempC       Float       @default(21.5)
+  nominalCabinHumidityPct Float       @default(45.0)
+  createdAt               DateTime    @default(now())
+
+  astronauts              Astronaut[]
+}
+
 model Astronaut {
-  id              String   @id @default(cuid())
+  id              String      @id @default(cuid())
   name            String
   missionDay      Int
-  calibrationDone Boolean  @default(false)
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  calibrationDone Boolean     @default(false)
+  environmentId   String?
+  environment     Environment? @relation(fields: [environmentId], references: [id], onDelete: SetNull)
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
 
-  healthMetrics   HealthMetric[]
-  radiationEvents RadiationEvent[]
-  checkIns        CheckIn[]
-  countermeasures Countermeasure[]
-  alerts          Alert[]
+  healthMetrics        HealthMetric[]
+  radiationEvents      RadiationEvent[]
+  checkIns             CheckIn[]
+  countermeasures      Countermeasure[]
+  alerts               Alert[]
+  measurementTasks     MeasurementTask[]
+  gamificationProfile  GamificationProfile?
+  userBadges           UserBadge[]
+  imageCaptures        ImageCapture[]
+  escalationEvents     EscalationEvent[]
+  crewInteractionLogs  CrewInteractionLog[]
 }
 
 model HealthMetric {
-  id             String   @id @default(cuid())
+  id             String    @id @default(cuid())
   astronautId    String
   timestamp      DateTime
-  missionDay     Int      @default(1)
+  missionDay     Int       @default(1)
 
+  // Cardiovascular
   heartRate      Float?
-  hrv            Float?
-  sleepHours     Float?
-  activity       Float?
-  mood           Float?
-  fatigue        Float?
-  stress         Float?
-  reactionTimeMs Float?
-  voiceCadence   Float?
+  hrv            Float?    // rMSSD in ms
+  systolicBP     Float?    // mmHg
+  diastolicBP    Float?    // mmHg
 
-  dataSource     String   @default("WEARABLE_BIO_SENSOR")
-  isSynthetic    Boolean  @default(true)
+  // Metabolic & Nutrition
+  bloodGlucose   Float?    // mg/dL
+  weightKg       Float?    // kg
+  hydrationScore Float?    // 0 - 100
+  caloriesKcal   Float?    // Daily energy intake
+  vitaminDStatusNote String?
+
+  // Thermoregulation & Immune
+  bodyTemp       Float?    // °C
+  spo2           Float?    // % peripheral capillary oxygen saturation
+  stress         Float?    // 1-10 neuroendocrine / allostatic load
+
+  // Musculoskeletal & Exercise
+  activity       Float?    // Metabolic equivalent activity score
+  exerciseMinutes Float?   // Total exercise minutes today
+  exerciseType   String?   // ARED | T2_TREADMILL | CEVIS_CYCLE | HYBRID
+
+  // Cognitive & Behavioral
+  sleepHours     Float?
+  mood           Float?    // 1-10
+  fatigue        Float?    // 1-10
+  reactionTimeMs Float?    // PVT latency in ms
+  voiceCadence   Float?    // Syllables per second
+
+  // Habitability & Closed Environment Telemetry
+  cabinCO2ppm    Float?    // Carbon dioxide in ppm
+  cabinTempC     Float?    // °C
+  cabinHumidityPct Float?  // %
+  noiseDb        Float?    // Ambient dBA
+  socialContactMinutes Float? // Interaction minutes with crew
+
+  dataSource     String    @default("WEARABLE_BIO_SENSOR")
+  isSynthetic    Boolean   @default(true)
 
   astronaut      Astronaut @relation(fields: [astronautId], references: [id], onDelete: Cascade)
 
@@ -53,10 +105,10 @@ model RadiationEvent {
   astronautId    String
   timestamp      DateTime
   missionDay     Int      @default(1)
-  doseRate       Float
-  cumulativeDose Float
-  eventType      String
-  severity       String
+  doseRate       Float    // mSv/h
+  cumulativeDose Float    // mSv
+  eventType      String   // BACKGROUND | SOLAR_PARTICLE_EVENT | SOLAR_PARTICLE_EVENT_DECAY
+  severity       String   // NORMAL | ELEVATED | CRITICAL
 
   astronaut      Astronaut @relation(fields: [astronautId], references: [id], onDelete: Cascade)
 
@@ -75,6 +127,12 @@ model CheckIn {
   fatigue        Float?
   stress         Float?
   reactionTimeMs Float?
+  systolicBP     Float?
+  diastolicBP    Float?
+  bloodGlucose   Float?
+  bodyTemp       Float?
+  spo2           Float?
+  weightKg       Float?
   voiceAvailable Boolean  @default(false)
   voiceCadence   Float?
   notes          String?
@@ -93,7 +151,7 @@ model Countermeasure {
   reason         String   @default("Detected physiological deviation from baseline")
   startedAt      DateTime @default(now())
   evaluationAt   DateTime?
-  status         String   @default("ACTIVE")
+  status         String   @default("ACTIVE") // ACTIVE | EVALUATED | DISMISSED
 
   astronaut      Astronaut @relation(fields: [astronautId], references: [id], onDelete: Cascade)
   outcomes       CountermeasureOutcome[]
@@ -103,15 +161,15 @@ model Countermeasure {
 }
 
 model CountermeasureOutcome {
-  id               String   @id @default(cuid())
+  id               String         @id @default(cuid())
   countermeasureId String
-  targetMetric     String   @default("sleepHours")
+  targetMetric     String         @default("sleepHours")
   beforeScore      Float?
   afterScore       Float?
   effect           Float?
   confidence       Float?
-  result           String
-  evaluatedAt      DateTime @default(now())
+  result           String         // PROMISING | UNCERTAIN | WORSENING | INSUFFICIENT_DATA
+  evaluatedAt      DateTime       @default(now())
 
   countermeasure   Countermeasure @relation(fields: [countermeasureId], references: [id], onDelete: Cascade)
 
@@ -123,7 +181,7 @@ model Alert {
   astronautId String
   timestamp   DateTime @default(now())
   domain      String
-  severity    String
+  severity    String   // INFO | WARNING | CRITICAL
   title       String
   explanation String
   confidence  Float
@@ -132,4 +190,111 @@ model Alert {
 
   @@index([astronautId])
   @@index([timestamp])
+}
+
+model MeasurementTask {
+  id             String    @id @default(cuid())
+  astronautId    String
+  indicatorKey   String    // systolicBP, bloodGlucose, bodyTemp, spo2, etc.
+  title          String
+  timeOfDay      String    @default("MORNING") // MORNING | AFTERNOON | EVENING | BEDTIME
+  dueTime        String    // e.g. "07:30"
+  completed      Boolean   @default(false)
+  completedAt    DateTime?
+  skippedReason  String?
+  missionDay     Int       @default(1)
+  createdAt      DateTime  @default(now())
+
+  astronaut      Astronaut @relation(fields: [astronautId], references: [id], onDelete: Cascade)
+
+  @@index([astronautId])
+  @@index([missionDay])
+}
+
+model GamificationProfile {
+  id                 String   @id @default(cuid())
+  astronautId        String   @unique
+  xp                 Int      @default(0)
+  level              Int      @default(1)
+  currentStreakDays  Int      @default(0)
+  longestStreakDays  Int      @default(0)
+  healthScoreRing    Int      @default(85) // 0-100 overall composite score
+  updatedAt          DateTime @updatedAt
+
+  astronaut          Astronaut @relation(fields: [astronautId], references: [id], onDelete: Cascade)
+}
+
+model Badge {
+  id          String      @id @default(cuid())
+  code        String      @unique // BONE_GUARDIAN | STEADY_HEART | CIRCADIAN_MASTER | RADIATION_READY | HYDRATION_HERO
+  title       String
+  description String
+  icon        String
+  tier        String      @default("BRONZE") // BRONZE | SILVER | GOLD | PLATINUM
+  xpAward     Int         @default(100)
+
+  userBadges  UserBadge[]
+}
+
+model UserBadge {
+  id          String   @id @default(cuid())
+  astronautId String
+  badgeId     String
+  unlockedAt  DateTime @default(now())
+
+  astronaut   Astronaut @relation(fields: [astronautId], references: [id], onDelete: Cascade)
+  badge       Badge     @relation(fields: [badgeId], references: [id], onDelete: Cascade)
+
+  @@unique([astronautId, badgeId])
+  @@index([astronautId])
+}
+
+model ImageCapture {
+  id               String   @id @default(cuid())
+  astronautId      String
+  missionDay       Int      @default(1)
+  type             String   @default("FACE") // ULTRASOUND | FACE | SKIN | OTHER
+  filePath         String
+  notes            String?
+  capturedAt       DateTime @default(now())
+  sentToGround     Boolean  @default(false)
+  flaggedForReview Boolean  @default(false)
+
+  astronaut        Astronaut @relation(fields: [astronautId], references: [id], onDelete: Cascade)
+
+  @@index([astronautId])
+  @@index([missionDay])
+}
+
+model EscalationEvent {
+  id               String   @id @default(cuid())
+  astronautId      String
+  missionDay       Int      @default(1)
+  tier             String   @default("MONITOR") // SELF_MANAGE | MONITOR | CONTACT_FLIGHT_SURGEON | EMERGENCY
+  triggerIndicator String
+  triggerValue     Float?
+  reason           String
+  acknowledged     Boolean  @default(false)
+  acknowledgedAt   DateTime?
+  createdAt        DateTime @default(now())
+
+  astronaut        Astronaut @relation(fields: [astronautId], references: [id], onDelete: Cascade)
+
+  @@index([astronautId])
+  @@index([missionDay])
+}
+
+model CrewInteractionLog {
+  id                 String   @id @default(cuid())
+  astronautId        String
+  missionDay         Int      @default(1)
+  interactionMinutes Float    @default(60.0)
+  activityType       String   @default("MEAL_COOP") // MEAL_COOP | JOINT_MAINTENANCE | LEISURE | DEBRIEF
+  crewMoodRating     Float    @default(8.0) // 1-10
+  createdAt          DateTime @default(now())
+
+  astronaut          Astronaut @relation(fields: [astronautId], references: [id], onDelete: Cascade)
+
+  @@index([astronautId])
+  @@index([missionDay])
 }
