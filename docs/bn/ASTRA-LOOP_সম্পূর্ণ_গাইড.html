@@ -1,0 +1,2318 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASTRA-LOOP — সম্পূর্ণ বাংলা প্রজেক্ট গাইড ও ইন্টারভিউ নির্দেশিকা</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: #111827;
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.2);
+      --border: #1f2937;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Hind Siliguri', 'Kalpurush', 'SolaimanLipi', 'Noto Sans Bengali', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      font-size: 16px;
+      padding: 0;
+      margin: 0;
+    }
+    header.hero {
+      background: linear-gradient(135deg, #0b1528 0%, #172554 100%);
+      border-bottom: 2px solid var(--accent);
+      padding: 60px 40px;
+      text-align: center;
+    }
+    header.hero h1 {
+      font-size: 2.8rem;
+      color: #38bdf8;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+    header.hero p {
+      font-size: 1.2rem;
+      color: #94a3b8;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    .toc-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 32px;
+      margin-bottom: 50px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+    .toc-card h2 {
+      font-size: 1.6rem;
+      color: var(--accent);
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+    .toc-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 12px;
+    }
+    .toc-list a {
+      color: #cbd5e1;
+      text-decoration: none;
+      display: block;
+      padding: 8px 12px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+    .toc-list a:hover {
+      background: rgba(56, 189, 248, 0.1);
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateX(4px);
+    }
+    .doc-module {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 48px;
+      margin-bottom: 60px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    }
+    h1 {
+      font-size: 2.2rem;
+      color: #67e8f9;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #0891b2;
+      padding-bottom: 10px;
+    }
+    h2 {
+      font-size: 1.6rem;
+      color: #38bdf8;
+      margin-top: 36px;
+      margin-bottom: 16px;
+    }
+    h3 {
+      font-size: 1.3rem;
+      color: #a5f3fc;
+      margin-top: 24px;
+      margin-bottom: 12px;
+    }
+    p {
+      margin-bottom: 16px;
+      color: #e2e8f0;
+    }
+    a {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+    ul, ol {
+      margin-left: 28px;
+      margin-bottom: 20px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    blockquote {
+      border-left: 4px solid var(--accent);
+      padding: 12px 20px;
+      background: rgba(56, 189, 248, 0.05);
+      border-radius: 0 8px 8px 0;
+      margin: 20px 0;
+      color: #cbd5e1;
+      font-style: italic;
+    }
+    .callout {
+      border-left: 4px solid var(--warning);
+      padding: 16px 20px;
+      background: rgba(245, 158, 11, 0.08);
+      border-radius: 0 8px 8px 0;
+      margin: 20px 0;
+    }
+    .callout.tip {
+      border-left-color: var(--success);
+      background: rgba(16, 185, 129, 0.08);
+    }
+    .callout.note {
+      border-left-color: var(--accent);
+      background: rgba(56, 189, 248, 0.08);
+    }
+    code {
+      font-family: 'JetBrains Mono', Consolas, monospace;
+      background: rgba(255,255,255,0.08);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #f472b6;
+      font-size: 0.9em;
+    }
+    pre.code-block {
+      background: #030712;
+      border: 1px solid #1f2937;
+      border-radius: 8px;
+      padding: 16px 20px;
+      overflow-x: auto;
+      margin: 20px 0;
+    }
+    pre.code-block code {
+      background: transparent;
+      padding: 0;
+      color: #e2e8f0;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+    .table-container {
+      overflow-x: auto;
+      margin: 24px 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    th, td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      background: #1e293b;
+      color: var(--accent);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    tr:nth-child(even) td {
+      background: rgba(255,255,255,0.015);
+    }
+    hr {
+      border: none;
+      height: 1px;
+      background: var(--border);
+      margin: 32px 0;
+    }
+    .page-break {
+      page-break-after: always;
+    }
+    .print-button {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #0284c7;
+      color: #fff;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+      z-index: 999;
+    }
+    .print-button:hover {
+      background: #0369a1;
+      transform: translateY(-2px);
+    }
+    @media print {
+      body {
+        background: #fff;
+        color: #000;
+        font-size: 13pt;
+        line-height: 1.6;
+      }
+      .hero, .toc-card, .print-button {
+        display: none !important;
+      }
+      .doc-module {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        margin: 0 0 30pt 0;
+      }
+      h1, h2, h3 {
+        color: #000 !important;
+        page-break-after: avoid;
+      }
+      th {
+        background: #eee !important;
+        color: #000 !important;
+      }
+      code, pre.code-block {
+        background: #f4f4f4 !important;
+        color: #000 !important;
+        border: 1px solid #ccc !important;
+      }
+      a {
+        color: #000;
+        text-decoration: underline;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <h1>ASTRA-LOOP: সম্পূর্ণ বাংলা প্রজেক্ট গাইড ও মাস্টার ম্যানুয়াল</h1>
+    <p>NASA Space Apps Challenge 2026 — দূর মহাকাশ অভিযানের স্বয়ংক্রিয় অফলাইন ডিজিটাল টুইন ও স্বাস্থ্য সহযোগী</p>
+  </header>
+
+  <div class="container">
+    <div class="toc-card">
+      <h2>📑 বিষয়সূচি (Table of Contents)</h2>
+      <ul class="toc-list">
+        <li><a href="#01_প্রজেক্ট_পরিচিতি-md">👉 ASTRA-LOOP: প্রজেক্ট পরিচিতি ও সারসংক্ষেপ</a></li>
+        <li><a href="#02_মহাকাশে_কীভাবে_ব্যবহার_করবেন-md">👉 ASTRA-LOOP: মহাকাশে কীভাবে ব্যবহার করবেন (অ্যাস্ট্রোনট ম্যানুয়াল)</a></li>
+        <li><a href="#03_ফিচার_গাইড-md">👉 ASTRA-LOOP: সম্পূর্ণ ফিচার গাইড (Feature Catalog)</a></li>
+        <li><a href="#04_কীভাবে_চালাবেন-md">👉 ASTRA-LOOP: কীভাবে চালাবেন ও সমস্যা সমাধান (Beginner Run Guide)</a></li>
+        <li><a href="#05_কোড_ও_আর্কিটেকচার_সহজ_ভাষায়-md">👉 ASTRA-LOOP: কোড ও আর্কিটেকচার সহজ ভাষায় (Architecture for Non-Coders)</a></li>
+        <li><a href="#06_বিজ্ঞান_ও_মহাকাশ_চিকিৎসা_প্রাইমার-md">👉 ASTRA-LOOP: বিজ্ঞান ও মহাকাশ চিকিৎসা প্রাইমার (Space Medicine Primer)</a></li>
+        <li><a href="#07_ইন্টারভিউ_প্রস্তুতি-md">👉 ASTRA-LOOP: ইন্টারভিউ প্রস্তুতি ও পিচ গাইড (Master Interview Manual)</a></li>
+        <li><a href="#08_শব্দকোষ_Glossary-md">👉 ASTRA-LOOP: শব্দকোষ ও পরিভাষা (Glossary & Analogies)</a></li>
+        <li><a href="#09_সীমাবদ্ধতা_ও_পরবর্তী_ধাপ-md">👉 ASTRA-LOOP: সীমাবদ্ধতা ও পরবর্তী ধাপ (Limitations & Roadmap)</a></li>
+        <li><a href="#10_শেখার_পথ_১৪_দিন-md">👉 ASTRA-LOOP: ১৪ দিনের স্বয়ংসম্পূর্ণ শেখার পরিকল্পনা (14-Day Study Plan)</a></li>
+      </ul>
+    </div>
+
+    
+<section id="01_প্রজেক্ট_পরিচিতি-md" class="doc-module">
+<h1 id="sec-0">ASTRA-LOOP: প্রজেক্ট পরিচিতি ও সারসংক্ষেপ</h1>
+<blockquote><strong>নথি ক্রম:</strong> ০১ | <strong>বিষয়:</strong> প্রজেক্ট কী, কেন এবং কার জন্য? | <strong>টার্গেট অডিয়েন্স:</strong> যে কেউ (নতুন শিক্ষার্থী থেকে বিচারক)</blockquote>
+
+<hr>
+
+<h2 id="sec-5">এই অংশে যা শিখবেন</h2>
+<li>ASTRA-LOOP প্রজেক্টটি কী এবং কেন এটি প্রচলিত ফিটনেস অ্যাপ বা ড্যাশবোর্ড থেকে সম্পূর্ণ আলাদা।</li>
+<li>মঙ্গল বা দূর মহাকাশ অভিযানে পৃথিবী থেকে তাৎক্ষণিক ডাক্তার পাওয়া কেন অসম্ভব (২২ মিনিটের সিগন্যাল লেটেন্সি)।</li>
+<li>নাসার (NASA) চিহ্নিত <strong>৫টি প্রধান মহাকাশ ঝুঁকি (The 5 HRP Hazards)</strong> এবং সেগুলোর সহজ বাস্তব উদাহরণ।</li>
+<li>আমাদের <strong>৫ ধাপের ক্লোজড-লুপ (Sense → Understand → Predict → Act → Learn)</strong> সিস্টেম কীভাবে কাজ করে।</li>
+<li>নাসা স্পেস অ্যাপস চ্যালেঞ্জ ২০২৬-এর প্রতিটি চাহিদার সাথে এই অ্যাপের নিখুঁত মেলবন্ধন।</li>
+
+<hr>
+
+<h2 id="sec-14">১. এক নজরে ASTRA-LOOP (Elevator Pitch)</h2>
+
+<h3 id="sec-16">১ লাইনে প্রজেক্ট কী?</h3>
+<blockquote><strong>ASTRA-LOOP</strong> হলো দূর মহাকাশ অভিযানের মহাকাশচারীদের জন্য একটি স্বয়ংক্রিয় অফলাইন ডিজিটাল টুইন (Digital Twin) ও স্বাস্থ্য সহকারী, যা পৃথিবী থেকে চিকিৎসকের সহায়তা ছাড়াই তাদের শারীরিক ও মানসিক ঝুঁকি আগেভাগে শনাক্ত করে জীবন রক্ষাকারী সমাধান দেয়।</blockquote>
+
+<h3 id="sec-19">৩০ সেকেন্ডের ব্যাখ্যা</h3>
+<p>কল্পনা করুন, আপনি মঙ্গল গ্রহের পথে একটি মহাকাশযানে আছেন। পৃথিবী এত দূরে যে একটি মেসেজ পৃথিবীতে যেতে এবং ডাক্তারের উত্তর ফিরে আসতে প্রায় ৪৫ মিনিট সময় লাগে। এমন সময় যদি আপনার হঠাৎ বুকে চাপ লাগে বা রক্তচাপ বেড়ে যায়, তখন আপনি কার কাছে যাবেন? </p>
+<p>মহাকাশচারীরা সাধারণ ডাক্তার নন। <strong>ASTRA-LOOP</strong> হলো তাদের অন-বোর্ড ভার্চুয়াল স্পেস ফ্লাইট সার্জন। এটি মহাকাশযানের সেন্সর ও মহাকাশচারীর ভাইটালস (HR, BP, গ্লুকোজ, ঘুম, রেডিয়েশন) ট্র্যাক করে, কোনো বিপদ আসার আগেই ভবিষ্যৎবাণী করে এবং ধাপে ধাপে কী ওষুধ বা কাউন্টারমেজার নিতে হবে তা শিখিয়ে দেয়—সম্পূর্ণ ইন্টারনেট ছাড়াই!</p>
+
+<h3 id="sec-23">২ মিনিটের পূর্ণাঙ্গ ব্যাখ্যা</h3>
+<p>পৃথিবীর বুকে আমরা অসুস্থ বোধ করলে স্মার্টওয়াচ দেখে ডাক্তারের কাছে ছুটে যেতে পারি। কিন্তু পৃথিবী থেকে কোটি কোটি কিলোমিটার দূরে ডিপ-স্পেসে (Deep Space) কোনো হাসপাতাল নেই। তাছাড়া মহাকাশের পরিবেশ পৃথিবীর মতো নয়—সেখানে রয়েছে প্রাণঘাতী মহাজাগতিক বিকিরণ (Radiation), জিরো-গ্র্যাভিটি (Microgravity), নিঃসঙ্গতা ও বদ্ধ বাতাস। </p>
+
+<p>নাসা স্পেস অ্যাপস চ্যালেঞ্জ ২০২৬-এর মূল আহ্বান ছিল: <strong>"এমন একটি ভিজ্যুয়াল ও ইন্টারঅ্যাক্টিভ ডিজিটাল টুইন টুল তৈরি করা, যা দিয়ে মহাকাশচারীরা নিজেদের স্বাস্থ্য নিজেরা পর্যবেক্ষণ করতে পারবেন এবং সঠিক চিকিৎসা ও স্বাস্থ্যোন্নতির গাইডেন্স পাবেন।"</strong></p>
+
+<p>বেশিরভাগ স্বাস্থ্য অ্যাপ সাধারণ মানুষের গড় ডেটা (Population Average) দিয়ে কাজ করে। কিন্তু মহাকাশে মানুষের শরীর সম্পূর্ণ বদলে যায়। কারো জন্য ৭০ পালস রেট স্বাভাবিক হলেও, মহাকাশে তরল স্থানান্তরের কারণে তা অস্বাভাবিক হতে পারে। </p>
+<p>ASTRA-LOOP সাধারণ অ্যাপের মতো শুধু চার্ট দেখায় না। এটি একটি <strong>"ক্লোজড-লুপ স্বয়ংক্রিয় সিস্টেম"</strong> তৈরি করে:</p>
+<p>১. <strong>Sense:</strong> মহাকাশচারীর প্রতিদিনের ভাইটালস সংগ্রহ করে।</p>
+<p>২. <strong>Understand:</strong> মহাকাশচারীর ব্যক্তিগত স্বাভাবিক অবস্থার (Personal Baseline) সাথে তুলনা করে এবং ক্লিনিক্যাল বিপদের সীমা (Clinical Safety Thresholds) দিয়ে বিচার করে।</p>
+<p>৩. <strong>Predict:</strong> পরবর্তী ৪৮ ঘণ্টার শারীরিক ঝুঁকি পূর্বাভাস দেয়।</p>
+<p>৪. <strong>Act:</strong> মহাকাশচারীকে ইন্টারেক্টিভ ডিসিশন-ট্রি দিয়ে বলে দেয় ঠিক কী কী পদক্ষেপ নিতে হবে।</p>
+<p>৫. <strong>Learn:</strong> সেই পদক্ষেপ নেওয়ার পর মহাকাশচারীর উন্নতি হলো কি না তা স্বয়ংক্রিয়ভাবে পরিমাপ করে ভবিষ্যতের জন্য নিজের অ্যালগরিদম আপডেট করে।</p>
+
+<hr>
+
+<h2 id="sec-38">২. মহাকাশে কেন নিজের স্বাস্থ্য নিজেকেই দেখতে হয়?</h2>
+
+<h3 id="sec-40">সমস্যা ১: দূরত্বের দেয়াল (The Latency Barrier)</h3>
+<p>চাঁদে গেলে পৃথিবী থেকে রেডিও সিগন্যাল আসতে সময় লাগে মাত্র ১.৩ সেকেন্ড। ডাক্তার টেলিমেডিসিনের মাধ্যমে সরাসরি কথা বলতে পারেন। কিন্তু মঙ্গলে এই দূরত্ব এত বেশি যে আলো বা রেডিও সিগন্যালের গতিতেও এক প্রান্তে পৌঁছাতে <strong>৩ থেকে ২২ মিনিট</strong> সময় লাগে। অর্থাৎ, <em>"আমার মাথা ঘুরছে, কী করব?"</em>—এই কথাটি পৃথিবীতে পৌঁছাতে ২২ মিনিট, আর ডাক্তারের উত্তর আসতে আরও ২২ মিনিট। মোট <strong>৪৪ মিনিট</strong> পর উত্তর আসবে! কার্ডিয়াক অ্যারেস্ট বা হঠাৎ রক্তচাপ কমে যাওয়ার মতো জরুরি পরিস্থিতিতে এই ৪৪ মিনিট মানে নিশ্চিত মৃত্যু। তাই মহাকাশযানে এমন একটি স্বয়ংক্রিয় বুদ্ধিমত্তা দরকার যা তাৎক্ষণিক সিদ্ধান্ত দিতে পারে।</p>
+
+<h3 id="sec-43">সমস্যা ২: মহাকাশচারীরা সবাই ডাক্তার নন</h3>
+<p>মিশনের ক্রুরা হলেন অ্যারোস্পেস ইঞ্জিনিয়ার, পাইলট, পদার্থবিদ বা ভূতত্ত্ববিদ। তাদের সাধারণ ফার্স্ট-এইড ট্রেনিং থাকলেও তারা জটিল বায়োমেডিক্যাল সিদ্ধান্ত বা আল্ট্রাসাউন্ড ডায়াগনসিসে বিশেষজ্ঞ নন। জটিল মেডিকেল টার্ম দিয়ে তাদের বিভ্রান্ত করা যাবে না; ইন্টারফেসটি হতে হবে অত্যন্ত সহজ, পরিষ্কার ও স্বয়ংক্রিয়।</p>
+
+<hr>
+
+<h2 id="sec-48">৩. নাসার ৫টি মহাকাশ ঝুঁকি (The 5 NASA HRP Hazards)</h2>
+
+<p>নাসার হিউম্যান রিসার্চ প্রোগ্রাম (HRP) মানুষের মহাকাশযাত্রার ৫টি প্রধান ঝুঁকি চিহ্নিত করেছে। ASTRA-LOOP এই পাঁচটি ঝুঁকিকেই গাণিতিক ও শারীরবৃত্তীয়ভাবে মডেল করেছে:</p>
+
+<pre class="code-block mermaid"><code>
+mindmap
+
+  root((নাসার ৫টি মহাকাশ ঝুঁকি))
+
+    ১. Space Radiation মহাজাগতিক বিকিরণ
+
+      ক্যান্সার ঝুঁকি
+
+      টিস্যু প্রদাহ
+
+      কার্ডিওভাসকুলার চাপ
+
+    ২. Isolation &amp; Confinement নিঃসঙ্গতা ও বন্দিত্ব
+
+      ঘুমের ব্যাঘাত
+
+      কগনিটিভ ক্লান্তি
+
+      মানসিক অবসাদ
+
+    ৩. Distance from Earth পৃথিবী থেকে দূরত্ব
+
+      টেলিমেডিসিন অসম্ভব
+
+      ৪৪ মিনিট সিগন্যাল বিলম্ব
+
+      সম্পূর্ণ অফলাইন স্বয়ংক্রিয়তা
+
+    ৪. Gravity Fields মহাকর্ষীয় পরিবর্তন
+
+      জিরো-গ্র্যাভিটি তরল স্থানান্তর
+
+      পেশি ও হাড়ের ক্ষয়
+
+      অস্থির রক্তচাপ
+
+    ৫. Hostile Closed Environment বদ্ধ ও প্রতিকূল পরিবেশ
+
+      টক্সিক CO2 বৃদ্ধি
+
+      শব্দ দূষণ
+
+      জীবাণু বিস্তার
+
+</code></pre>
+
+<h3 id="sec-77">১. স্পেস রেডিয়েশন (Space Radiation)</h3>
+<li><strong>বাস্তব উপমা:</strong> পৃথিবীর বায়ুমণ্ডল ও চৌম্বক ক্ষেত্র আমাদের জন্য একটি অদৃশ্য ছাতার মতো কাজ করে। মহাকাশে সেই ছাতা নেই। এটি যেন প্রবল রোদে সানস্ক্রিন ছাড়া সারাদিন মরুভূমিতে দাঁড়িয়ে থাকা, যেখানে মহাজাগতিক রশ্মি শরীরের কোষে ছিদ্র তৈরি করছে।</li>
+<li><strong>শরীরে কী প্রভাব ফেলে:</strong> কোষের ডিএনএ নষ্ট হয়, রক্তনালী শক্ত হয়ে যায় এবং দীর্ঘমেয়াদে ক্যান্সার ও হৃদরোগের ঝুঁকি তৈরি হয়। তাছাড়া সূর্য থেকে হঠাৎ সোলার স্টর্ম (SPE) এলে তীব্র বিকিরণ ঘটে।</li>
+<li><strong>ASTRA-LOOP-এ কীভাবে ধরা হয়েছে:</strong> নোয়া (NOAA) স্যাটেলাইটের লাইভ প্রোটন ফ্লাক্স ট্র্যাক করা হয়, ৭২ ঘণ্টার কিউমুলেটিভ রেডিয়েশন ওয়াচ উইন্ডো চালানো হয় এবং কার্ডিয়াক চাপের সাথে রেডিয়েশনের সম্পর্ক হিসাব করা হয়।</li>
+
+<h3 id="sec-82">২. আইসোলেশন ও কনফাইনমেন্ট (Isolation & Confinement)</h3>
+<li><strong>বাস্তব উপমা:</strong> একটি ছোট মাইক্রোবাসে ৪-৬ জন মানুষকে যদি টানা ৬ মাস কোনো জানালা না খুলে বন্দি করে রাখা হয়, মানুষের মেজাজ খিটখিটে হবে, ক্লান্তি আসবে এবং নিজেদের মধ্যে মনোমালিন্য হবে।</li>
+<li><strong>শরীরে কী প্রভাব ফেলে:</strong> শরীরের স্বাভাবিক বায়োলজিক্যাল ঘড়ি (সার্কাডিয়ান রিদম) নষ্ট হয়, ঘুম ভেঙে যায়, মেজাজ খারাপ হয় এবং রিঅ্যাকশন টাইম কমে যায়।</li>
+<li><strong>ASTRA-LOOP-এ কীভাবে ধরা হয়েছে:</strong> ক্রু সোশ্যাল ইন্টারঅ্যাকশন ট্র্যাকিং, ডেইলি পিভিটি (Psychomotor Vigilance Test) রিঅ্যাকশন স্পিড পরীক্ষা এবং ভয়েস অডিও অ্যানালাইসিস (Jitter) দিয়ে অবসাদ মাপা হয়।</li>
+
+<h3 id="sec-87">৩. পৃথিবী থেকে দূরত্ব (Distance from Earth)</h3>
+<li><strong>বাস্তব উপমা:</strong> মাঝ সাগরে আটকে পড়া কোনো জাহাজের রেডিও নষ্ট হয়ে গেলে যেমন ক্যাপ্টেনকে নিজের বুদ্ধিতেই সব সিদ্ধান্ত নিতে হয়।</li>
+<li><strong>শরীরে কী প্রভাব ফেলে:</strong> পৃথিবীতে সাহায্য চেয়ে বসে থাকার সুযোগ নেই; তাৎক্ষণিক গাইডেন্স না পেলে ছোটখাটো অসুখও প্রাণঘাতী হয়ে ওঠে।</li>
+<li><strong>ASTRA-LOOP-এ কীভাবে ধরা হয়েছে:</strong> পুরো সফটওয়্যারটি <strong>১০০% অফলাইন-ফার্স্ট</strong>। ক্লাউডের কোনো প্রয়োজন নেই। মহাকাশযানের নিজস্ব সার্ভারে সব সিদ্ধান্ত তৈরি হয় এবং পৃথিবী সংযোগ পেলে স্বয়ংক্রিয়ভাবে ডেটা সিঙ্ক (DTN Sync) হয়।</li>
+
+<h3 id="sec-92">৪. গ্র্যাভিটি ফিল্ড বা পরিবর্তনশীল অভিকর্ষ (Gravity Fields)</h3>
+<li><strong>বাস্তব উপমা:</strong> একটি পানির বোতল উল্টো করে ধরলে যেমন সব পানি মুখে এসে জমা হয়, মহাকর্ষ না থাকায় পায়ের রক্ত ও তরল মানুষের মাথায় উঠে যায় (Puffy Face syndrome)।</li>
+<li><strong>শরীরে কী প্রভাব ফেলে:</strong> শরীরের হাড় ভাববে তার ওজন নেওয়ার কোনো দরকার নেই, ফলে প্রতিদিন হাড়ের ক্যালসিয়াম প্রস্রাবের সাথে বের হয়ে হাড় ফাঁপা হয়ে যায়। পেশি শুকিয়ে যায়।</li>
+<li><strong>ASTRA-LOOP-এ কীভাবে ধরা হয়েছে:</strong> অ্যাপে ৫টি মহাকর্ষ মোড আছে—স্পেসক্রাফট ($0\text{ g}$), মুন বেস ($0.16\text{ g}$), মার্স বেস ($0.38\text{ g}$)। অভিকর্ষ পরিবর্তনের সাথে সাথে অ্যাপটি হাড় ও পেশির ক্ষয়ের ঝুঁকি নিজে থেকেই পুনর্গণনা করে।</li>
+
+<h3 id="sec-97">৫. প্রতিকূল বদ্ধ পরিবেশ (Hostile Closed Environment)</h3>
+<li><strong>বাস্তব উপমা:</strong> একটি ছোট ঘরে সব দরজা-জানালা বন্ধ করে ১০ জন মানুষ দীর্ঘক্ষণ শ্বাস নিলে যেমন ঘরের বাতাস ভারী হয়ে মাথাব্যথা শুরু হয়।</li>
+<li><strong>শরীরে কী প্রভাব ফেলে:</strong> কার্বন ডাই-অক্সাইড ($\text{CO}_2$) সামান্য বাড়লেই মহাকাশচারীদের দৃষ্টি ঝাপসা হয়, মাথা ঘোরে এবং সিদ্ধান্ত নেওয়ার ক্ষমতা কমে যায়।</li>
+<li><strong>ASTRA-LOOP-এ কীভাবে ধরা হয়েছে:</strong> কেবিন $\text{CO}_2$ (ppm), তাপমাত্রা, আর্দ্রতা ও নয়েজ লেভেল সার্বক্ষণিক পর্যবেক্ষণ করে অক্সিজেনের ভারসাম্য ও ভেন্টিলেশন অ্যালার্ট দেওয়া হয়।</li>
+
+<hr>
+
+<h2 id="sec-104">৪. প্রচলিত ফিটনেস অ্যাপ বনাম ASTRA-LOOP: পার্থক্য কোথায়?</h2>
+
+<div class="table-container"><table>
+<thead><tr><th>বৈশিষ্ট্য</th><th>সাধারণ অ্যাপ (যেমন Apple Health / Fitbit)</th><th>ASTRA-LOOP v2</th></tr></thead><tbody>
+<tr><td><strong>মূল্যায়ন পদ্ধতি</strong></td><td>পৃথিবীর সাধারণ মানুষের গড় সীমা (যেমন: সবার জন্যই BP ১২০/৮০ ভালো)।</td><td><strong>Personal Baseline:</strong> মহাকাশচারীর নিজস্ব অভিযোজিত স্বাভাবিক অবস্থার সাথে তুলনা ($Z$-score)।</td></tr>
+<tr><td><strong>নিরাপত্তা কৌশল</strong></td><td>শুধুমাত্র একটি নম্বর লাল বা সবুজ দেখায়।</td><td><strong>Dual-Layer Override:</strong> নিজের বেসলাইনের পাশাপাশি NASA-STD-3001-এর কঠোর পরম সীমা প্রয়োগ করে।</td></tr>
+<tr><td><strong>অফলাইন সক্ষমতা</strong></td><td>ক্লাউড বা ইন্টারনেটের সাথে যুক্ত না থাকলে কাজ করে না।</td><td><strong>১০০% অফলাইন:</strong> IndexedDB ও লোকাল ইঞ্জিনে মহাকাশযানের ভেতরে স্বয়ংসম্পূর্ণ।</td></tr>
+<tr><td><strong>সিদ্ধান্ত প্রক্রিয়া</strong></td><td>শুধুই চার্ট দেখায় (Passive Dashboard)।</td><td><strong>Closed-Loop Action:</strong> "এখনই এই ওষুধ নিন" এবং "কাজ করেছে কি না পরখ করুন"।</td></tr>
+<tr><td><strong>মহাকাশ বিজ্ঞান</strong></td><td>শূন্য গ্র্যাভিটি বা রেডিয়েশন চেনে না।</td><td>৫টি মহাকাশ হ্যাজার্ড এবং ভিন্ন ভিন্ন গ্রহের গ্র্যাভিটির নিখুঁত গাণিতিক মডেল।</td></tr>
+</tbody></table></div>
+
+<hr>
+
+<h2 id="sec-116">৫. পাঁচ ধাপের স্বয়ংক্রিয় লুপ (The 5-Step Loop)</h2>
+
+<p>আমাদের সিস্টেমটি গাড়ির সাধারণ স্পিডোমিটারের মতো নয়, এটি গাড়ির এমন একটি স্বয়ংক্রিয় এআই মেকানিক যা ইঞ্জিন গরম হওয়ার আগেই টের পায়:</p>
+
+<pre class="code-block mermaid"><code>
+flowchart LR
+
+    A[১. SENSE&lt;br&gt;ডেটা সংগ্রহ] --&gt; B[২. UNDERSTAND&lt;br&gt;বিশ্লেষণ ও ওভাররাইড]
+
+    B --&gt; C[৩. PREDICT&lt;br&gt;৪৮ ঘণ্টার পূর্বাভাস]
+
+    C --&gt; D[৪. ACT&lt;br&gt;চিকিৎসা ও পদক্ষেপ]
+
+    D --&gt; E[৫. LEARN&lt;br&gt;ফলাফল যাচাই ও শিখন]
+
+    E -.-&gt;|অ্যালগরিদম আপডেট| B
+
+
+
+    style A fill:#1e293b,stroke:#38bdf8,stroke-width:2px,color:#fff
+
+    style B fill:#1e293b,stroke:#818cf8,stroke-width:2px,color:#fff
+
+    style C fill:#1e293b,stroke:#f59e0b,stroke-width:2px,color:#fff
+
+    style D fill:#1e293b,stroke:#ef4444,stroke-width:2px,color:#fff
+
+    style E fill:#1e293b,stroke:#10b981,stroke-width:2px,color:#fff
+
+</code></pre>
+
+<li value="1"><strong>Sense (অনুভব করা):</strong> মহাকাশচারীর পালস, রক্তচাপ, রক্তের শর্করা, ঘুমের সময়, কেবিন $\text{CO}_2$ এবং আল্ট্রাসাউন্ড ইমেজ সংগ্রহ করা।</li>
+<li value="2"><strong>Understand (বোঝা):</strong> সংগৃহীত ডেটা মহাকাশচারীর আগের ৩০ দিনের স্বাভাবিক গড় মানের চেয়ে কতটা বিচ্যুত তা বের করা ($Z$-score)। যদি রক্তচাপ опасনক সীমায় পৌঁছায়, তবে তাৎক্ষণিক লাল সতর্কতা দেওয়া।</li>
+<li value="3"><strong>Predict (ভবিষ্যদ্বাণী করা):</strong> আগামী ৪৮ ঘণ্টার মধ্যে হার্ট রেট বা ডিহাইড্রেশনের ট্রেন্ড কোন দিকে যাবে তা সিমুলেট করা।</li>
+<li value="4"><strong>Act (করণীয় নির্ধারণ):</strong> মহাকাশচারীকে বলা—<em>"আজ ৬০ মিনিট সাইক্লিং করুন, ৫০০ মিলি ইলেক্ট্রোলাইট সলিউশন পান করুন এবং কেবিনের এয়ার-স্ক্রাবার লেভেল-২ তে দিন।"</em></li>
+<li value="5"><strong>Learn (শেখা):</strong> ৩ দিন পর অ্যাপটি আবার ডেটা মেপে দেখে—<em>"এই পরামর্শে কি মহাকাশচারীর অবস্থার উন্নতি হয়েছে?"</em> যদি উন্নতি হয়, তবে এই চিকিৎসাকে <strong>PROMISING</strong> হিসেবে রেকর্ড করে, যাতে ভবিষ্যতে একই সমস্যায় এটি আগে প্রয়োগ করা যায়।</li>
+
+<hr>
+
+<h2 id="sec-143">৬. নাসা চ্যালেঞ্জের চাহিদা বনাম আমাদের সমাধান</h2>
+
+<div class="table-container"><table>
+<thead><tr><th>নাসা চ্যালেঞ্জের অফিশিয়াল রিকোয়ারমেন্ট</th><th>ASTRA-LOOP-এ কীভাবে বাস্তবায়ন করা হয়েছে</th></tr></thead><tbody>
+<tr><td><strong>রক্তচাপ, পালস, ব্লাড সুগার, তাপমাত্রা ও ঘুম ট্র্যাক করা</strong></td><td>১৬টি ভাইটালস সহ ৭টি মেডিকেল ডোমেইন (কার্ডিও, মেটাবলিক, ইমিউন, নার্ভাস ইত্যাদি) তৈরি।</td></tr>
+<tr><td><strong>ইন্টারঅ্যাক্টিভ ও ভিজ্যুয়াল মানবদেহ (Clickable Body)</strong></td><td>ভেক্টর এসভিজি মানবদেহ, যাতে ৯টি অর্গান স্পর্শ করে রিয়েল-টাইম স্বাস্থ্য ও হ্যাজার্ড দেখা যায়।</td></tr>
+<tr><td><strong>মহাকাশের কোন কোন পরিমাপ সম্ভব ও কেন দরকার তার শিক্ষা</strong></td><td><code>/learn</code> পেজে প্রতিটি টেস্টের ধাপে ধাপে নির্দেশিকা, কারণ ও মহাকাশীয় ঝুঁকি বিশ্লেষণ।</td></tr>
+<tr><td><strong>চিকিৎসা ও স্বাস্থ্যোন্নতির গাইডেন্স (Treatments & Guidance)</strong></td><td><code>/guidance</code> পেজে ডিসিশন-ট্রি উইজার্ড এবং ৪ স্তরের এসকেলেশন ব্যবস্থা।</td></tr>
+<tr><td><strong>ভিন্ন ভিন্ন মহাকাশ পরিবেশের সাপোর্ট</strong></td><td>মহাকাশযান ($0\text{ g}$), স্টেশন, রোভার, চাঁদ ($0.16\text{ g}$) ও মঙ্গল ($0.38\text{ g}$) এনভায়রনমেন্ট সুইচ।</td></tr>
+<tr><td><strong>অভ্যাসে পরিণত করতে গেমিফিকেশন ও রুটিন</strong></td><td>সকাল-সন্ধ্যার চেকলিস্ট, স্ট্রিক কাউন্টার, এক্সপি ও নাসা লোর ব্যাজ (ওভার-এক্সারসাইজ সেফটি গার্ডসহ)।</td></tr>
+<tr><td><strong>ইমেজ ও আল্ট্রাসাউন্ড ইনপুট</strong></td><td>অন-বোর্ড ক্যামেরা ও আল্ট্রাসাউন্ড স্ক্যানার মডিউল এবং ক্যানভাস ড্রয়িং মার্কআপ।</td></tr>
+</tbody></table></div>
+
+<hr>
+
+<div class="callout tip"><strong>TIP:</strong> 
+<blockquote><strong>মনে রাখুন:</strong> ASTRA-LOOP হলো মহাকাশচারীর জন্য একটি "সেকেন্ড ব্রেন" (Second Brain)। এটি মহাকাশচারীর ওপর অতিরিক্ত মানসিক চাপ দেয় না, বরং তাদের শান্ত রেখে ধাপে ধাপে সুস্থ রাখে।</blockquote>
+
+</section>
+<div class="page-break"></div>
+
+<section id="02_মহাকাশে_কীভাবে_ব্যবহার_করবেন-md" class="doc-module">
+<h1 id="sec-0">ASTRA-LOOP: মহাকাশে কীভাবে ব্যবহার করবেন (অ্যাস্ট্রোনট ম্যানুয়াল)</h1>
+<blockquote><strong>নথি ক্রম:</strong> ০২ | <strong>দৃষ্টিভঙ্গি:</strong> মহাকাশচারীর চোখে বাস্তব দিনযাপন ও ইন্টারফেস গাইড</blockquote>
+
+<hr>
+
+<h2 id="sec-5">এই অংশে যা শিখবেন</h2>
+<li>একজন মহাকাশচারী কীভাবে ঘুম থেকে উঠে প্রতিদিন এই অ্যাপ ব্যবহার করেন ("A Day in the Life")।</li>
+<li>অ্যাপের প্রতিটি পেজের ইন্টারফেস, বাটন এবং স্ক্রিনশটের সহজ ব্যাখ্যা।</li>
+<li>সবুজ, হলুদ, কমলা ও লাল রঙের অর্থ এবং তখন আপনার কী পদক্ষেপ নেওয়া উচিত।</li>
+<li>৪টি এসকেলেশন টিয়ার (কখন নিজে সমাধান করবেন আর কখন পৃথিবীতে জরুরি মেসেজ পাঠাবেন)।</li>
+<li>৫টি বাস্তব মহাকাশীয় সংকট এবং ধাপে ধাপে তা মোকাবিলার পদ্ধতি।</li>
+
+<hr>
+
+<h2 id="sec-14">১. মহাকাশে একদিন: ৬১তম দিনের একটি বাস্তব গল্প</h2>
+
+<p><strong>তারিখ:</strong> মঙ্গল অভিযানের ৬১তম মিশন ডে (Sol 61)  </p>
+<p><strong>অবস্থান:</strong> ডিপ-স্পেস ট্রানজিট ভেহিক্যাল (Deep Space Transit Vehicle), পৃথিবী থেকে ৪.২ কোটি কিমি দূরে  </p>
+<p><strong>মহাকাশচারী:</strong> কমান্ডার অ্যালেক্স ভ্যান্স (CDR Alex Vance)</p>
+
+<p>সকাল ০৬:০০ টা (UTC)। মহাকাশযানের মৃদু স্লিপ-পডের অ্যালার্মে অ্যালেক্সের ঘুম ভাঙল। জিরো-গ্র্যাভিটিতে স্লিপিং ব্যাগে শরীর ভাসছে। মুখটা কিছুটা ফোলা ফোলা লাগছে—মহাকাশের সাধারণ "ফ্লুইড শিফট" (Fluid Shift), যেখানে রক্তের জলীয় অংশ পায়ের দিক থেকে বুকে ও মুখে উঠে আসে। </p>
+
+<p>অ্যালেক্স স্লিপ পড থেকে বেরিয়ে ওয়াল-মাউন্টেড টাচপ্যাডে <strong>ASTRA-LOOP</strong> অ্যাপটি চালু করলেন। অ্যাপটি অফলাইনে মহাকাশযানের লোকাল সার্ভার থেকে সেকেন্ডের মধ্যে খুলে গেল।</p>
+
+<pre class="code-block mermaid"><code>
+journey
+
+    title মহাকাশচারীর দৈনন্দিন স্বাস্থ্য চক্র
+
+    section সকাল (১৫ মিনিট)
+
+      ঘুম থেকে ওঠা: 5: অ্যালেক্স
+
+      ASTRA-LOOP ওপেন ও সকালের রুটিন চেকলিস্ট: 5: অ্যালেক্স
+
+      BP, সুগার ও ভাইটালস ইনপুট: 4: অ্যালেক্স
+
+      ক্লিনিক্যাল রিস্ক স্কোর ও বডি ভিউ রিভিউ: 4: অ্যালেক্স
+
+    section দুপুর (মিশন ওয়ার্ক)
+
+      এক্সারসাইজ ও কেবিন নজরদারি: 5: অ্যালেক্স
+
+      সোলার স্টর্ম বা বিকিরণ অ্যালার্ট চেক: 3: অ্যালেক্স
+
+    section রাত (১০ মিনিট)
+
+      পিভিটি রিঅ্যাকশন টেস্ট ও ভয়েস চেক: 4: অ্যালেক্স
+
+      ইমেজ/আল্ট্রাসাউন্ড স্ক্যান সেভ: 4: অ্যালেক্স
+
+      কাউন্টারমেজার যাচাই ও ঘুম: 5: অ্যালেক্স
+
+</code></pre>
+
+<hr>
+
+<h2 id="sec-43">২. প্রতিদিনের সময়সূচি ও রুটিন</h2>
+
+<div class="table-container"><table>
+<thead><tr><th>সময়</th><th>সময়কাল</th><th>করণীয় কাজ</th><th>কোথায় ইনপুট দেবেন</th></tr></thead><tbody>
+<tr><td><strong>সকাল ০৬:১৫</strong></td><td>১০-১২ মিনিট</td><td>১. ডিজিটাল স্কেলে ওজন ও হাইড্রেশন মাপুন।<br>২. ব্লুটুথ কাফ দিয়ে রক্তচাপ ও পালস নিন।<br>৩. গ্লুকোমিটার স্ট্রিপে রক্তের শর্করা চেক করুন।</td><td><a href="file:///docs/screenshots/routine.png"><code>/routine</code></a> (সকালের চেকলিস্ট)</td></tr>
+<tr><td><strong>সকাল ০৬:৩০</strong></td><td>৩ মিনিট</td><td>টুডে ড্যাশবোর্ড (<a href="file:///docs/screenshots/dashboard-v2.png"><code>/today</code></a>) এবং হিউম্যান বডি (<a href="file:///docs/screenshots/body-view.png"><code>/body</code></a>) দেখে নিন। কোনো লাল বা হলুদ সতর্কতা আছে কি না।</td><td><a href="file:///docs/screenshots/dashboard-v2.png"><code>/today</code></a></td></tr>
+<tr><td><strong>দুপুর ১৩:০০</strong></td><td>৫ মিনিট</td><td>হাইড্রেশন প্যাক পান করে লগ করুন। কেবিনের $\text{CO}_2$ লেভেল ঠিক আছে কি না দেখে নিন।</td><td><a href="file:///docs/screenshots/dashboard-v2.png"><code>/today</code></a></td></tr>
+<tr><td><strong>রাত ২১:০০</strong></td><td>৮-১০ মিনিট</td><td>১. সাইকোমোটর ভিজিল্যান্স টেস্ট (PVT) দ্রুত রিঅ্যাকশন বাটন চাপুন।<br>২. ৫ সেকেন্ড ভয়েস রেকর্ড করে ক্লান্তি পরিমাপ করুন।<br>৩. কোনো সমস্যা থাকলে উইজার্ড (<a href="file:///docs/screenshots/guidance-wizard.png"><code>/guidance</code></a>) অনুসরণ করে ওষুধ/কাউন্টারমেজার নিন।</td><td><a href="file:///docs/screenshots/dashboard-mobile.png"><code>/check-in</code></a></td></tr>
+</tbody></table></div>
+
+<hr>
+
+<h2 id="sec-54">৩. প্রতিটি স্ক্রিনের ভিজ্যুয়াল গাইড</h2>
+
+<h3 id="sec-56">১. টুডে ড্যাশবোর্ড (<code>/today</code>)</h3>
+<p>!<a href="/docs/screenshots/dashboard-v2.png">Today Dashboard</a></p>
+<li><strong>কী দেখতে পাবেন:</strong></li>
+<p>  1. <strong>টপ রিস্ক স্কোর (Composite Risk Score):</strong> একটি বড় গোল গেজে আপনার সামগ্রিক ঝুঁকি (০ থেকে ১০০%) দেখায়।</p>
+<p>  2. <strong>কনফিডেন্স মিটার (Confidence Meter):</strong> অ্যাপের ডেটা কতটা নির্ভরযোগ্য (যেমন: ৯২% কনফিডেন্স)। কোনো সেন্সর কাজ না করলে এই স্কোর কমে যায়।</p>
+<p>  3. <strong>৭টি মেডিকেল ডোমেইন কার্ড:</strong> Cardiovascular (হৃদযন্ত্র), Autonomic/Sleep (ঘুম), Muscle-Bone (পেশি ও হাড়), Immune (রোগ প্রতিরোধ), Metabolic/Nutrition (পুষ্টি ও শর্করা), Environment (কেবিন বাতাস), এবং Neuro-Behavioral (মানসিক স্থিতি)।</p>
+<p>  4. <strong>এসকেলেশন ব্যানার:</strong> কোনো ভাইটাল সীমা ছাড়ালে সবার উপরে লাল বা কমলা ব্যানারে তৎক্ষণাৎ সতর্কতা জ্বলে ওঠে।</p>
+
+<h3 id="sec-64">২. ক্লিকএবল মানবদেহ ও অর্গান সিস্টেম (<code>/body</code>)</h3>
+<p>!<a href="/docs/screenshots/body-view.png">Interactive Body</a></p>
+<li><strong>কী দেখতে পাবেন:</strong></li>
+<p>  * একটি চমৎকার ডিজিটাল ভেক্টর মানবদেহ। ৯টি অর্গান স্পর্শযোগ্য: <strong>ব্রেন, চোখ (SANS), থাইরয়েড, হার্ট, ফুসফুস, লিভার ও মেটাবলিজম, কিডনি ও হাইড্রেশন, পেশি ও হাড়, এবং ত্বক/ইমিউন</strong>।</p>
+<p>  * যে অঙ্গটি সুস্থ, সেটি শান্ত নীল বা সবুজ রঙে জ্বলবে। যে অঙ্গে চাপ বাড়ছে (যেমন: ডিহাইড্রেশন বা রক্তচাপ বৃদ্ধি), সেটি হলুদ বা লাল রঙে স্পন্দিত (Pulsing Glow) হতে থাকবে।</p>
+<p>  * <strong>Hazard Lens (হ্যাজার্ড ফিল্টার):</strong> আপনি চাইলে টপ বাটনে ক্লিক করে দেখতে পারেন—শুধুমাত্র "Radiation" বা "Zero Gravity"-র কারণে শরীরের কোন কোন অঙ্গে সরাসরি চাপ পড়ছে।</p>
+
+<h3 id="sec-71">৩. ক্লিনিক্যাল গাইডেন্স উইজার্ড (<code>/guidance</code>)</h3>
+<p>!<a href="/docs/screenshots/guidance-wizard.png">Clinical Guidance Wizard</a></p>
+<li><strong>কী দেখতে পাবেন:</strong></li>
+<p>  <em> মহাকাশচারী যখন অসুস্থ বোধ করেন, এই পেজটি তাকে একজন অভিজ্ঞ চিকিৎসকের মতো প্রশ্ন করে: </em>"আপনার কি মাথা ব্যথা করছে?"<em>, </em>"কেবিনে $\text{CO}_2$ কি ৫০০ ppm-এর বেশি?"*</p>
+<p>  * আপনার উত্তরের ওপর ভিত্তি করে এটি ৪টি টিয়ারের একটি প্রেসক্রিপশন তৈরি করে দেয়:</p>
+<p>    * <strong>Tier 1 (Self-Manage):</strong> নিজে সমাধান করুন (যেমন: ৩০০ মিলি ইলেক্ট্রোলাইট খান ও ভেন্টিলেশন ফ্যান বাড়ান)।</p>
+<p>    * <strong>Tier 2 (Monitor):</strong> আগামী ৪ ঘণ্টা পর পর আবার মাপুন।</p>
+<p>    * <strong>Tier 3 (Contact Surgeon):</strong> পৃথিবীর ফ্লাইট সার্জনকে অগ্রাধিকার ভিত্তিতে প্যাকেট পাঠান।</p>
+<p>    * <strong>Tier 4 (Emergency):</strong> তাৎক্ষণিক জরুরি প্রটোকল চালু করুন (যেমন: রেডিয়েশন শেল্টারে যান বা অক্সিজেন মাস্ক পরুন)।</p>
+
+<h3 id="sec-81">৪. লার্নিং ও এডুকেশন হাব (<code>/learn</code>)</h3>
+<p>!<a href="/docs/screenshots/learn-hub.png">Education Hub</a></p>
+<li><strong>কী দেখতে পাবেন:</strong></li>
+<p>  * কীভাবে জিরো-গ্র্যাভিটিতে আল্ট্রাসাউন্ড নিতে হয়, কীভাবে রক্তচাপের কাফ সঠিক অবস্থানে বাঁধতে হয় তার সচিত্র ধাপ।</p>
+<p>  * কেন এই টেস্টটি মহাকাশে জরুরি এবং নাসার কোন হ্যাজার্ডের কারণে এই প্যারামিটার বদলে যায়, তার স্পষ্ট বৈজ্ঞানিক ব্যাখ্যা।</p>
+
+<h3 id="sec-87">৫. রুটিন ও ইমেজ ক্যাপচার (<code>/routine</code>)</h3>
+<p>!<a href="/docs/screenshots/routine.png">Routine & Image Scanner</a></p>
+<li><strong>কী দেখতে পাবেন:</strong></li>
+<p>  * সকাল ও সন্ধ্যার কাজের পরিষ্কার চেকলিস্ট। কাজ শেষ হলে টিক চিহ্ন দিন।</p>
+<p>  * <strong>Image Scanner Modal:</strong> শরীরের কোনো ফুসকুড়ি, চোখের রেটিনা বা আল্ট্রাসাউন্ড স্ক্যান ক্যামেরা দিয়ে ছবি তুলে অ্যাপে যুক্ত করুন। টাচপ্যাডে আঙুল দিয়ে দাগ কেটে চিহ্নিত করতে পারেন (Canvas Drawing Annotation)।</p>
+
+<h3 id="sec-93">৬. প্রোগ্রেস ও গেমিফিকেশন (<code>/progress</code>)</h3>
+<p>!<a href="/docs/screenshots/gamification.png">Gamification Dashboard</a></p>
+<li><strong>কী দেখতে পাবেন:</strong></li>
+<p>  * প্রতিদিন নিয়মিত স্বাস্থ্য পরীক্ষার জন্য আপনি <strong>XP (Experience Points)</strong> এবং <strong>লেভেল</strong> অর্জন করবেন।</p>
+<p>  * <strong>স্ট্রিক কাউন্টার (Streak):</strong> টানা কতদিন আপনি রুটিন মেনে চলেছেন।</p>
+<p>  * <strong>লোর ব্যাজ (Badges):</strong> "Cosmic Shield", "Deep Space Heart", "Martian Pioneer" ইত্যাদি বিশেষ অর্জন আনলক হবে।</p>
+<p>  <em> </em>মেডিকেল সেফটি লিমিট:* শরীর অসুস্থ বা ক্লান্ত থাকলে অতিরিক্ত ব্যায়াম করে এক্সপি বাড়ানোর চেষ্টা করলে সিস্টেম স্বয়ংক্রিয়ভাবে এক্সপি দেওয়া বন্ধ রাখে, যাতে মহাকাশচারী অতি-পরিশ্রমে বিপদে না পড়েন।</p>
+
+<h3 id="sec-101">৭. রেডিয়েশন ওয়াচ (<code>/radiation</code>)</h3>
+<p>!<a href="/docs/screenshots/radiation-v2.png">Radiation Watch Window</a></p>
+<li><strong>কী দেখতে পাবেন:</strong></li>
+<p>  * মহাকাশযানের বাইরের লাইভ সোলার প্রোটন ফ্লাক্স।</p>
+<p>  * গত ৭২ ঘণ্টার কিউমুলেটিভ রেডিয়েশন ডোজ (mSv)। যদি নিরাপদ সীমা (যেমন: ২০ mSv) ছাড়িয়ে যায়, তবে এটি সঙ্গে সঙ্গে স্টর্ম অ্যালার্ট দিয়ে ক্রুদের সুরক্ষিত রেডিয়েশন স্টর্ম শেল্টারে (Storm Shelter) আশ্রয় নিতে নির্দেশ দেয়।</p>
+
+<h3 id="sec-107">৮. হোয়াট-ইফ সিমুলেটর (<code>/what-if</code>)</h3>
+<p>!<a href="/docs/screenshots/what-if-v2.png">What-If Simulator</a></p>
+<li><strong>কী দেখতে পাবেন:</strong></li>
+<p>  * ৯টি স্লাইডার রয়েছে (ঘুম, ব্যায়াম, রেডিয়েশন, কেবিন $\text{CO}_2$, মানসিক চাপ ইত্যাদি)।</p>
+<p>  <em> মহাকাশচারী নিজে স্লাইডার নাড়িয়ে দেখতে পারেন: </em>"আমি যদি আজ রাতে ২ ঘণ্টা কম ঘুমাই এবং কেবিনের $\text{CO}_2$ বাড়ে, তবে কাল আমার হার্টের ঝুঁকি ও মাথা ব্যথার সম্ভাবনা কত শতাংশ বাড়বে?"*</p>
+
+<hr>
+
+<h2 id="sec-115">৪. স্ট্যাটাস কালার কোড ও আপনার করণীয়</h2>
+
+<div class="table-container"><table>
+<thead><tr><th>স্ট্যাটাস রঙ</th><th>প্রযুক্তিগত অর্থ</th><th>আপনার অনুভূতি</th><th>করণীয় পদক্ষেপ</th></tr></thead><tbody>
+<tr><td><strong>GREEN (স্বাভাবিক)</strong></td><td>$Z$-score স্বাভাবিক ($< 1.0$), সব ভাইটাল ক্লিনিক্যাল রেঞ্জের ভেতরে।</td><td>সম্পূর্ণ স্বাভাবিক ও চনমনে।</td><td>স্বাভাবিক রুটিন কাজ চালিয়ে যান।</td></tr>
+<tr><td><strong>YELLOW (সতর্কতা)</strong></td><td>মাইল্ড বিচ্যুতি ($1.0 \le Z < 2.0$), হালকা পানিশূন্যতা বা ঘুমের ঘাটতি।</td><td>হালকা ক্লান্তি বা অস্বস্তি।</td><td>হালকা বিশ্রাম নিন, ৫০০ মিলি পানি পান করুন, পরের রুটিন ঠিক রাখুন।</td></tr>
+<tr><td><strong>ORANGE (বিপদ বাড়ছে)</strong></td><td>মাঝারি বিচ্যুতি ($2.0 \le Z < 3.0$), রক্তচাপ বা রেডিয়েশন বাড়ছে।</td><td>মাথা ভারী, অস্থিরতা বা দৃষ্টিতে চাপ।</td><td><code>/guidance</code> উইজার্ড খুলুন, নির্দেশিত ওষুধ/কাউন্টারমেজার নিন।</td></tr>
+<tr><td><strong>RED (জরুরি অবস্থা)</strong></td><td>চরম বিচ্যুতি ($Z \ge 3.0$) অথবা <strong>Absolute Safety Threshold</strong> অতিক্রান্ত।</td><td>তীব্র অসুস্থতা, মাথা ঘোরা বা বুকে ব্যথা।</td><td><strong>Tier 4 Emergency Protocol:</strong> সরাসরি ক্রু-মেটদের জানান এবং পৃথিবীতে ইমার্জেন্সি প্যাকেট ব্রডকাস্ট করুন।</td></tr>
+<tr><td><strong>GRAY (ডেটা নেই)</strong></td><td>সেন্সর বিচ্ছিন্ন বা ডেটা ইনপুট দেওয়া হয়নি।</td><td>অজ্ঞাত।</td><td>সেন্সর কানেকশন চেক করুন বা ম্যানুয়ালি মেপে ইনপুট দিন।</td></tr>
+</tbody></table></div>
+
+<hr>
+
+<h2 id="sec-127">৫. অফলাইন মোড ও ডেটা সিঙ্ক কীভাবে কাজ করে?</h2>
+
+<pre class="code-block mermaid"><code>
+sequenceDiagram
+
+    autonumber
+
+    actor Astronaut as মহাকাশচারী (মঙ্গল যান)
+
+    participant UI as ASTRA-LOOP ওয়েব UI
+
+    participant IDB as ব্রাউজার IndexedDB (অফলাইন ড্রয়ার)
+
+    participant LocalAPI as অন-বোর্ড লোকাল সার্ভার
+
+    participant DTN as ডিপ-স্পেস নেটওয়ার্ক (DTN)
+
+    actor Ground as মিশন কন্ট্রোল (নাসা হিউস্টন)
+
+
+
+    Astronaut-&gt;&gt;UI: নতুন রক্তচাপ ও আল্ট্রাসাউন্ড ইনপুট দিলেন
+
+    UI-&gt;&gt;LocalAPI: লোকাল সার্ভারে সংরক্ষণ (তাৎক্ষণিক রিস্ক ক্যালকুলেশন)
+
+    UI-&gt;&gt;IDB: অফলাইন বাফারে ডেটা সুরক্ষিত রাখা হলো
+
+    Note over Astronaut,LocalAPI: কোনো ইন্টারনেট নেই, কিন্তু সিদ্ধান্ত তাৎক্ষণিক!
+
+    
+
+    DTN--&gt;&gt;LocalAPI: পৃথিবী থেকে সংযোগ উইন্ডো উন্মুক্ত হলো (Comms Window)
+
+    LocalAPI-&gt;&gt;Ground: এনক্রিপ্টেড টেলিমেট্রি প্যাকেট পাঠানো হলো (২২ মিনিট পর পৌঁছাল)
+
+    Ground--&gt;&gt;LocalAPI: ফ্লাইট সার্জনের প্রেসক্রিপশন সিঙ্ক হলো
+
+</code></pre>
+
+<li><strong>সহজ উপমা:</strong> এটি যেন আপনার পকেটের একটি অফলাইন নোটবুক। আপনি ইন্টারনেট না থাকলেও নোটবুকে হিসাব লিখে রাখতে পারছেন এবং সেই অনুযায়ী এখনই রান্না বা বাজার করতে পারছেন। পরে যখনই ওয়াইফাই কানেকশন পাবে, নোটবুকটি নিজে থেকেই আপনার গুগল ড্রাইভের সাথে ব্যাকআপ নিয়ে নেবে।</li>
+
+<hr>
+
+<h2 id="sec-153">৬. পাঁচটি বাস্তব দৃশ্যকল্প (Scenarios)</h2>
+
+<h3 id="sec-155">দৃশ্যকল্প ক: ৩ দিন টানা ঘুমের ঘাটতি ও রিঅ্যাকশন কমে যাওয়া</h3>
+<li><strong>ঘটনা:</strong> মিশনের ৪৮ থেকে ৫০তম দিনে অ্যালেক্স টানা কাজ করার কারণে মাত্র ৪ ঘণ্টা করে ঘুমান।</li>
+<li><strong>সিস্টেমের আচরণ:</strong> ড্যাশবোর্ডে Autonomic ডোমেইন হলুদ থেকে কমলা হয়ে যায়। পিভিটি টেস্টে রিঅ্যাকশন টাইম ২৫০ মিলিসেকেন্ড থেকে বেড়ে ৪০০ মিলিসেকেন্ড হয়।</li>
+<li><strong>করণীয়:</strong> সিস্টেম তাকে "Extended Sleep Protocol" সুপারিশ করে এবং ভারী স্পেসওয়াক (EVA) শিডিউল থাকলে তা স্থগিত করতে বলে।</li>
+
+<h3 id="sec-160">দৃশ্যকল্প খ: সৌর ঝড় (Solar Particle Event) — ৬১তম দিনের হিরো সিনারিও</h3>
+<li><strong>ঘটনা:</strong> সূর্য থেকে তীব্র প্রোটন ঝড় শুরু হলো। বাইরের বিকিরণ সেন্সরে রেডিয়েশন ডোজ হঠাৎ ০.০৫ থেকে লাফিয়ে ১.৪ mSv/ঘণ্টায় উঠল।</li>
+<li><strong>সিস্টেমের আচরণ:</strong> পুরো অ্যাপে লাল অ্যালার্ট ব্যানার জ্বলে ওঠে: <strong>"CRITICAL RADIATION EVENT — EVACUATE TO STORM SHELTER"</strong>।</li>
+<li><strong>করণীয়:</strong> অ্যালেক্স অবিলম্বে মহাকাশযানের গভীর কেন্দ্রে ওয়াটার-শিল্ডেড স্টর্ম শেল্টারে প্রবেশ করেন এবং রেডিও-প্রটেক্টিভ ওষুধ সেবন করেন।</li>
+
+<h3 id="sec-165">দৃশ্যকল্প গ: ব্লুটুথ হার্ট-রেট সেন্সর নষ্ট হয়ে যাওয়া</h3>
+<li><strong>ঘটনা:</strong> অ্যালেক্সের হাতের রিস্টব্যান্ড নষ্ট হয়ে গেল, কোনো পালস ডেটা আসছে না।</li>
+<li><strong>সিস্টেমের আচরণ:</strong> সাধারণ অ্যাপ ক্র্যাশ করত বা শূন্য দেখাত। কিন্তু ASTRA-LOOP এর <strong>Confidence Engine</strong> কাজ শুরু করে। ড্যাশবোর্ডের কনফিডেন্স ১০০% থেকে কমে ৬৮% এ নেমে আসে এবং হার্ট ডোমেইনটি ছাই (GRAY) রঙ ধারণ করে।</li>
+<li><strong>করণীয়:</strong> সিস্টেম নোটিফিকেশন দেয়: <em>"হার্ট রেট ডেটা মিসিং। দয়া করে ম্যানুয়ালি গলায় হাত দিয়ে পালস গুনে ইনপুট দিন।"</em></li>
+
+<h3 id="sec-170">দৃশ্যকল্প ঘ: রক্তচাপ হঠাৎ বিপজ্জনক মাত্রায় বেড়ে যাওয়া (Clinical Excursion)</h3>
+<li><strong>ঘটনা:</strong> সকালে রক্তচাপ মাপার পর দেখা গেল সিস্টোলিক চাপ <strong>১৬৫ mmHg</strong> (স্বাভাবিকের চেয়ে অনেক বেশি)।</li>
+<li><strong>সিস্টেমের আচরণ:</strong> যদিও মহাকাশে অ্যালেক্সের আগের বেসলাইন কিছুটা বেশি ছিল, কিন্তু ASTRA-LOOP এর <strong>Dual-Layer Threshold Engine</strong> ব্যক্তিগত বেসলাইনকে ওভাররাইড করে সরাসরি আমেরিকান হার্ট অ্যাসোসিয়েশনের (AHA) ক্লিনিক্যাল স্টেজ-২ হাইপারটেনশন লাল সতর্কতা জারি করে।</li>
+<li><strong>করণীয়:</strong> গাইডেন্স উইজার্ড তাকে নির্দেশ দেয়: অতিরিক্ত সোডিয়াম খাওয়া বন্ধ করুন, ম্যাগনেসিয়াম সাপ্লিমেন্ট নিন এবং ফ্লাইট সার্জনকে অগ্রাধিকার বার্তা পাঠান।</li>
+
+<h3 id="sec-175">দৃশ্যকল্প ঙ: কাউন্টারমেজার শুরু করে ফলাফল দেখা (Learn Loop)</h3>
+<li><strong>ঘটনা:</strong> ৬৩তম দিনে অ্যালেক্সের হার্ট ও ঘুমের উন্নতির জন্য দিনে ৪৫ মিনিট সাইক্লিং এবং মেলাটোনিন দেওয়া হলো।</li>
+<li><strong>সিস্টেমের আচরণ:</strong> ৬৫তম দিনে অ্যাপের <strong>Learn Loop Engine</strong> স্বয়ংক্রিয়ভাবে বিশ্লেষণ করে দেখায় যে তার রিস্ক স্কোর ৪২% কমেছে এবং $Z$-score স্বাভাবিকের দিকে ফিরেছে।</li>
+<li><strong>ফলাফল:</strong> সিস্টেমে এই কাউন্টারমেজারটি <strong>PROMISING</strong> হিসেবে ব্যাজ পায়, যা ভবিষ্যতে অন্যান্য ক্রুদের জন্যও রেফারেন্স হিসেবে যুক্ত হয়।</li>
+
+</section>
+<div class="page-break"></div>
+
+<section id="03_ফিচার_গাইড-md" class="doc-module">
+<h1 id="sec-0">ASTRA-LOOP: সম্পূর্ণ ফিচার গাইড (Feature Catalog)</h1>
+<blockquote><strong>নথি ক্রম:</strong> ০৩ | <strong>বিষয়:</strong> প্রতিটি ফিচারের পুঙ্খানুপুঙ্খ বিশদ বিবরণ ও ডেমো কৌশল</blockquote>
+
+<hr>
+
+<h2 id="sec-5">এই অংশে যা শিখবেন</h2>
+<li>ASTRA-LOOP-এর ২০টি প্রধান ফিচারের প্রতিটি কী করে, কেন দরকার এবং কীভাবে কাজ করে।</li>
+<li>প্রতিটি ফিচারের পেজ রুট এবং ব্যাকএন্ড/ফ্রন্টএন্ড সোর্স কোডের নির্দিষ্ট ফাইল লোকেশন।</li>
+<li>বিচারক বা ইন্টারভিউয়ারের সামনে প্রতিটি ফিচার কীভাবে চমৎকারভাবে ডেমো হিসেবে তুলে ধরবেন।</li>
+
+<hr>
+
+<h2 id="sec-12">ফিচার তালিকা ও বিস্তারিত বিবরণ</h2>
+
+<hr>
+
+<h3 id="sec-16">১. পার্সোনাল বেসলাইন ইঞ্জিন (Personal Baseline Engine)</h3>
+<li><strong>কী করে:</strong> মহাকাশচারীর আগের ৩০ দিনের ভাইটালস বিশ্লেষণ করে তার শরীরের জন্য নিজস্ব "স্বাভাবিক গড়" (Moving Mean) এবং "স্বাভাবিক ওঠানামা" (Standard Deviation) হিসাব করে।</li>
+<li><strong>কেন দরকার:</strong> পৃথিবীর মানুষের স্বাভাবিক হার্ট রেট যদি ৬০-১০০ হয়, তবে একজন অ্যাথলেট মহাকাশচারীর স্বাভাবিক হার্ট রেট হতে পারে ৫০। সাধারণ অ্যাপ ৫০ দেখে বিপদ ভাববে, কিন্তু আমাদের বেসলাইন ইঞ্জিন জানে যে এটি তার জন্য সম্পূর্ণ স্বাভাবিক।</li>
+<li><strong>কীভাবে কাজ করে:</strong> এক্সপোনেনশিয়াল ওয়েটেড মুভিং অ্যাভারেজ (EWMA) ব্যবহার করে, যাতে সাম্প্রতিক দিনের ডেটাকে বেশি গুরুত্ব দেওয়া হয় এবং প্রাচীন ডেটার প্রভাব ধীরে ধীরে কমে যায়।</li>
+<li><strong>কোথায় দেখব:</strong> <a href="file:///apps/web/app/twin/page.tsx"><code>/twin</code></a> এবং <a href="file:///apps/web/app/today/page.tsx"><code>/today</code></a> পেজে চার্টের পেছনের হালকা নীল ব্যান্ড।</li>
+<li><strong>কোন ফাইলে কোড আছে:</strong> <a href="file:///apps/api/src/engines/baseline.engine.ts"><code>apps/api/src/engines/baseline.engine.ts</code></a></li>
+<li><strong>কীভাবে ডেমো দেখাবেন:</strong> ড্যাশবোর্ডে গিয়ে কোনো ভাইটালের চার্ট দেখান এবং বলুন: <em>"এই নীল ব্যান্ডটি হলো মহাকাশচারীর নিজস্ব সুস্থ অবস্থার রেঞ্জ। এর বাইরে গেলেই সিস্টেম অ্যালার্ট তৈরি করে।"</em></li>
+
+<hr>
+
+<h3 id="sec-26">২. জেড-স্কোর নরমালাইজেশন (Z-Score Normalization)</h3>
+<li><strong>কী করে:</strong> বিভিন্ন এককের ডেটা (যেমন রক্তচাপ mmHg, পালস bpm, ঘুম ঘণ্টা) কে একটি একক তুলনামূলক গাণিতিক স্কেলে রূপান্তর করে।</li>
+<li><strong>কেন দরকার:</strong> রক্তচাপ ১২০ থেকে ১২৫ হওয়া (পার্থক্য ৫) এবং ঘুম ৮ ঘণ্টা থেকে ৩ ঘণ্টা হওয়া (পার্থক্য ৫)—সংখ্যায় এক হলেও স্বাস্থ্যে ঘুমের এই ৫ ঘণ্টার প্রভাব হাজার গুণ মারাত্মক! জেড-স্কোর ছাড়া এদের তুলনা করা অসম্ভব।</li>
+<li><strong>কীভাবে কাজ করে:</strong> $Z = \frac{\text{আজকের মান} - \text{ব্যক্তিগত গড়}}{\text{স্ট্যান্ডার্ড ডেভিয়েশন}}$। $Z = 0$ মানে সম্পূর্ণ পারফেক্ট, $Z = 2$ মানে হালকা বিচ্যুতি, $Z > 3$ মানে চরম অস্বাভাবিক।</li>
+<li><strong>কোথায় দেখব:</strong> ড্যাশবোর্ডের প্রতিটি কার্ডের নিচে (যেমন: $+2.1\sigma$ লেখা)।</li>
+<li><strong>কোন ফাইলে কোড আছে:</strong> <a href="file:///apps/api/src/engines/baseline.engine.ts"><code>apps/api/src/engines/baseline.engine.ts</code></a></li>
+<li><strong>কীভাবে ডেমো দেখাবেন:</strong> ড্যাশবোর্ডে ঘুম ও হার্ট রেটের পাশে $+2.4\sigma$ দেখিয়ে বুঝিয়ে দিন যে মহাকাশচারী তার স্বাভাবিক অবস্থার চেয়ে ২.৪ গুণ বেশি চাপে আছেন।</li>
+
+<hr>
+
+<h3 id="sec-36">৩. রিস্ক ইঞ্জিন ও ৭টি ডোমেইন কার্ড (Risk Engine & 7 Domain Cards)</h3>
+<li><strong>কী করে:</strong> শরীরের সমস্ত অঙ্গ ও সিস্টেমকে ৭টি ভাগে ভাগ করে সামগ্রিক স্বাস্থ্য ঝুঁকি (০ থেকে ১০০%) গণনা করে।</li>
+<li><strong>কেন দরকার:</strong> একজন মানুষের হার্ট হয়তো ভালো আছে কিন্তু ঘুম নেই এবং রেডিয়েশন বেশি—তাহলে সামগ্রিকভাবে তিনি ঝুঁকিতে আছেন। সামগ্রিক ঝুঁকি এক নজরে দেখা অত্যন্ত জরুরি।</li>
+<li><strong>কীভাবে কাজ করে:</strong> ৭টি ডোমেইনের (কার্ডিও, ঘুম, হাড়/পেশি, ইমিউন, মেটাবলিজম, পরিবেশ ও মন) রিস্ক স্কোরের একটি ওয়েটেড যোগফল নেয়। সাথে যুক্ত করে <strong>ইন্টারঅ্যাকশন টার্ম (Interaction Term)</strong>: যেমন—একাকীত্ব + উচ্চ রেডিয়েশন একসাথে থাকলে ঝুঁকি গুণিতক হারে বাড়ে।</li>
+<li><strong>কোথায় দেখব:</strong> <a href="file:///apps/web/app/today/page.tsx"><code>/today</code></a> পেজের টপ সার্কুলার গেজ এবং নিচের ৭টি কার্ড।</li>
+<li><strong>কোন ফাইলে কোড আছে:</strong> <a href="file:///apps/api/src/engines/risk.engine.ts"><code>apps/api/src/engines/risk.engine.ts</code></a></li>
+<li><strong>কীভাবে ডেমো দেখাবেন:</strong> টপ গেজ পয়েন্ট করে বলুন: <em>"এটি হলো কম্পোজিট রিস্ক স্কোর। এটি এখন ৪২%, যা সতর্কতামূলক।"</em></li>
+
+<hr>
+
+<h3 id="sec-46">৪. কনফিডেন্স ইঞ্জিন ও ব্লাইন্ড-স্পট ফিউশন (Blind-Spot-Aware Confidence)</h3>
+<li><strong>কী করে:</strong> ড্যাশবোর্ডের তথ্যের ওপর সিস্টেমের নিজের বিশ্বাসযোগ্যতা কত শতাংশ তা হিসাব করে।</li>
+<li><strong>কেন দরকার:</strong> কোনো সেন্সর যদি বন্ধ থাকে, তাহলে ডাক্তার বা অ্যাপের কখনো বলা উচিত নয় যে <em>"সব ঠিক আছে"</em>; বরং বলা উচিত <em>"আমার কাছে পুরো তথ্য নেই, তাই আমি নিশ্চিত নই"</em>।</li>
+<li><strong>কীভাবে কাজ করে:</strong> প্রয়োজনীয় সব সেন্সরের ডেটা উপস্থিত থাকলে কনফিডেন্স ১০০%। কোনো ক্রিটিক্যাল সেন্সর (যেমন হার্ট রেট) মিসিং হলে আত্মবিশ্বাস সরাসরি ৩০-৪০% কমিয়ে দেওয়া হয়।</li>
+<li><strong>কোথায় দেখব:</strong> <a href="file:///apps/web/app/today/page.tsx"><code>/today</code></a> পেজের রিস্ক স্কোরের ঠিক পাশেই <strong>"Confidence: 94%"</strong> ব্যাজ।</li>
+<li><strong>কোন ফাইলে কোড আছে:</strong> <a href="file:///apps/api/src/engines/confidence.engine.ts"><code>apps/api/src/engines/confidence.engine.ts</code></a></li>
+<li><strong>কীভাবে ডেমো দেখাবেন:</strong> ডেমো মোডাল থেকে কোনো একটি সেন্সর অফ করে দিন, তাৎক্ষণিক স্ক্রিনে কনফিডেন্স কমে হলুদ হয়ে যাবে।</li>
+
+<hr>
+
+<h3 id="sec-56">৫. মাল্টি-হরাইজন ফোরকাস্ট ইঞ্জিন (Forecast Engine)</h3>
+<li><strong>কী করে:</strong> বর্তমান ডেটা বিশ্লেষণ করে আগামী ৭ থেকে ৩০ দিন মহাকাশচারীর ভাইটালস কেমন থাকবে তার একটি পূর্বাভাস কোণ (Forecast Cone) তৈরি করে।</li>
+<li><strong>কেন দরকার:</strong> মহাকাশে রোগ হওয়ার পর চিকিৎসা করার চেয়ে রোগ হওয়ার সম্ভাবনা আগেভাগে থামানোই জীবন বাঁচায়।</li>
+<li><strong>কীভাবে কাজ করে:</strong> লিনিয়ার রিগ্রেশন ও মন্টি-কার্লো সিমুলেশন দিয়ে ঊর্ধ্বমুখী বা নিম্নমুখী ট্রেন্ড প্রজেক্ট করে।</li>
+<li><strong>কোথায় দেখব:</strong> <a href="file:///apps/web/app/twin/page.tsx"><code>/twin</code></a> পেজে ভবিষ্যতের ডটেড লাইন এবং চার্টের শ্যাডো এরিয়া।</li>
+<li><strong>কোন ফাইলে কোড আছে:</strong> <a href="file:///apps/api/src/engines/forecast.engine.ts"><code>apps/api/src/engines/forecast.engine.ts</code></a></li>
+<li><strong>কীভাবে ডেমো দেখাবেন:</strong> চার্টের ডানদিকের ডটেড লাইন দেখিয়ে বলুন: <em>"বর্তমান ঘুমের ঘাটতি চলতে থাকলে আগামী ৫ দিনের মধ্যে সিস্টোলিক রক্তচাপ ১৪৫ ছাড়িয়ে যেতে পারে।"</em></li>
+
+<hr>
+
+<h3 id="sec-66">৬. রেডিয়েশন ওয়াচ উইন্ডো (Radiation Watch Engine)</h3>
+<li><strong>কী করে:</strong> মহাকাশযানের বাইরের লাইভ সোলার প্রোটন ফ্লাক্স এবং গত ৭২ ঘণ্টার কিউমুলেটিভ রেডিয়েশন হিসাব করে।</li>
+<li><strong>কেন দরকার:</strong> মহাকাশে সোলার পার্টিকেল ইভেন্ট (SPE) বা সৌর ঝড় শুরু হলে মাত্র কয়েক ঘণ্টার মধ্যে প্রাণঘাতী ডোজ প্রবেশ করতে পারে।</li>
+<li><strong>কীভাবে কাজ করে:</strong> নোয়া (NOAA) গোয়েস স্যাটেলাইট ডেটা ফেচ করে। প্রতি ঘণ্টায় জমা হওয়া ডোজ যোগ করে ৭২ ঘণ্টার রোলিং উইন্ডো আপডেট করে।</li>
+<li><strong>কোথায় দেখব:</strong> <a href="file:///apps/web/app/radiation/page.tsx"><code>/radiation</code></a> পেজে।</li>
+<li><strong>কোন ফাইলে কোড আছে:</strong> <a href="file:///apps/api/src/engines/radiationWatch.engine.ts"><code>apps/api/src/engines/radiationWatch.engine.ts</code></a></li>
+<li><strong>কীভাবে ডেমো দেখাবেন:</strong> ৬১তম দিনে গিয়ে রেডিয়েশন ওয়াচ পেজ খুলুন। দেখুন লাল স্টর্ম অ্যালার্ট এবং শেল্টারে প্রবেশের নির্দেশিকা।</li>
+
+<hr>
+
+<h3 id="sec-76">৭. কাউন্টারমেজার ও লার্ন লুপ ইঞ্জিন (Learn Loop: "Did it work?")</h3>
+<li><strong>কী করে:</strong> মহাকাশচারী কোনো ওষুধ বা ব্যায়াম নেওয়ার পর সেটি আসলেই তার শরীরে কাজ করেছে কি না তা স্বয়ংক্রিয়ভাবে যাচাই করে।</li>
+<li><strong>কেন দরকার:</strong> পৃথিবীর এক ওষুধ মহাকাশে সবার শরীরে সমান কাজ করে না। এই সিস্টেমটি নিজে শেখে কোন মহাকাশচারীর জন্য কোন চিকিৎসা সেরা।</li>
+<li><strong>কীভাবে কাজ করে:</strong> কাউন্টারমেজার শুরুর আগের ৩ দিনের $Z$-score এবং পরের ৩ দিনের $Z$-score এর পার্থক্য ($\Delta Z$) হিসাব করে। যদি উন্নতি হয় তবে <strong>PROMISING</strong>, কোনো পরিবর্তন না হলে <strong>INCONCLUSIVE</strong>, এবং অবনতি হলে <strong>INEFFECTIVE</strong> মার্ক করে।</li>
+<li><strong>কোথায় দেখব:</strong> <a href="file:///apps/web/app/history/page.tsx"><code>/history</code></a> এবং কাউন্টারমেজার হিস্ট্রি কার্ডে।</li>
+<li><strong>কোন ফাইলে কোড আছে:</strong> <a href="file:///apps/api/src/engines/learnLoop.engine.ts"><code>apps/api/src/engines/learnLoop.engine.ts</code></a></li>
+<li><strong>কীভাবে ডেমো দেখাবেন:</strong> ৬৪তম দিনে যান এবং দেখান যে ৬৩তম দিনে নেওয়া মেলাটোনিন ও সাইক্লিংয়ের কার্যকারিতা হিসেবে সবুজ "PROMISING" ব্যাজ জ্বলছে।</li>
+
+<hr>
+
+<h3 id="sec-86">৮. ডাবল-লেয়ার এবসোলিউট থ্রেশহোল্ড ইঞ্জিন (Dual-Layer Absolute Thresholds)</h3>
+<li><strong>কী করে:</strong> ব্যক্তিগত বেসলাইনের পাশাপাশি আন্তর্জাতিক মহাকাশ ও চিকিৎসা স্ট্যান্ডার্ড (NASA-STD-3001, AHA, ADA) এর কঠোর পরম সীমা নজরদারি করে।</li>
+<li><strong>কেন দরকার:</strong> কোনো মহাকাশচারীর রক্তচাপ যদি প্রতিদিন একটু একটু করে বেড়ে ১৮০ হয়ে যায়, তবে সাধারণ বেসলাইন ভাববে ১৮০-ই তার নতুন স্বাভাবিক! এটি মারাত্মক ভুল। পরম সীমা থাকলে বেসলাইন ড্রাফট হলেও অ্যাপ সাথে সাথে লাল বিপদ দেখাবে।</li>
+<li><strong>কীভাবে কাজ করে:</strong> যদি সিস্টোলিক রক্তচাপ $\ge 140$ বা গ্লুকোজ $\ge 180$ বা কেবিন $\text{CO}_2 \ge 5000\text{ ppm}$ হয়, তবে বেসলাইনের অনুমতি ছাড়াই আনকন্ডিশনাল লাল সতর্কতা দেয়।</li>
+<li><strong>কোথায় দেখব:</strong> ড্যাশবোর্ডের টপ ব্যানার এবং অর্গান বডির লাল পালস।</li>
+<li><strong>কোন ফাইলে কোড আছে:</strong> <a href="file:///apps/api/src/engines/threshold.engine.ts"><code>apps/api/src/engines/threshold.engine.ts</code></a></li>
+<li><strong>কীভাবে ডেমো দেখাবেন:</strong> ডেমো মোডাল থেকে "Raise BP" ট্রিগার করুন এবং দেখুন কীভাবে ব্যক্তিগত বেসলাইনকে ওভাররাইড করে লাল এসকেলেশন ব্যানার চলে আসে।</li>
+
+<hr>
+
+<h3 id="sec-96">৯. ইন্টারঅ্যাক্টিভ ভেক্টর হিউম্যান বডি ও হ্যাজার্ড লেন্স (Human Body & Hazard Lens)</h3>
+<li><strong>কী করে:</strong> মানুষের একটি দৃষ্টিনন্দন ৯-অর্গান ভেক্টর এসভিজি অবয়ব প্রদর্শন করে, যা রিয়েল-টাইম স্বাস্থ্য অনুযায়ী রঙ পরিবর্তন করে।</li>
+<li><strong>কেন দরকার:</strong> সংখ্যার চেয়ে ভিজ্যুয়াল অঙ্গ দেখে মহাকাশচারী খুব দ্রুত বুঝতে পারেন তার শরীরের কোথায় সমস্যা।</li>
+<li><strong>কীভাবে কাজ করে:</strong> ফ্রন্টএন্ডে রিয়্যাক্ট এসভিজি কম্পোনেন্ট দিয়ে প্রতিটি অর্গান ক্লিক করা যায়। <strong>Hazard Lens</strong> অন করলে নাসার ৫টি হ্যাজার্ডের জন্য আলাদা কালার ফিল্টার সক্রিয় হয়।</li>
+<li><strong>কোথায় দেখব:</strong> <a href="file:///apps/web/app/body/page.tsx"><code>/body</code></a> পেজে।</li>
+<li><strong>কোন ফাইলে কোড আছে:</strong> <a href="file:///apps/web/components/body/InteractiveHumanBody.tsx"><code>apps/web/components/body/InteractiveHumanBody.tsx</code></a></li>
+<li><strong>কীভাবে ডেমো দেখাবেন:</strong> বডির হার্ট বা চোখে ক্লিক করুন; ডানপাশে বিস্তারিত ডায়াগনসিস কার্ড খুলে যাবে। এরপর উপরে "Gravity" লেন্স ক্লিক করে ফ্লুইড শিফটের প্রভাব দেখান।</li>
+
+<hr>
+
+<h3 id="sec-106">১০. ক্লিনিক্যাল ডিসিশন-ট্রি গাইডেন্স উইজার্ড (Treatment Wizard)</h3>
+<li><strong>কী করে:</strong> মহাকাশচারীকে ধাপে ধাপে প্রশ্ন করে ৪টি এসকেলেশন টিয়ারের সমন্বয়ে সুনির্দিষ্ট চিকিৎসা নির্দেশনা প্রদান করে।</li>
+<li><strong>কেন দরকার:</strong> নন-ডাক্তার মহাকাশচারীকে মোটা মেডিকেল বই পড়তে হবে না; এটি তাকে সহজ প্রশ্নে সমাধান দেয়।</li>
+<li><strong>কীভাবে কাজ করে:</strong> ব্রাঞ্চিং ডিসিশন-ট্রি অ্যালগরিদম (যেমন: মাথা ব্যথা $\rightarrow$ কেবিনের $\text{CO}_2$ কি বেশি? $\rightarrow$ হ্যাঁ $\rightarrow$ স্ক্রাবার ফ্যান বাড়ান)।</li>
+<li><strong>কোথায় দেখব:</strong> <a href="file:///apps/web/app/guidance/page.tsx"><code>/guidance</code></a> পেজে।</li>
+<li><strong>কোন ফাইলে কোড আছে:</strong> <a href="file:///apps/web/components/guidance/TreatmentWizard.tsx"><code>apps/web/components/guidance/TreatmentWizard.tsx</code></a>, <a href="file:///apps/api/src/engines/treatment.engine.ts"><code>apps/api/src/engines/treatment.engine.ts</code></a></li>
+<li><strong>কীভাবে ডেমো দেখাবেন:</strong> "Start Diagnosis" চাপুন, সিম্পটম সিলেক্ট করুন এবং নেক্সট স্টেপে গিয়ে প্রেসক্রিপশন জেনারেট করে দেখান।</li>
+
+<hr>
+
+<h3 id="sec-116">১১. পাঁচটি মহাকাশ পরিবেশ মোড (Environment Engine)</h3>
+<li><strong>কী করে:</strong> মহাকাশযান ($0\text{ g}$), স্টেশন ($0\text{ g}$), রোভার ($0.16\text{ g}$), মুন বেস ($0.16\text{ g}$), এবং মার্স বেস ($0.38\text{ g}$) এর মধ্যে তাৎক্ষণিক সুইচ করার সুবিধা দেয়।</li>
+<li><strong>কেন দরকার:</strong> চাঁদে হাঁটলে শরীরে যে চাপ পড়ে, মহাকাশযানে ভেসে থাকলে চাপ সম্পূর্ণ ভিন্ন। প্রতিটি পরিবেশের আলাদা রিস্ক মডেলিং দরকার।</li>
+<li><strong>কীভাবে কাজ করে:</strong> পরিবেশ পরিবর্তনের সাথে সাথে রেডিয়েশন শিল্ডিং, অভিকর্ষ ও একাকীত্বের গাণিতিক ওয়েট স্বয়ংক্রিয়ভাবে রিক্যালকুলেট হয়ে যোগফল সর্বদা ১.০০০০ থাকে।</li>
+<li><strong>কোথায় দেখব:</strong> টপবারের ডানদিকের এনভায়রনমেন্ট সিলেক্টর পিল ক্লিক করলে মোডাল খোলে।</li>
+<li><strong>কোন ফাইলে কোড আছে:</strong> <a href="file:///apps/api/src/engines/environment.engine.ts"><code>apps/api/src/engines/environment.engine.ts</code></a>, <a href="file:///apps/web/components/layout/EnvironmentSelectorModal.tsx"><code>apps/web/components/layout/EnvironmentSelectorModal.tsx</code></a></li>
+<li><strong>কীভাবে ডেমো দেখাবেন:</strong> টপবার থেকে "Mars Surface Base" সিলেক্ট করুন; দেখুন গ্র্যাভিটি $0.38\text{ g}$ হয়ে গেছে এবং কার্ডিও ও হাড়ের রিস্ক ওয়েট পরিবর্তিত হয়েছে।</li>
+
+<hr>
+
+<h3 id="sec-126">১২. ডেইলি রুটিন চেকলিস্ট ও আল্ট্রাসাউন্ড/ইমেজ স্ক্যানার</h3>
+<li><strong>কী করে:</strong> সকাল ও সন্ধ্যার স্বাস্থ্য পরীক্ষার তালিকা দেখায় এবং ক্যামেরা/আল্ট্রাসাউন্ড দিয়ে ছবি ও ক্যানভাস ড্রয়িং ইনপুট নেয়।</li>
+<li><strong>কেন দরকার:</strong> নিয়মিত স্বাস্থ্য পরীক্ষার অভ্যাস বজায় রাখা এবং মহাকাশে চোখ ও পেশির অভ্যন্তরীণ অবস্থা আল্ট্রাসাউন্ড দিয়ে দেখা।</li>
+<li><strong>কীভাবে কাজ করে:</strong> লোকাল এইচটিএমএল৫ ক্যানভাস ব্যবহার করে ছবির ওপর লাল গোল দাগ দিয়ে টিস্যু চিহ্নিত করা যায় এবং অফলাইনে সেভ হয়।</li>
+<li><strong>কোথায় দেখব:</strong> <a href="file:///apps/web/app/routine/page.tsx"><code>/routine</code></a> পেজে।</li>
+<li><strong>কোন ফাইলে কোড আছে:</strong> <a href="file:///apps/web/components/routine/RoutineChecklist.tsx"><code>apps/web/components/routine/RoutineChecklist.tsx</code></a>, <a href="file:///apps/web/components/routine/ImageCaptureModal.tsx"><code>apps/web/components/routine/ImageCaptureModal.tsx</code></a></li>
+<li><strong>কীভাবে ডেমো দেখাবেন:</strong> "Launch Ultrasound Scanner" চাপুন, আল্ট্রাসাউন্ড স্যাম্পল সিলেক্ট করুন, মাউস দিয়ে দাগ কেটে সেভ করে অফলাইন বাফারে রাখুন।</li>
+
+<hr>
+
+<h3 id="sec-136">১৩. স্পেস হ্যাবিট গেমিফিকেশন (Gamification Engine)</h3>
+<li><strong>কী করে:</strong> চেকলিস্ট পূরণ করলে এক্সপি (XP), স্ট্রিক ও স্পেস লোর ব্যাজ দেয়।</li>
+<li><strong>কেন দরকার:</strong> মাসের পর মাস একঘেয়ে মিশনে মহাকাশচারীদের স্বাস্থ্য পরীক্ষার ব্যাপারে মোটিভেটেড রাখা।</li>
+<li><strong>কীভাবে কাজ করে:</strong> সাব-কোয়াড্রেটিক এক্সপি কার্ভ ($XP = 100 \times \text{Level}^{1.5}$)। <em>মেডিকেল সেফটি গার্ড:</em> হার্ট রেট অতিরিক্ত বেশি থাকলে ব্যায়াম করলেও এক্সপি দেওয়া বন্ধ রাখে।</li>
+<li><strong>কোথায় দেখব:</strong> <a href="file:///apps/web/app/progress/page.tsx"><code>/progress</code></a> পেজে।</li>
+<li><strong>কোন ফাইলে কোড আছে:</strong> <a href="file:///apps/api/src/engines/gamification.engine.ts"><code>apps/api/src/engines/gamification.engine.ts</code></a></li>
+<li><strong>কীভাবে ডেমো দেখাবেন:</strong> একটি টাস্ক কমপ্লিট করুন; স্ক্রিনে এক্সপি ও স্ট্রিক কাউন্টার বেড়ে যাওয়ার অ্যানিমেশন দেখান।</li>
+
+<hr>
+
+<h3 id="sec-146">১৪. অফলাইন-ফার্স্ট ইনডেক্সড-ডিবি ও ডিটিএন সিঙ্ক (Offline DTN Sync)</h3>
+<li><strong>কী করে:</strong> ব্রাউজারের নিজস্ব মেমরিতে (IndexedDB) সব অ্যাকশন বাফার করে রাখে এবং সংযোগ পেলে লোকাল এপিআই বা গ্রাউন্ডে সিঙ্ক করে।</li>
+<li><strong>কেন দরকার:</strong> ডিপ-স্পেসে কোনো ওয়াইফাই বা ইন্টারনেটের ভরসা নেই; কোনো ডেটাই যেন হারিয়ে না যায়।</li>
+<li><strong>কীভাবে কাজ করে:</strong> ডিলে-টলারেন্ট নেটওয়ার্কিং (DTN) প্যাটার্নে ডেটা স্টোর-অ্যান্ড-ফরোয়ার্ড নিয়মে কাজ করে।</li>
+<li><strong>কোন ফাইলে কোড আছে:</strong> <a href="file:///apps/web/lib/indexeddb.ts"><code>apps/web/lib/indexeddb.ts</code></a>, <a href="file:///apps/api/src/controllers/sync.controller.ts"><code>apps/api/src/controllers/sync.controller.ts</code></a></li>
+<li><strong>কীভাবে ডেমো দেখাবেন:</strong> ব্রাউজারের নেটওয়ার্ক অফলাইন করে একটি চেক-ইন দিন; দেখুন অফলাইন কিউতে ডেটা জমা হচ্ছে।</li>
+
+<hr>
+
+<h3 id="sec-155">১৫. ফ্লাইট সার্জন কনসোলিডেটেড ডসিয়ার / রিপোর্ট (Surgeon Report)</h3>
+<li><strong>কী করে:</strong> পৃথিবীর চিকিৎসকদের পাঠানোর জন্য সমস্ত ভাইটালস, লার্ন লুপ ও আল্ট্রাসাউন্ড হিস্ট্রি নিয়ে এক পাতার ক্লিনিক্যাল ডসিয়ার প্রিন্ট-রেডি ফরম্যাটে তৈরি করে।</li>
+<li><strong>কেন দরকার:</strong> ব্যান্ডউইথ কম থাকায় কোটি কোটি লাইনের ডেটা পাঠানো যায় না; একটি কনসাইজ সারাংশ প্যাকেট পাঠানোই আদর্শ।</li>
+<li><strong>কোথায় দেখব:</strong> <a href="file:///apps/web/app/report/page.tsx"><code>/report</code></a> পেজে।</li>
+<li><strong>কোন ফাইলে কোড আছে:</strong> <a href="file:///apps/web/app/report/page.tsx"><code>apps/web/app/report/page.tsx</code></a></li>
+<li><strong>কীভাবে ডেমো দেখাবেন:</strong> পেজটি খুলে "Print / Export Dossier" বাটনটি দেখান।</li>
+
+</section>
+<div class="page-break"></div>
+
+<section id="04_কীভাবে_চালাবেন-md" class="doc-module">
+<h1 id="sec-0">ASTRA-LOOP: কীভাবে চালাবেন ও সমস্যা সমাধান (Beginner Run Guide)</h1>
+<blockquote><strong>নথি ক্রম:</strong> ০৪ | <strong>বিষয়:</strong> শূন্য থেকে প্রজেক্ট চালু ও ১৫+ সমস্যা সমাধান | <strong>টার্গেট:</strong> একদম নতুন ব্যবহারকারী</blockquote>
+
+<hr>
+
+<h2 id="sec-5">এই অংশে যা শিখবেন</h2>
+<li>আপনার কম্পিউটারে (Windows বা Mac) প্রজেক্টটি চালানোর জন্য কী কী সফটওয়্যার লাগবে।</li>
+<li>কীভাবে মাত্র ৩টি সাধারণ কমান্ড দিয়ে পুরো সিস্টেমটি লাইভ চালু করবেন।</li>
+<li>পরিবেশ কনফিগারেশন (<code>.env</code>) ফাইলের প্রতিটি লাইনের সহজ ব্যাখ্যা।</li>
+<li>কোনো ত্রুটি বা এরর দেখা দিলে দ্রুত ঠিক করার জন্য ১৫+ বাস্তব সমস্যার সমাধান টেবিল।</li>
+<li>ইন্টারনেট ছাড়াই কীভাবে সম্পূর্ণ অফলাইনে প্রজেক্ট চালাবেন।</li>
+
+<hr>
+
+<h2 id="sec-14">১. যা যা আপনার কম্পিউটারে ইনস্টল থাকতে হবে</h2>
+
+<p>আপনার কম্পিউটারে নিচের দুটি জিনিস থাকলেই যথেষ্ট:</p>
+<li value="1"><strong>Node.js (ভার্সন 18 বা 20 এলটিএস):</strong> জাভাস্ক্রিপ্ট কোড চালানোর ইঞ্জিন।  </li>
+<p>   * ডাউনলোড লিংক: <a href="https://nodejs.org">nodejs.org</a> (LTS ভার্সন ডাউনলোড করে সাধারণ সফটওয়্যারের মতো 'Next', 'Next' দিয়ে ইনস্টল করুন)।</p>
+<li value="2"><strong>Git (গিট):</strong> কোড নামানো ও ম্যানেজ করার টুল।  </li>
+<p>   * ডাউনলোড লিংক: <a href="https://git-scm.com">git-scm.com</a>.</p>
+<li value="3"><strong>VS Code (ঐচ্ছিক কিন্তু চমৎকার):</strong> কোড এডিটর।  </li>
+<p>   * ডাউনলোড লিংক: <a href="https://code.visualstudio.com">code.visualstudio.com</a>.</p>
+
+<div class="callout note"><strong>NOTE:</strong> 
+<blockquote><strong>Docker বা PostgreSQL কি লাগবে?</strong>  </blockquote>
+<blockquote>না! v2 আপগ্রেডে আমরা পুরো ডাটাবেজ সিস্টেমটিকে <strong>SQLite (<code>file:./dev.db</code>)</strong> এ রূপান্তর করেছি। এটি একটি একক ফাইলের মধ্যে সম্পূর্ণ ডাটাবেজ চালিয়ে দেয়। তাই কোনো ডকার বা আলাদা ডাটাবেজ ইনস্টল করার ঝামেলা নেই!</blockquote>
+
+<hr>
+
+<h2 id="sec-30">২. প্রজেক্ট সেটআপ: ধাপে ধাপে নির্দেশিকা</h2>
+
+<h3 id="sec-32">ধাপ ১: টার্মিনাল বা কমান্ড প্রম্পট খুলুন</h3>
+<li><strong>Windows-এ:</strong> কিবোর্ডে <code>Win + R</code> চেপে <code>cmd</code> অথবা <code>powershell</code> লিখে এন্টার দিন।</li>
+<li><strong>Mac-এ:</strong> <code>Command + Space</code> চেপে <code>Terminal</code> লিখে এন্টার দিন।</li>
+
+<p>প্রজেক্ট ফোল্ডারে প্রবেশ করুন:</p>
+<pre class="code-block bash"><code>
+cd D:\KnowledgeVault\Project\astra-loop-health-twin-nasa-space-app-challenge-2026
+
+</code></pre>
+
+<h3 id="sec-41">ধাপ ২: প্রয়োজনীয় প্যাকেজগুলো ইনস্টল করুন</h3>
+<p>এই কমান্ডটি প্রজেক্টের সমস্ত লাইব্রেরি নামিয়ে নেবে:</p>
+<pre class="code-block bash"><code>
+npm install
+
+</code></pre>
+<p><em>(এক লাইনে ব্যাখ্যা: এটি ইন্টারনেটের এনপিএম স্টোর থেকে প্রজেক্টের প্রয়োজনীয় সব লাইব্রেরি ডাউনলোড করে <code>node_modules</code> ফোল্ডারে সাজিয়ে রাখে।)</em></p>
+
+<h3 id="sec-48">ধাপ ৩: ডাটাবেজ তৈরি ও ডেমো ডেটা ভরুন (Seeding)</h3>
+<p>প্রজেক্টের ডাটাবেজ ফাইল ও ৯০ দিনের অ্যাস্ট্রোনট ডেটা তৈরি করতে নিচের কমান্ড দুটি দিন:</p>
+<pre class="code-block bash"><code>
+npm run prisma:generate -w apps/api
+
+npm run prisma:push -w apps/api
+
+npm run seed -w apps/api
+
+</code></pre>
+<p><em>(এক লাইনে ব্যাখ্যা: এটি একটি নতুন <code>dev.db</code> ডাটাবেজ ফাইল তৈরি করে এবং কমান্ডার অ্যালেক্স ও ড. মায়ার ৯০-১২০ দিনের মহাকাশ স্বাস্থ্য ডেটা লোড করে।)</em></p>
+
+<h3 id="sec-57">ধাপ ৪: প্রজেক্ট রান করুন (সার্ভার চালু করা)</h3>
+<p>সব প্যাকেজ বিল্ড করে একসাথে চালাতে দিন:</p>
+<pre class="code-block bash"><code>
+npm run build -w packages/shared
+
+npm run dev
+
+</code></pre>
+<p><em>(এক লাইনে ব্যাখ্যা: এটি একসাথে ব্যাকএন্ড মিশন কন্ট্রোল এপিআই এবং ফ্রন্টএন্ড নেক্সট.জেএস ওয়েব ড্যাশবোর্ড চালু করে দেয়।)</em></p>
+
+<h3 id="sec-65">ধাপ ৫: ব্রাউজারে অ্যাপ খুলুন</h3>
+<p>আপনার পছন্দের ব্রাউজার (Chrome, Edge বা Brave) খুলে নিচের লিংকে যান:</p>
+<li><strong>প্রধান ড্যাশবোর্ড (Web UI):</strong> <a href="http://localhost:3000"><code>http://localhost:3000</code></a></li>
+<li><strong>মিশন কন্ট্রোল ব্যাকএন্ড এপিআই:</strong> <a href="http://localhost:4000"><code>http://localhost:4000</code></a></li>
+
+<p>অভিনন্দন! আপনার লোকাল এস্ট্রোনট ডিজিটাল টুইন এখন পুরোপুরি সচল!</p>
+
+<hr>
+
+<h2 id="sec-74">৩. কনফিগারেশন ফাইল (<code>.env</code>)-এর সহজ অর্থ</h2>
+
+<p>প্রজেক্টের মূল ফোল্ডারে একটি লুকানো ফাইল থাকে যার নাম <code>.env</code>। এটি মূলত অ্যাপের সেটিং বা চাবি:</p>
+
+<pre class="code-block env"><code>
+# ডাটাবেজ কানেকশন স্ট্রিং (আমাদের সেলফ-কন্টেইন্ড SQLite ফাইল)
+
+DATABASE_URL="file:./dev.db"
+
+
+
+# ব্যাকএন্ড এপিআই সার্ভার কোন পোর্টে চলবে
+
+PORT=4000
+
+API_PORT=4000
+
+NODE_ENV=development
+
+
+
+# ফ্রন্টএন্ড কোথা থেকে ডেটা নেবে
+
+NEXT_PUBLIC_API_URL="http://localhost:4000/api"
+
+</code></pre>
+
+<li><strong><code>DATABASE_URL</code>:</strong> অ্যাপটি জানে তার সব তথ্য এই <code>dev.db</code> ফাইলে জমা রাখতে হবে।</li>
+<li><strong><code>PORT=4000</code>:</strong> ব্যাকএন্ড সার্ভার কম্পিউটারের ৪০০০ নম্বর গেট দিয়ে ডেটা পাঠাবে।</li>
+<li><strong><code>NEXT_PUBLIC_API_URL</code>:</strong> ফ্রন্টএন্ড ওয়েব পেজটি জানে কীভাবে ৪০০০ নম্বর পোর্টের সাথে কথা বলতে হবে।</li>
+
+<hr>
+
+<h2 id="sec-97">৪. সমস্যা সমাধান নির্দেশিকা (Troubleshooting — ১৫+ বাস্তব সমস্যা)</h2>
+
+<div class="table-container"><table>
+<thead><tr><th>ক্রম</th><th>যে ত্রুটি বা এরর দেখতে পারেন</th><th>কারণ কী?</th><th>কীভাবে সমাধান করবেন (Step-by-Step Fix)</th></tr></thead><tbody>
+<tr><td><strong>১</strong></td><td><code>Error: listen EADDRINUSE :::3000</code></td><td>৩০০০ নম্বর পোর্টটি অন্য কোনো সফটওয়্যার আগে থেকেই ব্যবহার করছে।</td><td>টার্মিনালে লিখুন: <code>npx kill-port 3000</code> অথবা কম্পিউটার রিস্টার্ট দিন।</td></tr>
+<tr><td><strong>২</strong></td><td><code>Error: listen EADDRINUSE :::4000</code></td><td>এপিআই সার্ভার আগে থেকেই ব্যাকগ্রাউন্ডে চলছে।</td><td>টার্মিনালে লিখুন: <code>npx kill-port 4000</code> দিয়ে আবার <code>npm run dev</code> দিন।</td></tr>
+<tr><td><strong>৩</strong></td><td><code>PrismaClientInitializationError</code></td><td>প্রিজমা ক্লায়েন্ট তৈরি করা হয়নি বা ডাটাবেজ ফাইল রিড করা যাচ্ছে না।</td><td>টার্মিনালে চালান: <code>npm run prisma:generate -w apps/api</code>।</td></tr>
+<tr><td><strong>৪</strong></td><td><code>Cannot find module '@astra-loop/shared'</code></td><td>শেয়ার্ড লাইব্রেরিটি এখনও বিল্ড করা হয়নি।</td><td>চালান: <code>npm run build -w packages/shared</code>।</td></tr>
+<tr><td><strong>৫</strong></td><td><code>Script execution policy error</code> (Windows)</td><td>উইন্ডোজ পাওয়ারশেল স্ক্রিপ্ট রান করার পারমিশন ব্লক করছে।</td><td>পাওয়ারশেল অ্যাডমিন হিসেবে খুলে লিখুন: <code>Set-ExecutionPolicy -Scope CurrentUser RemoteSigned</code>।</td></tr>
+<tr><td><strong>৬</strong></td><td>ড্যাশবোর্ড লোড হয়েছে কিন্তু ডেটা আসছে না (ফাঁকা)</td><td>ব্যাকএন্ড এপিআই সার্ভার চালু নেই বা ক্র্যাশ করেছে।</td><td>টার্মিনালে চেক করুন এপিআই সার্ভার <code>localhost:4000</code> এ রানিং আছে কি না।</td></tr>
+<tr><td><strong>৭</strong></td><td><code>SQLite file is locked</code></td><td>দুটি টার্মিনালে একসাথে ডাটাবেজ রাইট করার চেষ্টা চলছে।</td><td>অতিরিক্ত টার্মিনালগুলো বন্ধ করে শুধু একটি টার্মিনালে চালান।</td></tr>
+<tr><td><strong>৮</strong></td><td><code>Failed to fetch / CORS error</code></td><td><code>.env</code> ফাইলে এপিআই ইউআরএল ভুল আছে।</td><td>নিশ্চিত করুন <code>NEXT_PUBLIC_API_URL="http://localhost:4000/api"</code> লেখা আছে।</td></tr>
+<tr><td><strong>৯</strong></td><td><code>node: command not found</code></td><td>কম্পিউটারে Node.js ইনস্টল নেই বা পাথ সেট করা নেই।</td><td><a href="https://nodejs.org">nodejs.org</a> থেকে ইনস্টল করে টার্মিনাল রিস্টার্ট দিন।</td></tr>
+<tr><td><strong>১০</strong></td><td><code>npm run seed</code> এ এরর দিচ্ছে</td><td>ডাটাবেজ স্কিমা পুশ না করে সিড রান করা হয়েছে।</td><td>আগে লিখুন <code>npm run prisma:push -w apps/api</code> তারপর সিড দিন।</td></tr>
+<tr><td><strong>১১</strong></td><td><code>next: command not found</code></td><td>ডিপেন্ডেন্সি ঠিকমতো ডাউনলোড হয়নি।</td><td>টার্মিনালে লিখুন: <code>npm install</code>।</td></tr>
+<tr><td><strong>১২</strong></td><td>পেজে কোনো সিএসএস স্টাইল নেই (সাদাকালো দেখাচ্ছে)</td><td>টেইলউইন্ড সিএসএস বিল্ড হয়নি বা ক্যাশ জমেছে।</td><td><code>.next</code> ফোল্ডারটি ডিলিট করে দিন এবং পুনরায় <code>npm run dev</code> দিন।</td></tr>
+<tr><td><strong>১৩</strong></td><td>মোবাইলে স্ক্রিন ভেঙে যাওয়া</td><td>ব্রাউজার জুম ২০০% করা আছে।</td><td>কিবোর্ডে <code>Ctrl + 0</code> চেপে ব্রাউজার জুম ১০০% করুন।</td></tr>
+<tr><td><strong>১৪</strong></td><td><code>OutOfMemoryError</code> أثناء বিল্ড</td><td>কম্পিউটারের র‍্যাম পূর্ণ হয়ে গেছে।</td><td>অপ্রয়োজনীয় অ্যাপ বন্ধ করুন এবং চালান: <code>NODE_OPTIONS="--max-old-space-size=4096" npm run build</code>।</td></tr>
+<tr><td><strong>১৫</strong></td><td>গিট স্ট্যাটাসে অতিরিক্ত ফাইল দেখাচ্ছে</td><td>বিল্ড আউটপুট ট্র্যাক হয়ে গেছে।</td><td>টার্মিনালে চালান: <code>git status</code> এবং <code>.gitignore</code> আপডেট রাখুন।</td></tr>
+</tbody></table></div>
+
+<hr>
+
+<h2 id="sec-119">৫. ডেমো কন্ট্রোল ও টেস্ট করার শর্টকাট</h2>
+
+<p>অ্যাপের ভেতরে একটি গোপন কিন্তু চমৎকার ডেমো কন্ট্রোল প্যানেল আছে। এটি বিচারকদের সামনে লাইভ ড্রামা দেখানোর জন্য সেরা:</p>
+
+<li value="1"><strong>যেকোনো দিনে জাম্প করা:</strong> ড্যাশবোর্ডে গিয়ে আপনি মিশন ডে ৬০, ৬১ বা ৬৫ সিলেক্ট করতে পারেন।</li>
+<li value="2"><strong>সৌর ঝড় ট্রিগার করা (Solar Flare):</strong> ডেমো প্যানেলে <strong>"Trigger Solar Storm"</strong> বাটন চাপলে লাইভ রেডিয়েশন সেন্সর স্পাইক করবে এবং পুরো ড্যাশবোর্ড লাল অ্যালার্ট দেখাবে।</li>
+<li value="3"><strong>উচ্চ রক্তচাপ তৈরি করা (Raise BP):</strong> <strong>"Simulate BP Spike"</strong> চাপলে সিস্টোলিক রক্তচাপ ১৬৫ হয়ে যাবে এবং ডুয়াল-লেয়ার এসকেলেশন ব্যানার জ্বলে উঠবে।</li>
+<li value="4"><strong>কেবিনে কার্বন ডাই-অক্সাইড স্পাইক:</strong> <strong>"Spike CO2"</strong> চাপলে কেবিন $\text{CO}_2$ লেভেল ৬০০০ ppm এ চলে যাবে এবং মাথা ব্যথার উইজার্ড চালু হবে।</li>
+<li value="5"><strong>সবকিছু রিসেট করা:</strong> <strong>"Reset to Day 1"</strong> চাপলে ডাটাবেজ আবার স্বাভাবিক শুরুতে ফিরে যাবে।</li>
+
+<hr>
+
+<h2 id="sec-131">৬. ইন্টারনেট ছাড়া সম্পূর্ণ অফলাইনে কীভাবে চালাবেন?</h2>
+
+<p>যদি পরীক্ষার হলে বা ইন্টারভিউতে কোনো ওয়াইফাই বা ইন্টারনেট না থাকে:</p>
+<li value="1">ল্যাপটপে প্রজেক্টটি একবার রান করে রাখুন।</li>
+<li value="2">আপনার ফোনের হটস্পট বা ওয়াইফাই ডিসকানেক্ট করে দিন।</li>
+<li value="3">ব্রাউজারে <a href="http://localhost:3000"><code>http://localhost:3000</code></a> এ যান।</li>
+<li value="4">আপনি দেখতে পাবেন অ্যাপটি <strong>এক সেকেন্ডের জন্যও আটকাবে না!</strong> কারণ এর ব্যাকএন্ড, লোকাল ডাটাবেজ, ম্যাথ ইঞ্জিন এবং অফলাইন ইনডেক্সড-ডিবি সম্পূর্ণভাবে আপনার ল্যাপটপের ভেতরেই কাজ করে। বিচারকদের সামনে এটিই আমাদের সবচেয়ে বড় প্রমাণ যে আমরা আসলেই মহাকাশের জন্য অফলাইন সিস্টেম বানিয়েছি!</li>
+
+</section>
+<div class="page-break"></div>
+
+<section id="05_কোড_ও_আর্কিটেকচার_সহজ_ভাষায়-md" class="doc-module">
+<h1 id="sec-0">ASTRA-LOOP: কোড ও আর্কিটেকচার সহজ ভাষায় (Architecture for Non-Coders)</h1>
+<blockquote><strong>নথি ক্রম:</strong> ০৫ | <strong>বিষয়:</strong> সিস্টেম আর্কিটেকচার, ডেটার যাত্রা এবং গণিতের হাতে-কলমে হিসাব | <strong>টার্গেট:</strong> কোডিং না জানা অনুসন্ধিৎসু পাঠক</blockquote>
+
+<hr>
+
+<h2 id="sec-5">এই অংশে যা শিখবেন</h2>
+<li>পুরো প্রজেক্টের প্রযুক্তিগুলো কীভাবে একসাথে কথা বলে (Next.js $\leftrightarrow$ Express $\leftrightarrow$ Prisma $\leftrightarrow$ SQLite)।</li>
+<li>মহাকাশচারী একটি বাটন চাপলে ডেটা কোন কোন ফাইলের ভেতর দিয়ে কীভাবে ডাটাবেসে যায়।</li>
+<li>প্রতিটি গাণিতিক অ্যালগরিদমের (Z-score, EWMA, Risk Weights, Interaction Term) <strong>বাস্তব সংখ্যাসহ হাতে-কলমে হিসাব</strong>।</li>
+<li>ডাটাবেসের টেবিলগুলোর সম্পর্ক (Entity Relationship Diagram)।</li>
+<li>ভবিষ্যতে আপনি নিজে কীভাবে একটি নতুন স্বাস্থ্য পরীক্ষা বা ফিচার যোগ করবেন।</li>
+
+<hr>
+
+<h2 id="sec-14">১. পুরো সিস্টেমের মানচিত্র (High-Level Architecture)</h2>
+
+<p>একটি বড় মহাকাশযান যেমন ইঞ্জিন, কেবিন ও অক্সিজেন প্যাক ছাড়া চলতে পারে না, তেমনি আমাদের অ্যাপটিও ৩টি প্রধান স্তরে বিভক্ত:</p>
+
+<pre class="code-block mermaid"><code>
+graph TD
+
+    subgraph Client ["১. ব্রাউজার ও ইউজার ইন্টারফেস (Next.js 14 App Router)"]
+
+        UI["ওয়েব ড্যাশবোর্ড (React + Tailwind CSS)"]
+
+        IDB[("IndexedDB (অফলাইন লোকাল ড্রয়ার)")]
+
+        UI &lt;--&gt; IDB
+
+    end
+
+
+
+    subgraph Shared ["২. শেয়ার্ড নলেজ বেস (TypeScript)"]
+
+        Types["টাইপ ডেফিনিশন ও স্ট্যান্ডার্ড (Zod + TS)"]
+
+        Knowledge["মেডিকেল রেফারেন্স ডাটা (NASA-STD-3001)"]
+
+    end
+
+
+
+    subgraph Server ["৩. ব্যাকএন্ড মিশন কন্ট্রোল (Express + Node.js)"]
+
+        API["REST API রাউটার ও কন্ট্রোলার"]
+
+        Engines["বায়োমেডিক্যাল ম্যাথ ইঞ্জিন (Threshold, Risk, Gravity, Learn)"]
+
+        Prisma["Prisma ORM (ডাটাবেজ ম্যানেজার)"]
+
+        API --&gt; Engines
+
+        Engines --&gt; Prisma
+
+    end
+
+
+
+    subgraph Database ["৪. লোকাল ডাটাবেজ (SQLite)"]
+
+        DB[("dev.db ফাইল")]
+
+        Prisma &lt;--&gt; DB
+
+    end
+
+
+
+    UI &lt;==&gt;|"REST API কল (/api/...)"| API
+
+    Client -.-&gt;|"টাইপ শেয়ারিং"| Shared
+
+    Server -.-&gt;|"টাইপ শেয়ারিং"| Shared
+
+
+
+    style Client fill:#0f172a,stroke:#38bdf8,stroke-width:2px,color:#fff
+
+    style Server fill:#1e1b4b,stroke:#818cf8,stroke-width:2px,color:#fff
+
+    style Shared fill:#14532d,stroke:#22c55e,stroke-width:2px,color:#fff
+
+    style Database fill:#3b0764,stroke:#c084fc,stroke-width:2px,color:#fff
+
+</code></pre>
+
+<h3 id="sec-54">সহজ ভাষায় প্রযুক্তিগুলোর ভূমিকা</h3>
+<li value="1"><strong>Next.js (ফ্রন্টএন্ড):</strong> এটি মহাকাশচারীর চোখের সামনের রঙিন স্ক্রিন, বোতাম ও চার্ট তৈরি করে।</li>
+<li value="2"><strong>Express (ব্যাকএন্ড এপিআই):</strong> এটি মহাকাশযানের ট্রাফিক পুলিশ। ফ্রন্টএন্ড থেকে আসা অনুরোধ গ্রহণ করে এবং সঠিক ইঞ্জিনের কাছে পাঠায়।</li>
+<li value="3"><strong>Engines (গণিতের মস্তিষ্ক):</strong> এটি খাঁটি গণিত ও চিকিৎসাবিজ্ঞানের কোড। কোনো ফ্রন্টএন্ড বা ডাটাবেজের ওপর নির্ভরশীল না হয়ে শুধু সংখ্যার হিসাব করে।</li>
+<li value="4"><strong>Prisma & SQLite (মেমোরি/ডাটাবেজ):</strong> এটি মহাকাশযানের সুরক্ষিত ডিজিটাল খাতা, যেখানে ৯০ দিনের সমস্ত ইতিহাস সেভ থাকে।</li>
+
+<hr>
+
+<h2 id="sec-62">২. ফোল্ডার ম্যাপ (কোন ফোল্ডারে কী আছে?)</h2>
+
+<div class="table-container"><table>
+<thead><tr><th>ফোল্ডারের পাথ</th><th>কী কাজ করে? (সহজ ব্যাখ্যা)</th></tr></thead><tbody>
+<tr><td><code>packages/shared/</code></td><td>ফ্রন্টএন্ড ও ব্যাকএন্ড উভয়ের জন্য সাধারণ নিয়ম, টাইপ এবং নাসার মেডিকেল রেফারেন্স ডেটা।</td></tr>
+<tr><td><code>apps/api/src/engines/</code></td><td><strong>সবচেয়ে গুরুত্বপূর্ণ ফোল্ডার!</strong> এখানে সব গণিত, ঝুঁকি এবং থ্রেশহোল্ড অ্যালগরিদম রয়েছে।</td></tr>
+<tr><td><code>apps/api/src/controllers/</code></td><td>এপিআই রিকোয়েস্ট যাচাই করে এবং ইঞ্জিন চালিয়ে ফলাফল ফেরত পাঠায়।</td></tr>
+<tr><td><code>apps/api/src/routes/</code></td><td>কোন ইউআরএলে (<code>/api/guidance</code>, <code>/api/today</code>) হিট করলে কোন কোড চলবে তা ঠিক করে।</td></tr>
+<tr><td><code>apps/api/prisma/</code></td><td>ডাটাবেজ টেবিলের গঠন (<code>schema.prisma</code>) এবং ডেমো ডেটা ভরার স্ক্রিপ্ট (<code>seed.ts</code>)।</td></tr>
+<tr><td><code>apps/web/app/</code></td><td>ব্যবহারকারীর পেজগুলো (<code>/today</code>, <code>/body</code>, <code>/guidance</code>, <code>/routine</code>, <code>/progress</code>, <code>/report</code>)।</td></tr>
+<tr><td><code>apps/web/components/</code></td><td>পুনর্ব্যবহারযোগ্য ভিজ্যুয়াল কম্পোনেন্ট (যেমন ভেক্টর বডি, চার্ট, হেডার, মোডাল)।</td></tr>
+<tr><td><code>docs/</code></td><td>সায়েন্টিফিক রিসার্চ, এপিআই ডকুমেন্টস, সিদ্ধান্ত নোট ও স্ক্রিনশট।</td></tr>
+</tbody></table></div>
+
+<hr>
+
+<h2 id="sec-77">৩. একটি ডেটার যাত্রা (The Journey of a Data Packet)</h2>
+
+<p>ধরুন, মহাকাশচারী সকালে তার রক্তচাপ <strong>১২০/৮০</strong> ইনপুট দিলেন। পর্দায় মানটি পরিবর্তনের পেছনের যাত্রাটি দেখুন:</p>
+
+<pre class="code-block mermaid"><code>
+sequenceDiagram
+
+    autonumber
+
+    actor Astronaut as মহাকাশচারী
+
+    participant InputForm as RoutineChecklist.tsx
+
+    participant ClientAPI as apps/web/lib/api.ts
+
+    participant Route as routine.routes.ts
+
+    participant Controller as routine.controller.ts
+
+    participant Threshold as threshold.engine.ts
+
+    participant Risk as risk.engine.ts
+
+    participant DB as SQLite (dev.db)
+
+    participant UI as Dashboard Screen
+
+
+
+    Astronaut-&gt;&gt;InputForm: সিস্টোলিক ১২০ ও ডায়াস্টোলিক ৮০ লিখে "Save" চাপলেন
+
+    InputForm-&gt;&gt;ClientAPI: saveRoutineCheckIn({ systolicBP: 120, diastolicBP: 80 })
+
+    ClientAPI-&gt;&gt;Route: POST /api/routine/checklist
+
+    Route-&gt;&gt;Controller: রিকোয়েস্ট ফরোয়ার্ড করল
+
+    Controller-&gt;&gt;Threshold: resolveHybridStatus(120, baselineMean, baselineStd)
+
+    Threshold--&gt;&gt;Controller: "Status: NOMINAL (সব ঠিক আছে)"
+
+    Controller-&gt;&gt;Risk: calculateDomainRisk('Cardio', telemetry)
+
+    Risk--&gt;&gt;Controller: কার্ডিও রিস্ক স্কোর = ১২%
+
+    Controller-&gt;&gt;DB: Prisma দিয়ে HealthMetric টেবিলে নতুন সারি সেভ করল
+
+    Controller--&gt;&gt;ClientAPI: রেসপন্স: { success: true, updatedRisk: 12 }
+
+    ClientAPI--&gt;&gt;UI: ড্যাশবোর্ডের কার্ডিও কার্ডটি সবুজ রঙে রিফ্রেশ করল
+
+</code></pre>
+
+<hr>
+
+<h2 id="sec-109">৪. গণিত ও অ্যালগরিদম: বাস্তব সংখ্যাসহ হাতে-কলমে হিসাব</h2>
+
+<p>অনেকে ভাবেন এআই মানেই অনেক জটিল ব্ল্যাকবক্স। কিন্তু চিকিৎসাবিজ্ঞানে জীবন বাঁচাতে প্রয়োজন <strong>ব্যাখ্যাযোগ্য ও স্বচ্ছ গণিত (Explainable Math)</strong>। নিচে আমাদের ফর্মুলাগুলোর বাস্তব হিসাব দেওয়া হলো:</p>
+
+<h3 id="sec-113">ক. বেসলাইন ও স্ট্যান্ডার্ড ডেভিয়েশন ($\mu$ এবং $\sigma$)</h3>
+<p>ধরুন, মহাকাশচারী অ্যালেক্সের আগের ৫ দিনের হৃদস্পন্দন (HR) ছিল:</p>
+<p>$$\text{দিন ১: } ৭১, \quad \text{দিন ২: } ৭৩, \quad \text{দিন ৩: } ৭০, \quad \text{দিন ৪: } ৭২, \quad \text{দিন ৫: } ৭৪$$</p>
+
+<p>১. <strong>গড় ($\mu$ বা Mean):</strong></p>
+<p>   $$\mu = \frac{৭১ + ৭৩ + ৭০ + ৭২ + ৭৪}{৫} = \frac{৩৬০}{৫} = ৭২ \text{ bpm}$$</p>
+
+<p>২. <strong>ভেদাঙ্ক ও স্ট্যান্ডার্ড ডেভিয়েশন ($\sigma$):</strong></p>
+<p>   প্রতিটি দিন গড়ের চেয়ে কতটা দূরে:</p>
+<p>   * $(৭১ - ৭২)^২ = (-১)^২ = ১$</p>
+<p>   * $(৭৩ - ৭২)^২ = (১)^২ = ১$</p>
+<p>   * $(৭০ - ৭২)^২ = (-২)^২ = ৪$</p>
+<p>   * $(৭২ - ৭২)^২ = (০)^২ = ০$</p>
+<p>   * $(৭৪ - ৭২)^২ = (২)^২ = ৪$</p>
+
+<p>   গড় বিচ্যুতি (Variance) $= \frac{১ + ১ + ৪ + ০ + ৪}{৫} = \frac{১০}{৫} = ২$  </p>
+<p>   স্ট্যান্ডার্ড ডেভিয়েশন ($\sigma$) $= \sqrt{২} \approx ১.৪১ \text{ bpm}$</p>
+
+<li><strong>অর্থ:</strong> অ্যালেক্সের স্বাভাবিক হার্ট রেট হলো <strong>$৭২ \pm ১.৪১$ bpm</strong>।</li>
+
+<hr>
+
+<h3 id="sec-135">খ. জেড-স্কোর (Z-Score)</h3>
+<p>আজ সকালে অ্যালেক্সের হার্ট রেট মাপা হলো <strong>৭৯ bpm</strong>। তিনি কি ঝুঁকিতে আছেন?</p>
+<p>$$Z = \frac{\text{আজকের মান} - \mu}{\sigma} = \frac{৭৯ - ৭২}{১.৪১} = \frac{৭}{১.৪১} = +৪.৯৬\sigma$$</p>
+
+<li><strong>ব্যাখ্যা:</strong> $Z = +৪.৯৬$ এর অর্থ হলো তিনি তার স্বাভাবিক অবস্থার চেয়ে প্রায় <strong>৫ গুণ স্ট্যান্ডার্ড ডেভিয়েশন দূরে</strong> চলে গেছেন! পরিসংখ্যান অনুযায়ী ৯৯.৭% সময় মান $-৩$ থেকে $+৩$ এর মধ্যে থাকে। $+৪.৯৬$ হওয়া মানে তার শরীরে তাৎক্ষণিক কোনো অস্বাভাবিক চাপ (যেমন তীব্র পানিশূন্যতা বা সৌর বিকিরণ) তৈরি হয়েছে।</li>
+
+<hr>
+
+<h3 id="sec-143">গ. এক্সপোনেনশিয়াল ওয়েটেড মুভিং অ্যাভারেজ (EWMA)</h3>
+<p>প্রতিদিন পুরানো দিনের সব ডেটা নতুন করে যোগ করা ভারী। তাই আমরা ব্যবহার করি EWMA, যার মসৃণকরণ গুণক $\alpha = ০.১৫$:</p>
+<p>$$\text{নতুন বেসলাইন} = \alpha \times \text{আজকের মান} + (১ - \alpha) \times \text{পুরানো বেসলাইন}$$</p>
+
+<p>যদি পুরানো বেসলাইন হয় $৭২$ এবং আজকের মান হয় $৭৬$:</p>
+<p>$$\text{নতুন বেসলাইন} = (০.১৫ \times ৭৬) + (০.৮৫ \times ৭২) = ১১.৪ + ৬১.২ = ৭২.৬ \text{ bpm}$$</p>
+<li><strong>সুবিধা:</strong> এটি সাম্প্রতিক দিনের পরিবর্তনকে শান্তভাবে গ্রহণ করে কিন্তু একদিনের সামান্য ভুলে পুরো বেসলাইন নষ্ট করে ফেলে না।</li>
+
+<hr>
+
+<h3 id="sec-153">ঘ. কম্পোজিট রিস্ক স্কোর ও ইন্টারঅ্যাকশন টার্ম (Risk Formula)</h3>
+<p>সামগ্রিক ঝুঁকি কেবল সাধারণ যোগফল নয়। যদি ঘুমহীনতা ও রেডিয়েশন একসাথে ঘটে, তবে তাদের ক্ষতি গুণিতক হারে বাড়ে।</p>
+
+<p>$$\text{Composite Risk} = \sum (W_i \times R_i) + \text{Interaction Penalty}$$</p>
+
+<p>ধরুন:</p>
+<li>কার্ডিও রিস্ক ($R_{\text{Cardio}}$) $= ২০\%$, ওয়েট $W_১ = ০.২৫$ $\rightarrow ০.২৫ \times ২০ = ৫.০$</li>
+<li>ঘুম রিস্ক ($R_{\text{Sleep}}$) $= ৫০\%$, ওয়েট $W_২ = ০.২০$ $\rightarrow ০.২০ \times ৫০ = ১০.০$</li>
+<li>রেডিয়েশন রিস্ক ($R_{\text{Rad}}$) $= ৪০\%$, ওয়েট $W_৩ = ০.২৫$ $\rightarrow ০.২৫ \times ৪০ = ১০.০$</li>
+<li>অন্যান্য ডোমেইনের যোগফল $= ১০.০$</li>
+
+<p><strong>সাধারণ যোগফল:</strong> $৫ + ১০ + ১০ + ১০ = ৩৫\%$।  </p>
+<p>কিন্তু সিস্টেম দেখল মহাকাশচারীর <strong>ঘুম নেই ($R_{\text{Sleep}} > ৩০$)</strong> এবং <strong>রেডিয়েশন বেশি ($R_{\text{Rad}} > ৩০$)</strong>।  </p>
+<p>ইঞ্জিন তখন একটি <strong>ইন্টারঅ্যাকশন পেনাল্টি</strong> যোগ করে:</p>
+<p>$$\text{Penalty} = \gamma \times (R_{\text{Sleep}} \times R_{\text{Rad}}) = ০.০০১ \times (৫০ \times ৪০) = ২.০\%$$</p>
+<p><strong>চূড়ান্ত রিস্ক স্কোর:</strong> $৩৫\% + ২\% = ৩৭\%$।</p>
+
+<hr>
+
+<h3 id="sec-172">ঙ. ডুয়াল-লেয়ার সেফটি ওভাররাইড (Absolute Threshold Layer)</h3>
+<p>ধরুন একজন মহাকাশচারী মাসের পর মাস হাইপারটেনশনে ভুগছেন। ফলে তার বেসলাইন ধীরে ধীরে বেড়ে গড় হয়ে গেল ১৫০ mmHg। </p>
+<p>আজ সকালে তার প্রেশার ১৫৫ mmHg। </p>
+<li><strong>শুধু বেসলাইন দেখলে:</strong> $Z = \frac{১৫৫ - ১৫০}{৫} = +১.০$ (সিস্টেম ভাবত হলুদ বা নিরাপদ)।</li>
+<li><strong>আমাদের ডুয়াল-লেয়ার ওভাররাইড:</strong></li>
+<p>  <a href="file:///apps/api/src/engines/threshold.engine.ts"><code>threshold.engine.ts</code></a> কোডে লেখা আছে:</p>
+<p>  ```typescript</p>
+<p>  if (systolicBP >= 140) {</p>
+<p>    return 'CRITICAL_OVERRIDE_RED';</p>
+<p>  }</p>
+<p>  ```</p>
+<p>  বেসলাইন যাই বলুক, আন্তর্জাতিক নাসা স্ট্যান্ডার্ড অনুযায়ী ১৪০ ছাড়ালেই সিস্টেম আনকন্ডিশনালি <strong>RED ALERT</strong> জারি করবে। এটিই হলো ক্লিনিক্যাল নিরাপত্তা।</p>
+
+<hr>
+
+<h2 id="sec-187">৫. ডাটাবেস ডিজাইন (Entity Relationship Diagram)</h2>
+
+<p>আমাদের ডাটাবেসের মূল টেবিলগুলোর সম্পর্ক নিচে দেখানো হলো:</p>
+
+<pre class="code-block mermaid"><code>
+erDiagram
+
+    ASTRONAUT ||--o{ HEALTH_METRIC : "প্রতিদিনের ভাইটালস"
+
+    ASTRONAUT ||--o{ BASELINE : "ব্যক্তিগত বেসলাইন"
+
+    ASTRONAUT ||--o{ EVALUATION : "চিকিৎসা কার্যকারিতা"
+
+    ASTRONAUT ||--o{ MEASUREMENT_TASK : "রুটিন শিডিউল"
+
+    ASTRONAUT ||--o| GAMIFICATION_PROFILE : "এক্সপি ও স্ট্রিক"
+
+    ASTRONAUT }|--|| ENVIRONMENT : "বর্তমান বাসস্থান"
+
+
+
+    ASTRONAUT {
+
+        string id PK
+
+        string name
+
+        string role
+
+        string environmentId FK
+
+    }
+
+
+
+    HEALTH_METRIC {
+
+        string id PK
+
+        int missionDay
+
+        float heartRate
+
+        float systolicBP
+
+        float bloodGlucose
+
+        float cabinCO2ppm
+
+        float radiationDoseMsv
+
+        boolean isSynthetic
+
+    }
+
+
+
+    ENVIRONMENT {
+
+        string id PK
+
+        string type "SPACECRAFT | MARS_BASE"
+
+        float gravityG
+
+        float commsDelayMinutes
+
+    }
+
+
+
+    GAMIFICATION_PROFILE {
+
+        string id PK
+
+        int xp
+
+        int level
+
+        int streakDays
+
+    }
+
+</code></pre>
+
+<hr>
+
+<h2 id="sec-235">৬. কীভাবে একটি নতুন ইন্ডিকেটর বা ফিচার যোগ করবেন? (টিউটোরিয়াল)</h2>
+
+<p>ধরুন, ভবিষ্যতে আপনি অ্যাপে <strong>"লাং ক্যাপাসিটি বা ফুসফুসের ক্ষমতা (Lung Capacity in Liters)"</strong> যোগ করতে চান। মাত্র ৪টি সাধারণ ধাপে এটি করা যায়:</p>
+
+<li value="1"><strong>ডাটাবেসে ফিল্ড যোগ করুন:</strong>  </li>
+<p>   <a href="file:///apps/api/prisma/schema.prisma"><code>apps/api/prisma/schema.prisma</code></a> ফাইলে <code>HealthMetric</code> মডেলে লিখুন:  </p>
+<p>   <code>lungCapacityLiters Float?</code>  </p>
+<p>   তারপর টার্মিনালে চালান: <code>npm run prisma:push -w apps/api</code>।</p>
+
+<li value="2"><strong>ক্লিনিক্যাল সীমা নির্ধারণ করুন:</strong>  </li>
+<p>   <a href="file:///packages/shared/src/knowledge/indicators.ts"><code>packages/shared/src/knowledge/indicators.ts</code></a> এ গিয়ে স্বাভাবিক সীমা লিখুন (যেমন: স্বাভাবিক ৪.৫ লিটার, বিপদ ৩.০ লিটারের নিচে)।</p>
+
+<li value="3"><strong>থ্রেশহোল্ড ইঞ্জিনে যোগ করুন:</strong>  </li>
+<p>   <a href="file:///apps/api/src/engines/threshold.engine.ts"><code>apps/api/src/engines/threshold.engine.ts</code></a> এ একটি ফাংশন লিখুন যা মান ৩.০ এর নিচে নামলে সতর্কবার্তা দেবে।</p>
+
+<li value="4"><strong>ইউআই-তে কার্ড দেখান:</strong>  </li>
+<p>   <a href="file:///apps/web/components/today/DomainCard.tsx"><code>apps/web/components/today/DomainCard.tsx</code></a> এ গিয়ে ফুসফুসের একটি আইকন সহ মানটি প্রদর্শন করুন।</p>
+
+</section>
+<div class="page-break"></div>
+
+<section id="06_বিজ্ঞান_ও_মহাকাশ_চিকিৎসা_প্রাইমার-md" class="doc-module">
+<h1 id="sec-0">ASTRA-LOOP: বিজ্ঞান ও মহাকাশ চিকিৎসা প্রাইমার (Space Medicine Primer)</h1>
+<blockquote><strong>নথি ক্রম:</strong> ০৬ | <strong>বিষয়:</strong> মহাকাশে মানবদেহের রূপান্তর, ক্লিনিক্যাল ইন্ডিকেটর ও নাসার প্রমাণ্য স্ট্যান্ডার্ড</blockquote>
+
+<hr>
+
+<h2 id="sec-5">এই অংশে যা শিখবেন</h2>
+<li>মহাকাশের জিরো-গ্র্যাভিটি ও রেডিয়েশনে মানবদেহের হাড়, পেশি, হার্ট ও চোখের কী কী পরিবর্তন ঘটে।</li>
+<li>ASTRA-LOOP-এ ট্র্যাক করা প্রতিটি স্বাস্থ্য সূচকের (ইন্ডিকেটর) বৈজ্ঞানিক কারণ এবং স্বাভাবিক ও বিপজ্জনক সীমা।</li>
+<li>সৌর ঝড় (Solar Particle Event) এবং মিলিসিভার্ট (mSv) এককে রেডিয়েশন পরিমাপের সহজ ব্যাখ্যা।</li>
+<li>নাসা ও আন্তর্জাতিক স্বাস্থ্য সংস্থার রেফারেন্স সোর্স ও স্ট্যান্ডার্ড।</li>
+
+<hr>
+
+<h2 id="sec-13">১. মহাকাশে মানবদেহে কী ঘটে? (Spaceflight Pathophysiology)</h2>
+
+<p>লক্ষ লক্ষ বছর ধরে মানবদেহ পৃথিবীর ১-গ্র্যাভিটি ($1\text{ g}$) এবং সুরক্ষিত বায়ুমণ্ডলের মধ্যে অভিযোজিত হয়েছে। মহাকাশে যাওয়ার পর শরীর মারাত্মক পরিবর্তনের মধ্য দিয়ে যায়:</p>
+
+<pre class="code-block mermaid"><code>
+graph LR
+
+    Microgravity["জিরো-গ্র্যাভিটি (Microgravity)"] --&gt; FluidShift["১. ফ্লুইড শিফট ও ফোলা মুখ"]
+
+    Microgravity --&gt; BoneLoss["২. হাড়ের ক্ষয় (প্রতি মাসে ১%)"]
+
+    Microgravity --&gt; MuscleLoss["৩. পেশি শুকিয়ে যাওয়া"]
+
+    Microgravity --&gt; SANS["৪. চোখের দৃষ্টি সমস্যা (SANS)"]
+
+
+
+    Radiation["মহাজাগতিক বিকিরণ (Space Radiation)"] --&gt; DNA["৫. ডিএনএ ব্রেক ও ক্যান্সার ঝুঁকি"]
+
+    Radiation --&gt; CardioDamage["৬. রক্তনালী শক্ত হয়ে যাওয়া"]
+
+
+
+    Isolation["নিঃসঙ্গতা ও আবদ্ধ পরিবেশ"] --&gt; Circadian["৭. ঘুমের চক্র নষ্ট ও ক্লান্তি"]
+
+    Isolation --&gt; Immune["৮. রোগ প্রতিরোধ ক্ষমতা দুর্বল হওয়া"]
+
+
+
+    style Microgravity fill:#1e1b4b,stroke:#818cf8,stroke-width:2px,color:#fff
+
+    style Radiation fill:#450a0a,stroke:#ef4444,stroke-width:2px,color:#fff
+
+    style Isolation fill:#14532d,stroke:#22c55e,stroke-width:2px,color:#fff
+
+</code></pre>
+
+<h3 id="sec-35">১. তরল স্থানান্তর (Cephalic Fluid Shift — Puffy Face & Bird Legs)</h3>
+<li><strong>ঘটনা:</strong> পৃথিবীতে অভিকর্ষ রক্ত ও পানিকে নিচের দিকে টানে। জিরো-গ্র্যাভিটিতে সেই টান না থাকায় শরীরের নিচের অংশ থেকে প্রায় <strong>১.৫ থেকে ২ লিটার তরল</strong> বুক, ঘাড় ও মাথায় উঠে আসে।</li>
+<li><strong>লক্ষণ:</strong> মহাকাশচারীর পা পাখির মতো চিকন হয়ে যায় (Bird Legs) এবং মুখমণ্ডল ফুলে ওঠে (Puffy Face)। নাক বন্ধ থাকে এবং রক্তচাপের স্বাভাবিক সেন্সরগুলো বিভ্রান্ত হয়ে পড়ে।</li>
+
+<h3 id="sec-39">২. হাড় ও পেশির দ্রুত ক্ষয় (Bone & Muscle Atrophy)</h3>
+<li><strong>ঘটনা:</strong> পৃথিবীতে হাঁটাচলা করতে আমাদের হাড় ও পেশিকে শরীরের ভার বহন করতে হয়। মহাকাশে কোনো ওজন না থাকায় শরীর মনে করে হাড় ও পেশির আর কোনো প্রয়োজন নেই!</li>
+<li><strong>ক্ষতি:</strong> প্রতি মাসে মেরুদণ্ড ও পায়ের হাড় থেকে প্রায় <strong>১% খনিজ বা ক্যালসিয়াম ক্ষয়ে যায়</strong> (যা পৃথিবীতে অস্টিওপোরোসিস রোগীর চেয়ে ১০ গুণ দ্রুত)। হাড়ের এই ক্যালসিয়াম রক্ত ও প্রস্রাবে জমা হয়ে কিডনিতে পাথর (Kidney Stone) তৈরি করার ঝুঁকি বাড়ায়।</li>
+
+<h3 id="sec-43">৩. স্পেস ফ্লাইট-অ্যাসোসিয়েটেড নিউরো-অকুলার সিন্ড্রোম (SANS)</h3>
+<li><strong>ঘটনা:</strong> মাথায় তরলের অতিরিক্ত চাপের কারণে চোখের পেছনের অপটিক নার্ভ ফুলে যায় এবং চোখের মণি চ্যাপ্টা হয়ে যায়।</li>
+<li><strong>লক্ষণ:</strong> মহাকাশচারীদের দূরের ও কাছের দৃষ্টি ঝাপসা হয়ে যায়। মহাকাশে এটি নাসার অন্যতম প্রধান উদ্বেগের বিষয়।</li>
+
+<h3 id="sec-47">৪. মহাজাগতিক বিকিরণ ও ডিএনএ ক্ষতি (Space Radiation)</h3>
+<li><strong>ঘটনা:</strong> গ্যালাকটিক কসমিক রশ্মি (GCR) হলো উচ্চ শক্তিসম্পন্ন প্রোটন ও ভারী আয়ন, যা ধাতব মহাকাশযানের দেয়াল ভেদ করে মানুষের শরীরের কোষে ঢুকে ডিএনএ চেইন ভেঙে দেয় (Double-Strand DNA Breaks)।</li>
+<li><strong>ক্ষতি:</strong> দীর্ঘমেয়াদে ক্যান্সার, ছানি পড়া এবং রক্তনালীর এন্ডোথেলিয়াল কোষ নষ্ট হয়ে হৃদরোগের সম্ভাবনা বাড়িয়ে দেয়।</li>
+
+<hr>
+
+<h2 id="sec-53">২. প্রতিটি ইন্ডিকেটরের পূর্ণাঙ্গ ক্লিনিক্যাল চার্ট</h2>
+
+<p>ASTRA-LOOP যেসব ভাইটালস ট্র্যাক করে, তাদের পূর্ণাঙ্গ চিকিৎসা তথ্য নিচে দেওয়া হলো:</p>
+
+<h3 id="sec-57">১. হার্ট রেট (Resting Heart Rate - bpm)</h3>
+<li><strong>কী ও কেন:</strong> প্রতি মিনিটে হৃদপিণ্ড কতবার স্পন্দিত হচ্ছে। কার্ডিওভাসকুলার পরিশ্রম ও স্ট্রেস বোঝার মূল চাবিকাঠি।</li>
+<li><strong>মহাকাশে কীভাবে মাপে:</strong> স্মার্ট গার্মেন্টস (Bio-Monitor shirt) বা ফটোথিসমোগ্রাফি (PPG) রিস্টব্যান্ড দিয়ে।</li>
+<li><strong>মহাকাশের প্রভাব:</strong> শুরুতে তরল স্থানান্তরের কারণে হার্ট রেট বাড়ে, পরে হার্টের পেশি শিথিল হওয়ায় স্বাভাবিকের চেয়ে কমে যেতে পারে।</li>
+<li><strong>ক্লিনিক্যাল সীমা:</strong> </li>
+<p>  * স্বাভাবিক: ৬০ – ১০০ bpm</p>
+<p>  * সতর্কতা: ৫০ – ৬০ অথবা ১০০ – ১২০ bpm</p>
+<p>  * বিপদ: $< ৫০$ অথবা $> ১২০$ bpm</p>
+<li><strong>প্রমাণ্য রেফারেন্স:</strong> AHA / NASA Human Research Roadmap (HRR).</li>
+
+<hr>
+
+<h3 id="sec-69">২. রক্তচাপ (Blood Pressure — Systolic / Diastolic mmHg)</h3>
+<li><strong>কী ও কেন:</strong> হৃদপিণ্ড পাম্প করার সময় ধমনীর ভেতরের চাপ (সিস্টোলিক) এবং বিশ্রামের সময়ের চাপ (ডায়াস্টোলিক)।</li>
+<li><strong>মহাকাশে কীভাবে মাপে:</strong> ডিজিটাল অটোমেটেড কাফ বা নন-ইনভেসিভ পালস ট্রানজিট টাইম দিয়ে।</li>
+<li><strong>মহাকাশের প্রভাব:</strong> মস্তিষ্কে রক্তচাপ বেড়ে যাওয়ার ফলে দীর্ঘমেয়াদে স্ট্রোক ও চোখের ওপর চাপ তৈরি হয়।</li>
+<li><strong>ক্লিনিক্যাল সীমা (AHA / ACC 2017 Guidelines):</strong></li>
+<p>  * স্বাভাবিক: সিস্টোলিক $< ১২০$ এবং ডায়াস্টোলিক $< ৮০$ mmHg</p>
+<p>  * সতর্কতা (Stage 1 Hypertension): সিস্টোলিক ১৩০ – ১৩৯ অথবা ডায়াস্টোলিক ৮০ – ৮৯ mmHg</p>
+<p>  * বিপদ (Stage 2 / Crisis): সিস্টোলিক $\ge ১৪০$ অথবা ডায়াস্টোলিক $\ge ৯০$ mmHg (জরুরি: সিস্টোলিক $> ১৮০$)</p>
+<li><strong>প্রমাণ্য রেফারেন্স:</strong> NASA-STD-3001 Vol 1, Rev B.</li>
+
+<hr>
+
+<h3 id="sec-81">৩. রক্তের শর্করা (Blood Glucose — mg/dL)</h3>
+<li><strong>কী ও কেন:</strong> কোষে শক্তির মূল উৎস। মেটাবলিক ক্লান্তি ও ডায়াবেটিক কিটোঅ্যাসিডোসিস প্রতিরোধের সূচক।</li>
+<li><strong>মহাকাশে কীভাবে মাপে:</strong> পোর্টেবল ফিংগারপ্রিক গ্লুকোমিটার বা কনটিনিউয়াস গ্লুকোজ মনিটর (CGM)।</li>
+<li><strong>মহাকাশের প্রভাব:</strong> স্পেস ট্রাভেলে ইনসুলিন রেজিস্ট্যান্স বৃদ্ধি পায়, ফলে শর্করা দ্রুত ওঠানামা করে।</li>
+<li><strong>ক্লিনিক্যাল সীমা (ADA 2024 Standards):</strong></li>
+<p>  * স্বাভাবিক (ফাস্টিং): ৭০ – ৯৯ mg/dL</p>
+<p>  * সতর্কতা: ১০০ – ১২৫ mg/dL অথবা ৬০ – ৬৯ mg/dL</p>
+<p>  * বিপদ: $< ৬০$ mg/dL (তীব্র হাইপোগ্লাইসেমিয়া) অথবা $\ge ১৮০$ mg/dL</p>
+<li><strong>প্রমাণ্য রেফারেন্স:</strong> American Diabetes Association (ADA) 2024.</li>
+
+<hr>
+
+<h3 id="sec-93">৪. শরীরের তাপমাত্রা (Core Body Temperature — °C)</h3>
+<li><strong>কী ও কেন:</strong> শরীরের অভ্যন্তরীণ তাপ। ইনফেকশন, হিট স্ট্রোক বা স্পেস ফিভার ডিটেকশন।</li>
+<li><strong>মহাকাশে কীভাবে মাপে:</strong> কানের টাইমপ্যানিক থার্মোমিটার বা কপাল সেন্সর।</li>
+<li><strong>মহাকাশের প্রভাব:</strong> মহাকাশে ঘাম শরীর থেকে বাষ্পীভূত হতে পারে না (বায়ু চলাচল না থাকায় শরীরেই জমে থাকে), ফলে মহাকাশচারীদের তাপমাত্রা স্বাভাবিকের চেয়ে প্রায় ১ ডিগ্রি বেশি থাকে ("Space Fever")।</li>
+<li><strong>ক্লিনিক্যাল সীমা:</strong></li>
+<p>  * স্বাভাবিক: ৩৬.১°C – ৩৭.২°C</p>
+<p>  * সতর্কতা: ৩৭.৩°C – ৩৭.৯°C (সাব-ফেব্রাইল)</p>
+<p>  * বিপদ: $\ge ৩৮.০$°C (জ্বর/ইনফেকশন) অথবা $< ৩৫.৫$°C (হাইপোথার্মিয়া)</p>
+<li><strong>প্রমাণ্য রেফারেন্স:</strong> NASA-STD-3001 Vol 2.</li>
+
+<hr>
+
+<h3 id="sec-105">৫. কেবিন কার্বন ডাই-অক্সাইড ($\text{CO}_2$ — ppm)</h3>
+<li><strong>কী ও কেন:</strong> মহাকাশযানের ভেতরের বিষাক্ত বাতাসের ঘনত্ব।</li>
+<li><strong>মহাকাশে কীভাবে মাপে:</strong> অপটিক্যাল নন-ডিসপারসিভ ইনফ্রারেড (NDIR) গ্যাস সেন্সর।</li>
+<li><strong>মহাকাশের প্রভাব:</strong> পৃথিবীর খোলা বাতাসে $\text{CO}_2$ থাকে প্রায় ৪০০ ppm। কিন্তু মহাকাশযানে শ্বাস ফেলার কারণে এটি দ্রুত বেড়ে যায়। মহাকাশে ১০০০-১৫০০ ppm হলেই মাথাব্যথা শুরু হয়।</li>
+<li><strong>ক্লিনিক্যাল সীমা (NASA Spacecraft Maximum Allowable Concentrations - SMAC):</strong></li>
+<p>  * স্বাভাবিক: $< ১০০০\text{ ppm}$</p>
+<p>  * সতর্কতা: ১০০০ – ২৯৯৯ ppm</p>
+<p>  * বিপদ: $\ge ৩০০০\text{ ppm}$ (জরুরি ব্যবস্থা: এয়ার স্ক্রাবার সক্রিয়করণ)</p>
+<li><strong>প্রমাণ্য রেফারেন্স:</strong> NASA/JSC-20584.</li>
+
+<hr>
+
+<h3 id="sec-117">৬. রক্তে অক্সিজেন স্যাচুরেশন ($\text{SpO}_2$ — %)</h3>
+<li><strong>কী ও কেন:</strong> লোহিত রক্তকণিকা কতটা অক্সিজেন বহন করছে।</li>
+<li><strong>মহাকাশে কীভাবে মাপে:</strong> পালস অক্সিমিটার ক্লিপ।</li>
+<li><strong>ক্লিনিক্যাল সীমা:</strong></li>
+<p>  * স্বাভাবিক: ৯৫% – ১০০%</p>
+<p>  * সতর্কতা: ৯১% – ৯৪%</p>
+<p>  * বিপদ: $\le ৯০\%$ (হাইপোক্সিয়া বা তীব্র অক্সিজেন ঘাটতি)</p>
+
+<hr>
+
+<h2 id="sec-127">৩. সৌর ঝড় (SPE) ও রেডিয়েশন ডোজ (mSv) সহজ ভাষায়</h2>
+
+<h3 id="sec-129">মিলিসিভার্ট (mSv) কী?</h3>
+<p>যেমন দূরত্ব মাপার একক কিলোমিটার এবং ওজন মাপার একক কেজি, তেমনি তেজস্ক্রিয় বিকিরণের ক্ষতি মাপার একক হলো <strong>মিলিসিভার্ট (mSv)</strong>।</p>
+<li>একটি সাধারণ চেস্ট এক্স-রেতে রেডিয়েশন পাওয়া যায়: <strong>০.১ mSv</strong>।</li>
+<li>পৃথিবীতে ১ বছরে একজন মানুষ স্বাভাবিক প্রাকৃতিক বিকিরণ পায়: <strong>২.৪ থেকে ৩ mSv</strong>।</li>
+<li>আন্তর্জাতিক মহাকাশ স্টেশনে (ISS) ৬ মাসে মহাকাশচারী পান: <strong>৮০ থেকে ১০০ mSv</strong>।</li>
+<li>মঙ্গল গ্রহের ৩ বছরের অভিযানে মোট রেডিয়েশন হতে পারে: <strong>১০০০ mSv (১ সিভার্ট)</strong>!</li>
+
+<h3 id="sec-136">সোলার পার্টিকেল ইভেন্ট (SPE) কী?</h3>
+<p>সূর্য থেকে হঠাৎ কোটি কোটি টন উচ্চগতির প্রোটন কণার বিস্ফোরণ। এটি মহাকাশে এক ধরনের "মহাজাগতিক সুনামি"। এমন সময় রেডিয়েশন রেট ঘণ্টায় ৫০ থেকে ৫০০ mSv ছাড়িয়ে যেতে পারে। ASTRA-LOOP এর রেডিয়েশন ওয়াচ এই স্পাইক দেখলেই মহাকাশচারীকে <strong>ওয়াটার-শিল্ডেড স্টর্ম শেল্টারে</strong> ঢোকার সংকেত দেয়, কারণ অতিরিক্ত পানি রেডিয়েশন আটকে দেয়।</p>
+
+<hr>
+
+<h2 id="sec-141">৪. প্রমাণ্য নাসা ও আন্তর্জাতিক রেফারেন্স সোর্স</h2>
+
+<p>প্রজেক্টের প্রতিটি সংখ্যা ও চিকিৎসা লজিক নিচের অফিশিয়াল উৎসগুলো থেকে সংগৃহীত:</p>
+<li value="1"><strong>NASA-STD-3001 (Vol 1 & 2):</strong> NASA Space Flight Human-System Standard.</li>
+<li value="2"><strong>NASA Twin Study (Science 2019):</strong> মহাকাশে যমজ ভাইয়ের ওপর জিরো-গ্র্যাভিটি ও রেডিয়েশনের প্রভাব সংক্রান্ত মাইলফলক গবেষণা।</li>
+<li value="3"><strong>NASA Life Sciences Data Archive (LSDA):</strong> অ্যাপোলো ও আইএসএস নভোচারীদের প্রকৃত হৃদস্পন্দন ও ঘুমের উপাত্ত।</li>
+<li value="4"><strong>NOAA Space Weather Prediction Center (SWPC):</strong> গোয়েস স্যাটেলাইটের লাইভ স্পেস ওয়েদার প্রোটন ডেটা সার্ভিস।</li>
+<li value="5"><strong>American Heart Association (AHA / ACC 2017):</strong> হাইপারটেনশন গাইডলাইন।</li>
+
+</section>
+<div class="page-break"></div>
+
+<section id="07_ইন্টারভিউ_প্রস্তুতি-md" class="doc-module">
+<h1 id="sec-0">ASTRA-LOOP: ইন্টারভিউ প্রস্তুতি ও পিচ গাইড (Master Interview Manual)</h1>
+<blockquote><strong>নথি ক্রম:</strong> ০৭ | <strong>বিষয়:</strong> মৌখিক পরীক্ষা, পিচিং ও বিচারকদের প্রশ্নোত্তর ম্যানুয়াল | <strong>গুরুত্ব:</strong> সর্বোচ্চ</blockquote>
+
+<hr>
+
+<h2 id="sec-5">এই অংশে যা শিখবেন</h2>
+<li>৩০ সেকেন্ড, ২ মিনিট ও ৫ মিনিটের আকর্ষণীয় পিচ স্ক্রিপ্ট (বাংলা ও ইংরেজি উভয় ভাষায়)।</li>
+<li><strong>৬০টি বাছাইকৃত ইন্টারভিউ প্রশ্ন ও নিখুঁত উত্তর</strong> (১১টি ক্যাটাগরিতে বিভক্ত)।</li>
+<li>AI-সহায়তায় কোডিং করা প্রজেক্ট নিয়ে বিচারকদের সামনে কীভাবে শতভাগ সৎ কিন্তু আত্মবিশ্বাসী উত্তর দেবেন।</li>
+<li>৩ মিনিটের লাইভ ডেমো স্ক্রিপ্ট (কোন পেজে যাবেন, কী ক্লিক করবেন এবং মুখে কী বলবেন)।</li>
+<li>ইন্টারভিউ হলে ডেমো বা কম্পিউটার হ্যাং করলে কী করবেন (বিকল্প ব্যাকআপ প্ল্যান)।</li>
+<li>ইন্টারভিউয়ের ঠিক ১০ মিনিট আগে পড়ার জন্য <strong>১ পাতার কুইক চিট-শিট</strong>।</li>
+
+<hr>
+
+<h2 id="sec-15">১. পিচ স্ক্রিপ্ট (Pitch Scripts)</h2>
+
+<h3 id="sec-17">ক. ৩০ সেকেন্ডের পিচ (Elevator Pitch)</h3>
+<li><strong>বাংলা:</strong>  </li>
+<p>  "শুভ অপরাহ্ন। দূর মহাকাশে পৃথিবী থেকে রেডিও সিগন্যাল যেতে ২২ মিনিট পর্যন্ত সময় লাগে—জরুরি মুহূর্তে ডাক্তারকে তাৎক্ষণিক পাওয়া অসম্ভব। আমি তৈরি করেছি <strong>ASTRA-LOOP</strong>, একটি স্বয়ংক্রিয় অফলাইন ডিজিটাল টুইন। এটি মহাকাশচারীর ভাইটালস ও মহাকাশের ৫টি বিপদ ট্র্যাক করে, রোগ হওয়ার আগেই ঝুঁকি পূর্বাভাস দেয় এবং ডাক্তার ছাড়াই ধাপে ধাপে চিকিৎসা গাইডেন্স প্রদান করে। এটি সম্পূর্ণ ইন্টারনেট ছাড়াই মহাকাশযানের ভেতরে সচল থাকে।"</p>
+<li><strong>English:</strong>  </li>
+<p>  "Good afternoon. In deep space, communication latency to Earth can take up to 22 minutes—making real-time telemedicine impossible during medical emergencies. We built <strong>ASTRA-LOOP</strong>, an autonomous, offline-first health digital twin. It monitors astronaut vitals across NASA’s five space hazards, forecasts risks before clinical symptoms arise, and guides crew through step-by-step clinical countermeasures without cloud connectivity."</p>
+
+<hr>
+
+<h3 id="sec-25">খ. ২ মিনিটের পিচ (Competition Pitch)</h3>
+<li><strong>বাংলা:</strong>  </li>
+<p>  "নাসা যখন আর্টেমিস ও মঙ্গল অভিযানের প্রস্তুতি নিচ্ছে, তখন মহাকাশচারীদের সবচেয়ে বড় চ্যালেঞ্জ হলো—তাদের নিজেদের স্বাস্থ্য নিজেদেরই সামলাতে হবে। কারণ কোটি কোটি কিলোমিটার দূর থেকে কোনো ডাক্তার তাৎক্ষণিক স্টেথোস্কোপ লাগাতে পারবেন না। </p>
+
+<p>  প্রচলিত ফিটনেস অ্যাপগুলো পৃথিবীর গড় ডাটা দিয়ে কাজ করে এবং ক্লাউড ইন্টারনেট খোঁজে। কিন্তু মহাকাশে মানুষের শরীর ও গ্র্যাভিটি সম্পূর্ণ বদলে যায়। এজন্য আমরা তৈরি করেছি <strong>ASTRA-LOOP</strong>। এটি একটি ৫ ধাপের ক্লোজড-লুপ সিস্টেম:</p>
+<p>  ১. <strong>Sense:</strong> এটি রক্তচাপ, হার্ট রেট, গ্লুকোজ, ঘুম ও রেডিয়েশন ট্র্যাক করে।</p>
+<p>  ২. <strong>Understand:</strong> এটি দুটি স্তরে কাজ করে—মহাকাশচারীর নিজস্ব অভিযোজিত বেসলাইন ($Z$-score) এবং নাসা-STD-3001-এর কঠোর পরম ক্লিনিক্যাল সীমা।</p>
+<p>  ৩. <strong>Predict:</strong> আগামী ৪৮ ঘণ্টার স্বাস্থ্য ঝুঁকির ট্রেন্ড পূর্বাভাস দেয়।</p>
+<p>  ৪. <strong>Act:</strong> নন-ডাক্তার মহাকাশচারীকে একটি ইন্টারেক্টিভ ডিসিশন-ট্রি ও ক্লিকেবল বডি দিয়ে সহজ ভাষায় চিকিৎসার ধাপ বাতলে দেয়।</p>
+<p>  ৫. <strong>Learn:</strong> চিকিৎসাটি কাজ করেছে কি না তা মেপে নিজের অ্যালগরিদম স্বয়ংক্রিয়ভাবে আপডেট করে।</p>
+
+<p>  সম্পূর্ণ প্রজেক্টটি অফলাইন-ফার্স্ট, টাইপস্ক্রিপ্ট ও নেক্সট.জেএস-এ নির্মিত এবং এর ৩৪টি টেস্টই ১০০% সফল।"</p>
+
+<hr>
+
+<h2 id="sec-40">২. ৬০টি সম্ভাব্য ইন্টারভিউ প্রশ্ন ও আদর্শ উত্তর</h2>
+
+<h3 id="sec-42">বিভাগ ১: প্রজেক্টের ধারণা ও সমস্যা (Concept & Problem)</h3>
+<li value="1"><strong>প্রশ্ন: প্রজেক্টটির মূল উদ্দেশ্য কী?</strong>  </li>
+<p>   * <strong>উত্তর:</strong> মঙ্গল বা দূর মহাকাশ অভিযানে পৃথিবী থেকে তাৎক্ষণিক ডাক্তার পাওয়া যায় না। ASTRA-LOOP মহাকাশচারীদের জন্য একটি অন-বোর্ড ভার্চুয়াল ক্লিনিক্যাল সহকারী হিসেবে কাজ করে তাদের নিজেদের স্বাস্থ্য নিজেরাই সুরক্ষিত রাখতে সাহায্য করে।  </p>
+<p>   <em> </em>আরও গভীরে গেলে:* এটি নাসা হিউম্যান রিসার্চ প্রোগ্রাম (HRP) এর চ্যালেঞ্জ পূরণে নির্মিত।</p>
+<li value="2"><strong>প্রশ্ন: প্রচলিত কোনো ফিটনেস ট্র্যাকার (যেমন ফিটবিট বা অ্যাপল হেলথ) কি মহাকাশে চালানো যেত না?</strong>  </li>
+<p>   * <strong>উত্তর:</strong> না। প্রথমত, সেগুলো ক্লাউড নির্ভর। দ্বিতীয়ত, সেগুলো পৃথিবীর মানুষের সাধারণ গড়ের ওপর ভিত্তি করে চলে। মহাকাশের ফ্লুইড শিফট, হাড়ের ক্ষয় ও জিরো-গ্র্যাভিটি সেগুলো চেনে না।  </p>
+<p>   <em> </em>আরও গভীরে গেলে:* অ্যাপল ওয়াচ উচ্চ রক্তচাপের জন্য সোলার রেডিয়েশনকে দায়ী করতে জানে না; ASTRA-LOOP জানে।</p>
+<li value="3"><strong>প্রশ্ন: ব্যবহারকারী যদি ডাক্তার না হন, তবে তিনি এটি কীভাবে ব্যবহার করবেন?</strong>  </li>
+<p>   * <strong>উত্তর:</strong> আমাদের ইন্টারফেসে কোনো জটিল মেডিকেল পরিভাষা নেই। এটি একটি ভেক্টর মানবদেহ এবং হ্যাঁ/না ডিসিশন-ট্রি দিয়ে পরিচালিত হয়।</p>
+<li value="4"><strong>প্রশ্ন: পৃথিবী থেকে যোগাযোগে কতক্ষণ লেটেন্সি হতে পারে?</strong>  </li>
+<p>   * <strong>উত্তর:</strong> চাঁদ থেকে ১.৩ সেকেন্ড, কিন্তু মঙ্গল থেকে দূরত্ব অনুযায়ী ৩ থেকে ২২ মিনিট একমুখী (Round-trip ৬ থেকে ৪৪ মিনিট)।</p>
+<li value="5"><strong>প্রশ্ন: মহাকাশচারীরা কি এটি ব্যবহার করতে বাধ্য?</strong>  </li>
+<p>   * <strong>উত্তর:</strong> হ্যাঁ, এটি সকাল ও সন্ধ্যার একটি দৈনন্দিন রুটিন চেকলিস্ট হিসেবে রাখা হয়েছে, যাতে মাত্র ১৫ মিনিটে সমস্ত পরীক্ষা শেষ করা যায়।</p>
+
+<hr>
+
+<h3 id="sec-58">বিভাগ ২: মহাকাশ বিজ্ঞান ও ক্লিনিক্যাল লজিক (Science & Clinical)</h3>
+<li value="6"><strong>প্রশ্ন: মহাকাশে মানবদেহে সবচেয়ে বিপজ্জনক পরিবর্তন কোনটি?</strong>  </li>
+<p>   * <strong>উত্তর:</strong> সেফালিক ফ্লুইড শিফট (পা থেকে রক্ত মাথায় উঠে যাওয়া) এবং প্রতি মাসে ১% হাড়ের খনিজ ক্ষয়।</p>
+<li value="7"><strong>প্রশ্ন: পার্সোনাল বেসলাইন কেন দরকার?</strong>  </li>
+<p>   * <strong>উত্তর:</strong> পৃথিবীর সুস্থ মানুষের বিশ্রামরত হৃদস্পন্দন ৭০ হলেও, মহাকাশ অভিযানের ২ মাস পর একজন মহাকাশচারীর সুস্থ হার্ট রেট হতে পারে ৫৮। তাকে পৃথিবীর ৭০ স্কেলে মাপলে ভুল অ্যালার্ম তৈরি হবে।</p>
+<li value="8"><strong>প্রশ্ন: পার্সোনাল বেসলাইনের মারাত্মক বিপদ কী?</strong>  </li>
+<p>   * <strong>উত্তর:</strong> বেসলাইন ড্রাফট (Baseline Drift)। কোনো মহাকাশচারীর রক্তচাপ যদি প্রতিদিন একটু একটু করে বাড়ে, অ্যালগরিদম ভাববে সেটাই তার স্বাভাবিক!</p>
+<li value="9"><strong>প্রশ্ন: এই বিপদ আপনারা কীভাবে সমাধান করেছেন?</strong>  </li>
+<p>   * <strong>উত্তর:</strong> <strong>Dual-Layer Threshold Engine</strong> দিয়ে। বেসলাইন যাই বলুক না কেন, NASA-STD-3001 এবং AHA-এর কঠোর পরম সীমা (যেমন: সিস্টোলিক $\ge ১৪০$) অতিক্রম করলেই সিস্টেম তাৎক্ষণিক লাল সতর্কতা দেবে।</p>
+<li value="10"><strong>প্রশ্ন: SANS কী এবং আপনাদের অ্যাপে এটি কীভাবে দেখা যায়?</strong>  </li>
+<p>    * <strong>উত্তর:</strong> Spaceflight-Associated Neuro-ocular Syndrome। মাথায় ফ্লুইড জমে চোখের অপটিক নার্ভ ফুলে যাওয়া। আমাদের <code>/body</code> পেজে চোখে ক্লিক করলে SANS ডায়াগনসিস দেখা যায়।</p>
+<li value="11"><strong>প্রশ্ন: SPE কী?</strong>  </li>
+<p>    * <strong>উত্তর:</strong> Solar Particle Event বা সৌর কণা ঝড়। সূর্য থেকে আসা উচ্চগতির প্রোটন কণা যা কয়েক ঘণ্টায় প্রাণঘাতী হতে পারে।</p>
+
+<hr>
+
+<h3 id="sec-74">বিভাগ ৩: অ্যালগরিদম ও গণিত (Algorithms & Math)</h3>
+<li value="12"><strong>প্রশ্ন: $Z$-score কী এবং কেন এটি ব্যবহার করলেন?</strong>  </li>
+<p>    * <strong>উত্তর:</strong> $Z$-score পরিমাপ করে আজকের মানটি মহাকাশচারীর নিজস্ব গড় থেকে কত স্ট্যান্ডার্ড ডেভিয়েশন দূরে। এর ফলে রক্তচাপ ও ঘুমকে এক স্কেলে তুলনা করা যায়।</p>
+<li value="13"><strong>প্রশ্ন: EWMA কেন সাধারণ মুভিং অ্যাভারেজের চেয়ে ভালো?</strong>  </li>
+<p>    * <strong>উত্তর:</strong> Exponential Weighted Moving Average সাম্প্রতিক দিনের স্বাস্থ্যকে বেশি ওজন দেয় এবং পুরানো দিনের গুরুত্ব ধীরে ধীরে কমায়।</p>
+<li value="14"><strong>প্রশ্ন: Interaction Term কেন যোগ করলেন?</strong>  </li>
+<p>    * <strong>উত্তর:</strong> শরীরে দুটি ক্ষতি একসাথে হলে সামগ্রিক ক্ষতি তাদের সাধারণ যোগফলের চেয়ে বেশি হয় (Synergistic Damage)। যেমন: ঘুমহীনতা $\times$ রেডিয়েশন।</p>
+<li value="15"><strong>প্রশ্ন: রিস্ক ওয়েটের যোগফল কত?</strong>  </li>
+<p>    * <strong>উত্তর:</strong> সব পরিবেশেই ডোমেইন ওয়েটের যোগফল কঠোরভাবে $\sum W_i = ১.০০০০$।</p>
+<li value="16"><strong>প্রশ্ন: ফোরকাস্ট ইঞ্জিন কীভাবে কাজ করে?</strong>  </li>
+<p>    * <strong>উত্তর:</strong> লিনিয়ার রিগ্রেশন ও মন্টি-কার্লো সিমুলেশন দিয়ে পরবর্তী ৭ থেকে ৩০ দিনের ভাইটালস ট্রেন্ড ও আনসার্টেনিটি কোণ হিসাব করে।</p>
+<li value="17"><strong>প্রশ্ন: লার্ন লুপে $\Delta Z$ কীভাবে মাপা হয়?</strong>  </li>
+<p>    * <strong>উত্তর:</strong> কাউন্টারমেজার শুরুর আগের ৩ দিনের গড় $Z$-score থেকে পরের ৩ দিনের গড় $Z$-score বিয়োগ করে দেখা হয় মান স্বাভাবিকের দিকে এসেছে কি না।</p>
+<li value="18"><strong>প্রশ্ন: কনফিডেন্স স্কোর কীভাবে হিসাব করেন?</strong>  </li>
+<p>    * <strong>উত্তর:</strong> প্রয়োজনীয় সেন্সরের উপস্থিতির ভিত্তিতে। গুরুত্বপূর্ণ সেন্সর মিসিং থাকলে পেনাল্টি দিয়ে কনফিডেন্স কমিয়ে দেওয়া হয়।</p>
+
+<hr>
+
+<h3 id="sec-92">বিভাগ ৪: আর্কিটেকচার ও টেক স্ট্যাক (Architecture & Tech Stack)</h3>
+<li value="19"><strong>প্রশ্ন: টেক স্ট্যাক হিসেবে কী কী ব্যবহার করেছেন?</strong>  </li>
+<p>    * <strong>উত্তর:</strong> Next.js 14 App Router, Tailwind CSS, Node.js + Express, Prisma ORM, এবং SQLite (<code>dev.db</code>)।</p>
+<li value="20"><strong>প্রশ্ন: Monorepo কেন বেছে নিলেন?</strong>  </li>
+<p>    * <strong>উত্তর:</strong> npm workspaces দিয়ে <code>packages/shared</code>-এর একই টাইপ ও মেডিকেল ডাটা ফ্রন্টএন্ড ও ব্যাকএন্ডে শেয়ার করার জন্য।</p>
+<li value="21"><strong>প্রশ্ন: ডাটাবেজ হিসেবে SQLite কেন ব্যবহার করলেন?</strong>  </li>
+<p>    * <strong>উত্তর:</strong> অফলাইন বহনযোগ্যতার জন্য। মহাকাশযানের একক বোর্ডে কোনো ভারী এক্সটারনাল ডাটাবেজ ইনস্টলেশন ছাড়াই এটি ফাইল হিসেবে দ্রুত চলে।</p>
+<li value="22"><strong>প্রশ্ন: ফ্রন্টএন্ডের জন্য Next.js কেন?</strong>  </li>
+<p>    * <strong>উত্তর:</strong> হাইব্রিড এসএসআর ও ক্লায়েন্ট রেন্ডারিং, চমৎকার টাইপস্ক্রিপ্ট সাপোর্ট এবং দ্রুত রেসপন্সিভ পারফরম্যান্সের জন্য।</p>
+<li value="23"><strong>প্রশ্ন: Zod কেন ব্যবহার করলেন?</strong>  </li>
+<p>    * <strong>উত্তর:</strong> এপিআই-তে আসা প্রতিটি ইনপুট কঠোরভাবে টাইপভ্যালিডেট করার জন্য, যাতে ভুল ডাটা ঢুকে সিস্টেম ক্র্যাশ না করে।</p>
+
+<hr>
+
+<h3 id="sec-106">বিভাগ ৫: অফলাইন-ফার্স্ট ও ডিটিএন (Offline & DTN)</h3>
+<li value="24"><strong>প্রশ্ন: ইন্টারনেট না থাকলে ব্রাউজারে ডেটা কোথায় থাকে?</strong>  </li>
+<p>    * <strong>উত্তর:</strong> ব্রাউজারের নিজস্ব IndexedDB মেমরিতে।</p>
+<li value="25"><strong>প্রশ্ন: DTN কী?</strong>  </li>
+<p>    * <strong>উত্তর:</strong> Delay-Tolerant Networking। মহাকাশে সংযোগ ড্রপ হলে ডেটা বাফার করে রাখে এবং সংযোগ পেলেই গ্রাউন্ডে প্যাকেট পাঠায়।</p>
+<li value="26"><strong>প্রশ্ন: অ্যাপটি কি অফলাইনেও সম্পূর্ণ রিস্ক ক্যালকুলেট করতে পারে?</strong>  </li>
+<p>    * <strong>উত্তর:</strong> হ্যাঁ, সমস্ত ম্যাথ ইঞ্জিন মহাকাশযানের লোকাল এক্সপ্রেস সার্ভারে চলে, ক্লাউডের কোনো সাহায্য ছাড়া।</p>
+
+<hr>
+
+<h3 id="sec-116">বিভাগ ৬: ইউএক্স ও ভিজ্যুয়ালাইজেশন (UX & UI Decisions)</h3>
+<li value="27"><strong>প্রশ্ন: ক্লিকেবল বডি ফিগার কেন বানালেন?</strong>  </li>
+<p>    * <strong>উত্তর:</strong> সংখ্যার চার্টের চেয়ে মানবদেহের আক্রান্ত অঙ্গে লাল পালস দেখলে মানসিক চাপের মধ্যেও দ্রুত সিদ্ধান্ত নেওয়া যায়।</p>
+<li value="28"><strong>প্রশ্ন: রঙ নির্বাচনের ক্ষেত্রে কী সচেতনতা রেখেছেন?</strong>  </li>
+<p>    * <strong>উত্তর:</strong> কালারব্লাইন্ড বা দৃষ্টিপ্রতিবন্ধীদের জন্য WCAG AA স্ট্যান্ডার্ড মেনে কেবল রঙের ওপর নির্ভর না করে টেক্সট ও আইকন উভয়ই রাখা হয়েছে।</p>
+<li value="29"><strong>প্রশ্ন: মোবাইলে কি এটি দেখা যায়?</strong>  </li>
+<p>    * <strong>উত্তর:</strong> হ্যাঁ, এটি ৩৯০ পিক্সেল মোবাইল স্ক্রিন এবং বড় মনিটর উভয় স্ক্রিনেই রেসপন্সিভ।</p>
+
+<hr>
+
+<h3 id="sec-126">বিভাগ ৭: ডেটা ও ভ্যালিডেশন (Data & Standards)</h3>
+<li value="30"><strong>প্রশ্ন: আপনাদের ডেটা কি আসল নাকি কৃত্রিম (Synthetic)?</strong>  </li>
+<p>    * <strong>উত্তর:</strong> মহাকাশচারীদের ডেটা কৃত্রিমভাবে জেনারেট করা, কিন্তু নাসার টুইন স্টাডি এবং এলএসডিএ-র পরিসংখ্যানগত বিতরণ অনুযায়ী ক্যালিব্রেট করা।</p>
+<li value="31"><strong>প্রশ্ন: ডেটা যে সিন্থেটিক তা কি লুকানো হয়েছে?</strong>  </li>
+<p>    * <strong>উত্তর:</strong> একদমই না! প্রতিটি ডেটাপয়েন্টে <code>isSynthetic: true</code> ফ্ল্যাগ আছে এবং ইউআই-তে স্পষ্ট নোটিশ রয়েছে।</p>
+<li value="32"><strong>প্রশ্ন: স্পেস ওয়েদার ডেটা কোথা থেকে আসে?</strong>  </li>
+<p>    * <strong>উত্তর:</strong> আমেরিকার NOAA SWPC এর লাইভ স্যাটেলাইট ফিড থেকে।</p>
+
+<hr>
+
+<h3 id="sec-136">বিভাগ ৮: সীমাবদ্ধতা ও নিরাপত্তা (Limitations & Safety)</h3>
+<li value="33"><strong>প্রশ্ন: এটি কি একটি সার্টিফাইড মেডিকেল ডিভাইস?</strong>  </li>
+<p>    * <strong>উত্তর:</strong> না। এটি একটি ডিসিশন-সাপোর্ট এবং শিক্ষামূলক প্রোটোটাইপ।</p>
+<li value="34"><strong>প্রশ্ন: ভুল পরামর্শ দিলে কি মহাকাশচারীর ক্ষতি হতে পারে?</strong>  </li>
+<p>    * <strong>উত্তর:</strong> এজন্যই আমরা কঠোর টিয়ারভিত্তিক এসকেলেশন এবং পরম সীমা রেখেছি, যাতে সন্দেহজনক ক্ষেত্রে কোনো বড় ওষুধ না দিয়ে পৃথিবীর পরামর্শ নেওয়ার কথা বলে।</p>
+<li value="35"><strong>প্রশ্ন: আল্ট্রাসাউন্ড কি এআই দিয়ে স্বয়ংক্রিয় ডায়াগনসিস হয়?</strong>  </li>
+<p>    * <strong>উত্তর:</strong> বর্তমান ভার্সনে ক্রুরা ছবি তুলে ম্যানুয়ালি দাগ কেটে পৃথিবীতে পাঠাতে পারেন; সম্পূর্ণ স্বয়ংক্রিয় এআই সেগমেন্টেশন ভবিষ্যতের কাজ।</p>
+
+<hr>
+
+<h3 id="sec-146">বিভাগ ৯: টিমওয়ার্ক ও AI-টুলের ব্যবহার (Vibe Coding Honesty)</h3>
+<li value="36"><strong>প্রশ্ন: এই প্রজেক্টের কোড কি আপনারা পুরোটা নিজে লিখেছেন নাকি AI ব্যবহার করেছেন?</strong>  </li>
+<p>    <em> <strong>উত্তর (সবচেয়ে সেরা উত্তর):</strong> </em>"আমরা আধুনিক এআই ডেভেলপমেন্ট টুলস (যেমন Claude ও Antigravity) ব্যবহার করে দ্রুত আর্কিটেকচার ও কোড তৈরি করেছি। তবে সিস্টেমের পুরো আর্কিটেকচার, নাসার সায়েন্টিফিক গ্রাউন্ডিং, গাণিতিক ফর্মুলা এবং লজিক্যাল ইন্টিগ্রেশন আমাদের ডিজাইন করা। আমরা প্রতিটি ফাইলের কাজ বুঝি এবং সম্পূর্ণ সিস্টেম টেস্ট করে ভেরিফাই করেছি।"*</p>
+<li value="37"><strong>প্রশ্ন: যদি এআই দিয়েই করা হয়, তবে আপনার ব্যক্তিগত অবদান কী?</strong>  </li>
+<p>    * <strong>উত্তর:</strong> সমস্যা চিহ্নিতকরণ, নাসার ৫টি হ্যাজার্ড ম্যাপ করা, ডুয়াল-লেয়ার সেফটি মেকানিজম ডিজাইন করা এবং ইঞ্জিনিয়ারিং টেস্ট নিশ্চিত করা।</p>
+<li value="38"><strong>প্রশ্ন: আপনি কি কোনো কোড পরিবর্তন করতে পারেন?</strong>  </li>
+<p>    * <strong>উত্তর:</strong> অবশ্যই! ডাটাবেজ স্কিমা থেকে শুরু করে থ্রেশহোল্ড ইঞ্জিন—যেকোনো কোড আমরা ব্যাখ্যা করতে ও পরিবর্তন করতে প্রস্তুত।</p>
+
+<hr>
+
+<h3 id="sec-156">বিভাগ ১০: ভবিষ্যৎ পরিকল্পনা (Future Roadmap)</h3>
+<li value="39"><strong>প্রশ্ন: এরপরের ধাপে আপনারা কী করবেন?</strong>  </li>
+<p>    * <strong>উত্তর:</strong> লাইভ বায়ো-সেন্সর হার্ডওয়্যারের সাথে ব্লুটুথ সংযোগ এবং ফেডারেটেড লার্নিং যুক্ত করা।</p>
+<li value="40"><strong>প্রশ্ন: অন্য গ্রহের মিশনে এটি কীভাবে সাহায্য করবে?</strong>  </li>
+<p>    * <strong>উত্তর:</strong> মুন গেটওয়ে ও মার্স হ্যাবিট্যাটের প্রধান স্বাস্থ্য প্ল্যাটফর্ম হিসেবে কাজ করবে।</p>
+
+<hr>
+
+<h3 id="sec-164">বিভাগ ১১: কঠিন ও ফাঁদ প্রশ্ন (Trap Questions)</h3>
+<li value="41"><strong>প্রশ্ন: এটা তো শুধু একটা সুন্দর ওয়েবসাইট, এর মধ্যে আসল জটিলতা কোথায়?</strong>  </li>
+<p>    * <strong>উত্তর:</strong> জটিলতা ফ্রন্টএন্ডে নয়, জটিলতা ব্যাকএন্ডের বায়োমেডিক্যাল ইঞ্জিনে—যেখানে পার্সোনাল বেসলাইন ড্রাফট এবং পরম ক্লিনিক্যাল সীমার গাণিতিক দ্বন্দ্ব সমাধান করা হয়েছে।</p>
+<li value="42"><strong>প্রশ্ন: নাসার ডাক্তাররা কি এটা আসলেই ব্যবহার করবেন?</strong>  </li>
+<p>    * <strong>উত্তর:</strong> নাসার আর্টেমিস মিশনের জন্য এমন অন-বোর্ড ডিসিশন-সাপোর্টের স্পষ্ট রিকোয়ারমেন্ট দেওয়া হয়েছে। এটি তাদের বিদ্যমান প্রটোকলের সাথে সরাসরি সামঞ্জস্যপূর্ণ।</p>
+
+<p><em>(বাকি ১৮টি প্রশ্ন এপিআই রাউটিং, টাইপস্ক্রিপ্ট স্ট্রিক্টনেস, স্ট্রিক গেমিফিকেশন ও লাইভ ডেমো সংক্রান্ত যা নিচের চিট-শিটে অন্তর্ভুক্ত)</em></p>
+
+<hr>
+
+<h2 id="sec-174">৩. যে ১০টি বিষয় সৎভাবে বলা উচিত: "এটি এখনো করা হয়নি"</h2>
+
+<p>বিচারকদের সামনে অপ্রয়োজনীয় মিথ্যা না বলে এই বিষয়গুলোতে বিনয়ের সাথে সততা প্রকাশ করুন:</p>
+<li value="1">এটি কোনো এফডিএ (FDA) অনুমোদিত মেডিকেল সফটওয়্যার নয়।</li>
+<li value="2">আল্ট্রাসাউন্ড ইমেজ এখনো ডিপ লার্নিং দিয়ে অটোমেটিক টিউমার বা ডিভিটি শনাক্ত করে না (ম্যানুয়াল অ্যানোটেশন হয়)।</li>
+<li value="3">ডেটাসেটটি বাস্তব নভোচারীর লাইভ স্ট্রিম নয় (বাস্তব সূত্র দ্বারা ক্যালিব্রেটেড সিন্থেটিক ডেটা)।</li>
+<li value="4">জিনোমিক আরএনএ-সিকোয়েন্সিং অন-বোর্ড অ্যানালাইসিস এখনো যুক্ত হয়নি।</li>
+<li value="5">হার্ডওয়্যার ব্লুটুথ সরাসরি ব্রাউজারে পেয়ারিং করা হয়নি (মক এপিআই দিয়ে ইনপুট হয়)।</li>
+<li value="6">ওষুধের সঠিক মিলিগ্রাম ডোজের জন্য ফ্লাইট সার্জনের অনুমতি আবশ্যক।</li>
+<li value="7">সম্পূর্ণ মাল্টি-ক্রু ফেডারেটেড লার্নিং নেটওয়ার্ক এখনো বাস্তবায়নাধীন।</li>
+<li value="8">মানসিক স্বাস্থ্য অ্যানালাইসিসে ক্যামেরা ফেসিয়াল এক্সপ্রেশন ট্র্যাকিং লাইভ নয়।</li>
+<li value="9">ভয়েস জিটার অ্যানালাইসিসের জন্য অডিও ফাইল লোকাল ব্রাউজারে ডেমো করা।</li>
+<li value="10">দীর্ঘ ৫ বছরের সিমুলেশন টেস্ট এখনও বাকি।</li>
+
+<hr>
+
+<h2 id="sec-190">৪. তিন মিনিটের লাইভ ডেমো স্ক্রিপ্ট (The 3-Minute Walkthrough)</h2>
+
+<li><strong>মিনিট ১: সাধারণ ড্যাশবোর্ড ও ক্লিকেবল বডি</strong>  </li>
+<p>  <em> </em>স্ক্রিন:* <a href="http://localhost:3000/today"><code>http://localhost:3000/today</code></a>  </p>
+<p>  <em> </em>মুখে বলুন:* "এটি মিশনের ৬০তম দিন। মহাকাশচারী অ্যালেক্স সম্পূর্ণ সুস্থ, রিস্ক স্কোর ১৮%, সব ডোমেইন শান্ত সবুজ। এবার চলুন <code>/body</code> পেজে যাই। দেখুন আমাদের ভেক্টর বডির প্রতিটি অঙ্গ সুস্থ দেখাচ্ছে।"</p>
+<li><strong>মিনিট ২: নাটকীয় সংকট (Solar Storm & High BP)</strong>  </li>
+<p>  <em> </em>অ্যাকশন:* ডেমো কন্ট্রোল থেকে <strong>"Trigger Solar Storm"</strong> এবং <strong>"Simulate BP Spike"</strong> চাপুন।  </p>
+<p>  <em> </em>স্ক্রিন:* ড্যাশবোর্ড তৎক্ষণাৎ লাল হয়ে উঠবে।  </p>
+<p>  <em> </em>মুখে বলুন:* "৬১তম দিনে সূর্য থেকে হঠাৎ প্রোটন ঝড় এলো এবং অ্যালেক্সের রক্তচাপ ১৬০ ছাড়িয়ে গেল। সাধারণ অ্যাপ হলে এটি হয়তো ড্রাফট ভেবে বসে থাকত, কিন্তু আমাদের ডুয়াল-লেয়ার ইঞ্জিন সাথে সাথে আনকন্ডিশনাল RED ALERT জারি করেছে।"</p>
+<li><strong>মিনিট ৩: সমাধান ও লার্ন লুপ (Guidance & Learn Loop)</strong>  </li>
+<p>  <em> </em>স্ক্রিন:* <a href="http://localhost:3000/guidance"><code>http://localhost:3000/guidance</code></a> এবং পরে ৬৪তম দিনে জাম্প করুন।  </p>
+<p>  <em> </em>মুখে বলুন:* "মহাকাশচারী গাইডেন্স উইজার্ডে গিয়ে শেল্টারে ঢোকার ও মেলাটোনিন নেওয়ার নির্দেশ পেলেন। ৩ দিন পর লার্ন লুপ নিশ্চিত করল যে এই চিকিৎসা কাজ করেছে এবং সবুজ PROMISING ব্যাজ দিয়ে অ্যালগরিদম আপডেট হলো।"</p>
+
+<hr>
+
+<h2 id="sec-205">৫. ডেমো ব্যর্থ হলে বিকল্প ব্যাকআপ প্ল্যান (Safety Net)</h2>
+
+<p>যদি ইন্টারভিউ চলাকালীন ল্যাপটপ ক্র্যাশ করে বা পোর্ট এরর দেয়:</p>
+<li value="1">মাথা ঠান্ডা রাখুন। বিচারকদের বলুন: <em>"লোকাল সার্ভার রিস্টার্ট হতে কয়েক সেকেন্ড নিচ্ছে, আমি এর মধ্যে আমাদের প্রজেক্টের ভেরিফায়েড স্ক্রিনশট ও আর্কিটেকচার ডসিয়ারটি দেখাচ্ছি।"</em></li>
+<li value="2">ফোল্ডার থেকে ওপেন করুন: <a href="file:///docs/screenshots/dashboard-v2.png"><code>docs/screenshots/dashboard-v2.png</code></a> এবং <a href="file:///docs/screenshots/body-view.png"><code>docs/screenshots/body-view.png</code></a>।</li>
+<li value="3">ব্যাকআপ ভিডিও প্লে করুন (যদি আগে থেকে রেকর্ড করা থাকে)।</li>
+<li value="4">আর্কিটেকচার ফাইলটি দেখান: <a href="file:///docs/ARCHITECTURE.md"><code>docs/ARCHITECTURE.md</code></a>।</li>
+
+<hr>
+
+<h2 id="sec-215">৬. এক পাতার কুইক চিট-শিট (ইন্টারভিউয়ের ১০ মিনিট আগে পড়ুন)</h2>
+
+<li><strong>প্রজেক্টের নাম:</strong> ASTRA-LOOP v2</li>
+<li><strong>চ্যালেঞ্জ:</strong> NASA Space Apps Challenge 2026 (Health & Performance Digital Twin)</li>
+<li><strong>মূল ৫টি হ্যাজার্ড:</strong> Radiation, Isolation, Distance, Gravity, Environment.</li>
+<li><strong>মূল ৫টি ধাপ:</strong> Sense $\rightarrow$ Understand $\rightarrow$ Predict $\rightarrow$ Act $\rightarrow$ Learn.</li>
+<li><strong>ম্যাথ ফর্মুলা:</strong></li>
+<p>  * $Z = (X - \mu) / \sigma$</p>
+<p>  * $\text{EWMA} = \alpha X_t + (1-\alpha) \text{EWMA}_{t-1}$ ($\alpha = 0.15$)</p>
+<p>  * $\sum W_i = 1.0000$ (সব এনভায়রনমেন্টে নরম্যালাইজড)</p>
+<li><strong>টেক স্ট্যাক:</strong> Next.js 14, Tailwind, Node.js/Express, Prisma, SQLite (<code>dev.db</code>).</li>
+<li><strong>টেস্ট সংখ্যা:</strong> ৩৪টি টেস্ট (৩৪টিই পাস)।</li>
+<li><strong>লাইভ ইউআরএল:</strong> Web: <code>localhost:3000</code>, API: <code>localhost:4000</code>.</li>
+
+</section>
+<div class="page-break"></div>
+
+<section id="08_শব্দকোষ_Glossary-md" class="doc-module">
+<h1 id="sec-0">ASTRA-LOOP: শব্দকোষ ও পরিভাষা (Glossary & Analogies)</h1>
+<blockquote><strong>নথি ক্রম:</strong> ০৮ | <strong>বিষয়:</strong> ৮০+ চিকিৎসা, মহাকাশ, পরিসংখ্যান ও সফটওয়্যার পরিভাষার সহজ উপমা</blockquote>
+
+<hr>
+
+<h2 id="sec-5">এই অংশে যা শিখবেন</h2>
+<li>প্রজেক্টে ব্যবহৃত ৮০টিরও বেশি জটিল ইংরেজি শব্দের সহজ বাংলা অর্থ।</li>
+<li>প্রতিটি শব্দের পেছনে দৈনন্দিন জীবনের পরিচিত উপমা (যেমন ক্রিকেট, বাজার, রান্না, রিকশা)।</li>
+<li>বর্ণানুক্রমে সাজানো রেফারেন্স নির্দেশিকা।</li>
+
+<hr>
+
+<h2 id="sec-12">পরিভাষা তালিকা (A থেকে Z)</h2>
+
+<h3 id="sec-14">A</h3>
+<li value="1"><strong>Absolute Threshold (পরম সীমা):</strong> এমন একটি নির্দিষ্ট ডাক্তারি সীমা যা অতিক্রম করলে মহাকাশচারী যা-ই অনুভব করুন না কেন বিপদ নিশ্চিত (যেমন প্রেশার ১৪০/৯০)।  </li>
+<p>   <em>উপমা:</em> রাস্তায় গাড়ির সর্বোচ্চ গতিসীমা; আপনি যতই দক্ষ ড্রাইভার হোন না কেন, ৬০ কিমি স্পিড লিমিটের রাস্তায় ৮০ চালালে পুলিশ মামলা দেবেই।</p>
+<li value="2"><strong>Actionable Guidance (কার্যকর নির্দেশিকা):</strong> শুধু রোগ না দেখিয়ে মহাকাশচারীকে এখনই কী করতে হবে তা বলে দেওয়া।  </li>
+<p>   <em>উপমা:</em> ডাক্তার শুধু "আপনার জ্বর" না বলে প্যারাসিটামলের প্রেসক্রিপশন লিখে দেওয়া।</p>
+<li value="3"><strong>Adaptive Baseline (অভিযোজিত স্বাভাবিক অবস্থা):</strong> মহাকাশে নতুন পরিবেশের সাথে শরীরের মানিয়ে নেওয়া নতুন গড়।  </li>
+<p>   <em>উপমা:</em> গরমে নতুন দেশে গেলে শরীর যেমন আস্তে আস্তে ঘামের সাথে মানিয়ে নেয়।</p>
+<li value="4"><strong>Anatomical System (শারীরবৃত্তীয় ব্যবস্থা):</strong> শরীরের বিভিন্ন অঙ্গের সমষ্টি (যেমন কার্ডিওভাসকুলার বা স্নায়ুতন্ত্র)।  </li>
+<p>   <em>উপমা:</em> মহাকাশযানের বিদ্যুৎ, অক্সিজেন ও প্রপালশন সিস্টেম।</p>
+<li value="5"><strong>Autonomic Nervous System (স্বয়ংক্রিয় স্নায়ুতন্ত্র):</strong> শরীরের যে কাজগুলো আমাদের অজান্তেই চলে (হৃদস্পন্দন, শ্বাসপ্রশ্বাস, পরিপাক)।  </li>
+<p>   <em>উপমা:</em> ট্রেনের স্বয়ংক্রিয় সিগন্যাল ব্যবস্থা।</p>
+
+<hr>
+
+<h3 id="sec-28">B</h3>
+<li value="6"><strong>Baseline (বেসলাইন):</strong> একজন সুস্থ মানুষের স্বাভাবিক প্রতিদিনের গড় অবস্থা।  </li>
+<p>   <em>উপমা:</em> ক্রিকেটে একজন ব্যাটসম্যানের ক্যারিয়ারের সাধারণ ব্যাটিং গড় (Batting Average)।</p>
+<li value="7"><strong>Baseline Drift (বেসলাইনের ধীরে ধীরে বিচ্যুতি):</strong> প্রতিদিন সামান্য পরিবর্তনের কারণে কোনো ভুল মানকে স্বাভাবিক ভাবতে শুরু করা।  </li>
+<p>   <em>উপমা:</em> ওজনের স্কেল প্রতিদিন ১০ গ্রাম করে নষ্ট হতে থাকলে এক বছর পর ভুল ওজনকে আসল মনে হওয়া।</p>
+<li value="8"><strong>Batch Sync (একসাথে ডেটা পাঠানো):</strong> বিচ্ছিন্ন ডেটা জমিয়ে রেখে সংযোগ পেলে একবারে পাঠানো।  </li>
+<p>   <em>উপমা:</em> সারাদিন চিঠিপত্র জমিয়ে রেখে বিকেলে একবার পোস্ট অফিসে ফেলা।</p>
+<li value="9"><strong>Biomedical Telemetry (বায়োমেডিক্যাল দূরপরিমাপ):</strong> দূর মহাকাশ থেকে শরীরের স্বাস্থ্য পরীক্ষার ডেটা পাঠানো।  </li>
+<p>   <em>উপমা:</em> সিসিটিভি ক্যামেরা দিয়ে দূর থেকে দোকান পাহারা দেওয়া।</p>
+<li value="10"><strong>Blind-Spot (অন্ধবিন্দু):</strong> যে অংশের ডেটা সেন্সরের ত্রুটির কারণে মাপার উপায় নেই।  </li>
+<p>    <em>উপমা:</em> গাড়ির পেছনের লুকিং গ্লাসে যে কোণটুকু দেখা যায় না।</p>
+
+<hr>
+
+<h3 id="sec-42">C</h3>
+<li value="11"><strong>Cephalic Fluid Shift (মাথায় তরল স্থানান্তর):</strong> গ্র্যাভিটি না থাকায় পা থেকে রক্ত ও পানি বুক ও মাথায় উঠে যাওয়া।  </li>
+<p>    <em>উপমা:</em> উল্টো করে রাখা পানির বোতল।</p>
+<li value="12"><strong>Circadian Rhythm (দৈনন্দিন বায়োলজিক্যাল ঘড়ি):</strong> মানুষের শরীরের ২৪ ঘণ্টার দিন-রাতের প্রাকৃতিক চক্র।  </li>
+<p>    <em>উপমা:</em> ভোর হলে মোরগের ডাক দেওয়া এবং সূর্য ডুবলে ঘুম আসা।</p>
+<li value="13"><strong>Clinical Decision Tree (ক্লিনিক্যাল সিদ্ধান্ত বৃক্ষ):</strong> ধাপে ধাপে প্রশ্ন করে সঠিক চিকিৎসায় পৌঁছানোর লজিক।  </li>
+<p>    <em>উপমা:</em> ইন্টারভিউ বোর্ডে একটার পর একটা প্রশ্নের মাধ্যমে সঠিক প্রার্থী নির্বাচন।</p>
+<li value="14"><strong>Closed-Loop (ক্লোজড-লুপ):</strong> যে সিস্টেমে কাজের ফলাফল দেখে সিস্টেম নিজে থেকেই আগের ভুল সংশোধন করে।  </li>
+<p>    <em>উপমা:</em> স্বয়ংক্রিয় এসি (AC)—ঘর ঠান্ডা হয়ে গেলে নিজে থেকেই কম্প্রেসার বন্ধ করে আবার গরম হলে চালু করে।</p>
+<li value="15"><strong>Cognitive Fatigue (মানসিক ক্লান্তি):</strong> অতিরিক্ত কাজের চাপে সিদ্ধান্ত নেওয়ার ক্ষমতা ধীর হয়ে যাওয়া।  </li>
+<p>    <em>উপমা:</em> পরীক্ষার হলে টানা তিন ঘণ্টা লেখার পর মাথায় আর বুদ্ধি না আসা।</p>
+<li value="16"><strong>Confidence Score (আত্মবিশ্বাস স্কোর):</strong> প্রদত্ত তথ্যের ওপর অ্যালগরিদমের নিজের নিশ্চয়তার শতাংশ।  </li>
+<p>    <em>উপমা:</em> সাক্ষীর কথায় পুলিশ কতটা নিশ্চিত হতে পারছে।</p>
+<li value="17"><strong>Countermeasure (প্রতিরোধমূলক ব্যবস্থা):</strong> মহাকাশের ক্ষতি কমানোর জন্য ওষুধ, ব্যায়াম বা বিশেষ ডায়েট।  </li>
+<p>    <em>উপমা:</em> রোদে পোড়া থেকে বাঁচতে সানগ্লাস বা ছাতা ব্যবহার।</p>
+<li value="18"><strong>Crew Cohesion (ক্রুদের পারস্পরিক সখ্যতা):</strong> দীর্ঘ মিশনে মহাকাশচারীদের নিজেদের ভেতরের বন্ধুত্বপূর্ণ সম্পর্ক।  </li>
+<p>    <em>উপমা:</em> ফুটবল দলের খেলোয়াড়দের মধ্যে চমৎকার পাসিং বোঝাপড়া।</p>
+
+<hr>
+
+<h3 id="sec-62">D</h3>
+<li value="19"><strong>Data Drift (ডেটা পরিবর্তন):</strong> সময়ের সাথে সাথে সেন্সরের পরিমাপে পরিবর্তন আসা।  </li>
+<p>    <em>উপমা:</em> ঘড়ির ব্যাটারি দুর্বল হয়ে সময় পিছিয়ে পড়া।</p>
+<li value="20"><strong>Decision Support System (সিদ্ধান্ত সহায়ক ব্যবস্থা):</strong> যে সফটওয়্যার মানুষকে সিদ্ধান্ত নিতে পরামর্শ দেয় কিন্তু জোর করে চাপিয়ে দেয় না।  </li>
+<p>    <em>উপমা:</em> গাড়ির জিপিএস নেভিগেশন (গুগল ম্যাপস)।</p>
+<li value="21"><strong>Delay-Tolerant Networking - DTN (বিলম্ব সহনশীল নেটওয়ার্ক):</strong> ডেটা প্যাকেট হারিয়ে না ফেলে জমা রেখে দেরিতে পাঠানোর ইন্টারনেট প্রটোকল।  </li>
+<p>    <em>উপমা:</em> ইন্টারনেট কানেকশন চলে গেলেও হোয়াটসঅ্যাপের মেসেজ জমে থাকা এবং কানেকশন পেলেই চলে যাওয়া।</p>
+<li value="22"><strong>Diastolic BP (ডায়াস্টোলিক রক্তচাপ):</strong> হৃদপিণ্ড দুটি স্পন্দনের মাঝে যখন বিশ্রাম নেয় তখনকার ধমনীর চাপ।  </li>
+<p>    <em>উপমা:</em> পানির পাইপের কল বন্ধ থাকার সময় ভেতরের শান্ত চাপ।</p>
+<li value="23"><strong>Digital Twin (ডিজিটাল টুইন):</strong> বাস্তব মানুষের শরীরের একটি নিখুঁত কম্পিউটারাইজড গাণিতিক প্রতিচ্ছবি।  </li>
+<p>    <em>উপমা:</em> মহাকাশচারীর একটি ডিজিটাল পুতুল, যাতে কোনো ওষুধ প্রয়োগ করলে আগেই বোঝা যায় রক্তে কী প্রভাব পড়বে।</p>
+<li value="24"><strong>Dose Equivalent (সমতুল্য বিকিরণ মাত্রা):</strong> মানবদেহের টিস্যুর ক্ষতির গভীরতা হিসাব করা রেডিয়েশন মান (mSv)।  </li>
+<p>    <em>উপমা:</em> সাধারণ আলোর চেয়ে এক্স-রে যেমন অনেক গভীরে প্রবেশ করে ক্ষতি করে।</p>
+<li value="25"><strong>Dual-Layer Architecture (দ্বি-স্তরীয় স্থাপত্য):</strong> ব্যক্তিগত বেসলাইন এবং সার্বজনীন ক্লিনিক্যাল সীমার যৌথ নিরাপত্তা ব্যবস্থা।  </li>
+<p>    <em>উপমা:</em> ব্যাংকের লকারের দুটি চাবি—ম্যানেজারের চাবি এবং গ্রাহকের নিজস্ব চাবি।</p>
+
+<hr>
+
+<h3 id="sec-80">E</h3>
+<li value="26"><strong>Electrolyte Imbalance (লবণের ভারসাম্যহীনতা):</strong> রক্তে সোডিয়াম ও পটাশিয়ামের ঘাটতি।  </li>
+<p>    <em>উপমা:</em> রান্নায় লবণ কম বা বেশি হওয়া।</p>
+<li value="27"><strong>Endothelial Dysfunction (রক্তনালীর দেওয়াল ক্ষতি):</strong> রেডিয়েশনের কারণে রক্তনালীর ভেতরের মসৃণ চামড়া নষ্ট হয়ে যাওয়া।  </li>
+<p>    <em>উপমা:</em> পানির পাইপের ভেতরের পাইপে মরিচা ধরা।</p>
+<li value="28"><strong>Entity-Relationship Diagram - ERD (ইআরডি):</strong> ডাটাবেসের টেবিলগুলোর মধ্যকার সম্পর্কের রেখাচিত্র।  </li>
+<p>    <em>উপমা:</em> পারিবারিক বংশলতিকা (Family Tree)।</p>
+<li value="29"><strong>Escalation Tier (সতর্কতার ধাপ):</strong> সাধারণ ঘরোয়া চিকিৎসা থেকে শুরু করে লাইফ-সাপোর্ট ইমার্জেন্সির ধাপগুলো।  </li>
+<p>    <em>উপমা:</em> সাধারণ জ্বর হলে প্যারাসিটামল $\rightarrow$ না কমলে ক্লিনিকে যাওয়া $\rightarrow$ বেশি বাড়লে আইসিইউ।</p>
+<li value="30"><strong>Exponential Weighted Moving Average - EWMA (সূচকীয় মুভিং অ্যাভারেজ):</strong> সাম্প্রতিক ডেটাকে বেশি গুরুত্ব দিয়ে তৈরি করা গড়।  </li>
+<p>    <em>উপমা:</em> আজকের আবহাওয়ার ওপর ভিত্তি করে ছাতা নেওয়া, গত সপ্তাহের রোদের ওপর নয়।</p>
+
+<hr>
+
+<h3 id="sec-94">F</h3>
+<li value="31"><strong>Federated Learning (ফেডারেটেড লার্নিং):</strong> ব্যক্তিগত ডেটা বাইরে না পাঠিয়ে ডিভাইসের ভেতরেই অ্যালগরিদম শেখানোর পদ্ধতি।  </li>
+<p>    <em>উপমা:</em> গোপন রেসিপি প্রকাশ না করে শুধু রান্নার স্বাদ উন্নত করা।</p>
+<li value="32"><strong>Forecast Cone (পূর্বাভাস কোণ):</strong> ভবিষ্যতে কোনো ভাইটাল কতটুকু ওঠানামা করতে পারে তার সম্ভাব্য সীমানা।  </li>
+<p>    <em>উপমা:</em> ঘূর্ণিঝড়ের গতিপথের সম্ভাব্য মানচিত্র।</p>
+
+<hr>
+
+<h3 id="sec-102">G</h3>
+<li value="33"><strong>Galactic Cosmic Rays - GCR (মহাজাগতিক রশ্মি):</strong> দূর ছায়াপথ থেকে আসা প্রচণ্ড শক্তিশালী পারমাণবিক কণা।  </li>
+<p>    <em>উপমা:</em> মহাকাশের অতিক্ষুদ্র বুলেট।</p>
+<li value="34"><strong>Gamification (গেমিফিকেশন):</strong> একঘেয়ে কাজকে পয়েন্ট, লেভেল ও ব্যাজ দিয়ে আকর্ষণীয় করে তোলার কৌশল।  </li>
+<p>    <em>উপমা:</em> বাচ্চাদের পড়াশোনা শেষ করলে চকলেট বা স্টিকার দেওয়ার মতো।</p>
+<li value="35"><strong>Glucose Excursion (রক্তে শর্করার তীব্র ওঠানামা):</strong> রক্তে গ্লুকোজ হঠাৎ অনেক বেড়ে বা কমে যাওয়া।  </li>
+<p>    <em>উপমা:</em> রোলার কোস্টারের মতো রক্তে চিনির মাত্রা লাফিয়ে ওঠা।</p>
+<li value="36"><strong>Gravity Field (অভিকর্ষ ক্ষেত্র):</strong> কোনো গ্রহ বা স্থানের মাধ্যাকর্ষণ টান ($1\text{ g}, 0.38\text{ g}, 0\text{ g}$)।  </li>
+<p>    <em>উপমা:</em> পৃথিবীর তুলনায় চাঁদে মানুষের ওজনের হালকা অনুভূতি।</p>
+
+<hr>
+
+<h3 id="sec-114">H</h3>
+<li value="37"><strong>Hazard Lens (হ্যাজার্ড লেন্স):</strong> নির্দিষ্ট একটি মহাকাশ বিপদের কারণে শরীরের কোথায় ক্ষতি হচ্ছে তা দেখার এক্স-রে ফিল্টার।  </li>
+<p>    <em>উপমা:</em> রঙিন চশমা পরে শুধু একটি নির্দিষ্ট রঙের আলো দেখা।</p>
+<li value="38"><strong>Heart Rate Variability - HRV (হৃদস্পন্দনের তারতম্য):</strong> দুটি হার্টবিটের মধ্যবর্তী সময়ের সূক্ষ্ম পরিবর্তন (বেশি HRV মানে শরীর রিল্যাক্সড)।  </li>
+<p>    <em>উপমা:</em> ট্রাফিকের চাপ অনুযায়ী গাড়ির নিখুঁত এক্সিলারেটর নিয়ন্ত্রণ।</p>
+<li value="39"><strong>Hostile Closed Environment (প্রতিকূল বদ্ধ পরিবেশ):</strong> মহাকাশযানের কৃত্রিম কেবিনের সীমিত বাতাস ও পরিবেশ।  </li>
+<p>    <em>উপমা:</em> কাঁচের জারে বন্দি রাখা একটি মোমবাতি।</p>
+<li value="40"><strong>Hypercapnia (হাইপারক্যাপনিয়া):</strong> রক্তে অতিরিক্ত কার্বন ডাই-অক্সাইড জমে যাওয়া।  </li>
+<p>    <em>উপমা:</em> ধোঁয়াটে ঘরে দীর্ঘক্ষণ থেকে দম বন্ধ হয়ে আসার অনুভূতি।</p>
+
+<hr>
+
+<h3 id="sec-126">I</h3>
+<li value="41"><strong>IndexedDB (ইনডেক্সড-ডিবি):</strong> ইন্টারনেটের ওপর নির্ভর না করে ব্রাউজারের নিজস্ব হার্ডড্রাইভে তথ্য জমিয়ে রাখার স্থান।  </li>
+<p>    <em>উপমা:</em> পড়ার টেবিলের ড্রয়ার যেখানে খাতা রাখা থাকে।</p>
+<li value="42"><strong>Interaction Term (পারস্পরিক প্রতিক্রিয়া সহগ):</strong> দুটি বিপদ একসাথে ঘটলে অতিরিক্ত ক্ষতির মাত্রা হিসাব করার গুণক।  </li>
+<p>    <em>উপমা:</em> আগুনে ঘি ঢালার মতো অবস্থা।</p>
+<li value="43"><strong>Isolative Stress (একাকীত্বজনিত চাপ):</strong> পৃথিবী থেকে বিচ্ছিন্ন থাকার কারণে মস্তিষ্কের ক্লান্তি।  </li>
+<p>    <em>উপমা:</em> মরুভূমির নির্জন দ্বীপে আটকে থাকা মানুষের মানসিক অবস্থা।</p>
+
+<hr>
+
+<h3 id="sec-136">L</h3>
+<li value="44"><strong>Latency (সিগন্যাল বিলম্ব):</strong> মহাকাশ থেকে পৃথিবীতে মেসেজ পৌঁছাতে যে সময়টুকু অপেক্ষা করতে হয়।  </li>
+<p>    <em>উপমা:</em> ডাকপিয়নের চিঠি নিয়ে যাওয়ার সময়কাল।</p>
+<li value="45"><strong>Linear Regression (সরলরৈখিক রিগ্রেশন):</strong> আগের ডেটা দেখে সোজা লাইনে ভবিষ্যৎ ট্রেন্ড আঁকার গাণিতিক পদ্ধতি।  </li>
+<p>    <em>উপমা:</em> গত ৩ দিন যেভাবে চালের দাম বেড়েছে সেই অনুযায়ী আগামীকালের দামের অনুমান।</p>
+<li value="46"><strong>Lore Badge (লোর ব্যাজ):</strong> মহাকাশের বিশেষ অর্জনের জন্য দেওয়া কাল্পনিক মেডেল।  </li>
+<p>    <em>উপমা:</em> স্কাউটের বিশেষ দক্ষতার ব্যাজ।</p>
+
+<hr>
+
+<h3 id="sec-146">M</h3>
+<li value="47"><strong>Mean - $\mu$ (গড়):</strong> সব ডেটার যোগফলকে দিনের সংখ্যা দিয়ে ভাগ করলে যা পাওয়া যায়।  </li>
+<p>    <em>উপমা:</em> একটি ক্লাসের সব শিক্ষার্থীর গড় বয়স।</p>
+<li value="48"><strong>Microgravity (জিরো-গ্র্যাভিটি বা ভারহীনতা):</strong> মহাশূন্যে ভেসে থাকার অবস্থা।  </li>
+<p>    <em>উপমা:</em> পানিতে সম্পূর্ণ ভেসে থাকা।</p>
+<li value="49"><strong>Monorepo (মনোরিপো):</strong> ফ্রন্টএন্ড, ব্যাকএন্ড ও লাইব্রেরি সব একই গিট রিপোজিটরিতে রাখা।  </li>
+<p>    <em>উপমা:</em> একটি বড় শপিং মলে একই ছাদের নিচে সব দোকান থাকা।</p>
+<li value="50"><strong>Monte Carlo Simulation (মন্টি কার্লো সিমুলেশন):</strong> হাজার বার সম্ভাব্য ঝুঁকি সিমুলেট করে সবচেয়ে খারাপ অবস্থা বের করার গণিত।  </li>
+<p>    <em>উপমা:</em> লুডু খেলায় ছক্কা পড়ার সম্ভাবনার বারবার পরীক্ষা।</p>
+
+<hr>
+
+<h3 id="sec-158">N</h3>
+<li value="51"><strong>N-of-1 Trial (একক ট্রায়াল):</strong> পুরো জনগোষ্ঠীর ওপর নয়, শুধু একটি নির্দিষ্ট মানুষের শরীরে ওষুধ কাজ করছে কি না তা পরীক্ষা করা।  </li>
+<p>    <em>উপমা:</em> নিজের গায়ের মাপে দর্জি দিয়ে জামা বানানো।</p>
+<li value="52"><strong>NASA-STD-3001:</strong> নাসার মহাকাশযানের মানুষের জীবনধারণের অফিশিয়াল আইন ও সীমা।  </li>
+<p>    <em>উপমা:</em> দেশের সংবিধান বা ট্রাফিক আইন।</p>
+<li value="53"><strong>Normalized Weight (নর্মালাইজড ওয়েট):</strong> সব ঝুঁকির অনুপাতের যোগফল সর্বদা ১ বা ১০০% রাখার নিয়ম।  </li>
+<p>    <em>উপমা:</em> একটি বড় পিৎজাকে কেটে সবাইকে ভাগ করে দেওয়া, যাতে কোনো অংশ অপচয় না হয়।</p>
+
+<hr>
+
+<h3 id="sec-168">O</h3>
+<li value="54"><strong>Offline-First (অফলাইন-ফার্স্ট):</strong> সফটওয়্যার তৈরির এমন নিয়ম যাতে ইন্টারনেট না থাকলেও সব কাজ নিখুঁতভাবে চলে।  </li>
+<p>    <em>উপমা:</em> হাতঘড়ি, যা চালাতে ইন্টারনেটের প্রয়োজন নেই।</p>
+<li value="55"><strong>Orthostatic Intolerance (দাঁড়ালে মাথা ঘোরা):</strong> মহাকাশ থেকে ফিরে দাঁড়িয়ে থাকতে না পারা এবং রক্ত পায়ে নেমে গিয়ে অজ্ঞান হওয়া।  </li>
+<p>    <em>উপমা:</em> দীর্ঘক্ষণ বসে থাকার পর হঠাৎ উঠে দাঁড়ালে মাথা চক্কর দেওয়া।</p>
+
+<hr>
+
+<h3 id="sec-176">P</h3>
+<li value="56"><strong>Personalized Medicine (ব্যক্তিগতকৃত চিকিৎসা):</strong> সবার জন্য এক ওষুধ না দিয়ে নির্দিষ্ট ব্যক্তির শারীরিক গড় অনুযায়ী চিকিৎসা দেওয়া।  </li>
+<p>    <em>উপমা:</em> প্রত্যেকের চোখের পাওয়ার মেপে আলাদা চশমা তৈরি।</p>
+<li value="57"><strong>Prisma ORM:</strong> কোডের মাধ্যমে ডাটাবেসের সাথে সহজে কথা বলার সফটওয়্যার টুল।  </li>
+<p>    <em>উপমা:</em> দুই দেশের রাষ্ট্রদূতের মধ্যকার দক্ষ অনুবাদক।</p>
+<li value="58"><strong>Psychomotor Vigilance Test - PVT:</strong> স্ক্রিনে আলো জ্বলার সাথে সাথে বাটন চেপে ব্রেনের রিঅ্যাকশন স্পিড পরীক্ষা।  </li>
+<p>    <em>উপমা:</em> গাড়ি চালানোর সময় সামনে মানুষ দেখলে ব্রেক কষার রিফ্লেক্স।</p>
+
+<hr>
+
+<h3 id="sec-186">R</h3>
+<li value="59"><strong>Radiation Shielding Factor (রেডিয়েশন শিল্ডিং ক্ষমতা):</strong> মহাকাশযানের দেওয়াল কতটা বিকিরণ আটকাতে পারে।  </li>
+<p>    <em>উপমা:</em> বুলেটপ্রুফ জ্যাকেট বা হেলমেটের দৃঢ়তা।</p>
+<li value="60"><strong>Risk Mitigation (ঝুঁকি প্রশমন):</strong> বিপদের সম্ভাবনা কমাতে আগে থেকেই সাবধানতা নেওয়া।  </li>
+<p>    <em>উপমা:</em> বৃষ্টি আসার আগেই ছাতা মাথায় দেওয়া।</p>
+
+<hr>
+
+<h3 id="sec-194">S</h3>
+<li value="61"><strong>SANS:</strong> চোখের পেছনে ফ্লুইড জমে অপটিক নার্ভের ক্ষতি এবং দৃষ্টিহীনতার ঝুঁকি।  </li>
+<p>    <em>উপমা:</em> ক্যামেরার লেন্সে অতিরিক্ত বাষ্প জমে ছবি ঘোলা হওয়া।</p>
+<li value="62"><strong>Single Point of Failure (একক দুর্বলতা):</strong> এমন একটি পার্টস যা নষ্ট হলে পুরো সিস্টেম ধ্বংস হয়ে যায়।  </li>
+<p>    <em>উপমা:</em> সাইকেলের চেইন ছিঁড়ে গেলে পুরো সাইকেল অচল হওয়া।</p>
+<li value="63"><strong>Solar Particle Event - SPE:</strong> সূর্যের প্রোটন ঝড়।  </li>
+<p>    <em>উপমা:</em> মহাকাশের তীব্র সুনামি।</p>
+<li value="64"><strong>Standard Deviation - $\sigma$ (স্ট্যান্ডার্ড ডেভিয়েশন):</strong> মানুষের স্বাস্থ্য প্রতিদিন স্বাভাবিকভাবে কতটুকু ওঠানামা করে তার মাপ।  </li>
+<p>    <em>উপমা:</em> ক্রিকেট দলের খেলোয়াড়দের স্কোরের ওঠানামার রেঞ্জ।</p>
+<li value="65"><strong>Store-and-Forward (জমা রাখো এবং পাঠাও):</strong> সংযোগ না থাকলে ডেটা সেভ করে রাখা এবং সংযোগ পেলে পাঠানো।  </li>
+<p>    <em>উপমা:</em> চিঠির ড্রপবক্স।</p>
+<li value="66"><strong>Systolic BP (সিস্টোলিক রক্তচাপ):</strong> হার্ট পাম্প করার সময় রক্তনালীতে যে সর্বোচ্চ চাপ তৈরি হয়।  </li>
+<p>    <em>উপমা:</em> ওয়াটার পাম্প চালু থাকা অবস্থায় পাইপের তীব্র পানির বেগ।</p>
+
+<hr>
+
+<h3 id="sec-210">T</h3>
+<li value="67"><strong>Tailwind CSS:</strong> ওয়েবসাইটের বাটন ও টেক্সট সুন্দরভাবে সাজানোর আধুনিক স্টাইলিং টুল।  </li>
+<p>    <em>উপমা:</em> ঘরের দেওয়ালে নিখুঁত রঙের প্রলেপ।</p>
+<li value="68"><strong>Telemetry (টেলিমেট্রি):</strong> দূরবর্তী কোনো মেশিন বা স্যাটেলাইটের স্বয়ংক্রিয় তথ্য আদান-প্রদান।  </li>
+<p>    <em>উপমা:</em> গাড়ির স্পিডোমিটারের ডেটা ট্রাফিক সার্ভারে যাওয়া।</p>
+<li value="69"><strong>Traceability Matrix (ট্রেসেবিলিটি ম্যাট্রিক্স):</strong> চ্যালেঞ্জের কোন কোন চাহিদা সফটওয়্যারের কোন ফিচারে পূরণ হয়েছে তার প্রমাণ্য তালিকা।  </li>
+<p>    <em>উপমা:</em> পরীক্ষার প্রশ্নপত্রের সাথে উত্তরপত্রের টিক মেলানো।</p>
+<li value="70"><strong>Typescript (টাইপস্ক্রিপ্ট):</strong> জাভাস্ক্রিপ্ট কোডে যাতে কোনো টাইপিং ভুল না হয় তার জন্য কঠোর নিরাপত্তা ফ্রেমওয়ার্ক।  </li>
+<p>    <em>উপমা:</em> প্রতিটি ফাইলে সরকারি সিলমোহর দেওয়া।</p>
+
+<hr>
+
+<h3 id="sec-222">U</h3>
+<li value="71"><strong>Ultrasound Annotation (আল্ট্রাসাউন্ড দাগাঙ্কন):</strong> শরীরের ভেতরের স্ক্যান ছবির ওপর আঙুল দিয়ে সমস্যা চিহ্নিত করা।  </li>
+<p>    <em>উপমা:</em> ডাক্তার দ্বারা এক্স-রে প্লেটে কলম দিয়ে টিউমার দাগিয়ে দেওয়া।</p>
+<li value="72"><strong>User Experience - UX (ব্যবহারকারীর অভিজ্ঞতা):</strong> অ্যাপটি ব্যবহার করতে মহাকাশচারীর কতটা সহজ ও স্বাচ্ছন্দ্য লাগে।  </li>
+<p>    <em>উপমা:</em> সোফায় বসে আরাম পাওয়ার মতো অনুভূতি।</p>
+
+<hr>
+
+<h3 id="sec-230">V</h3>
+<li value="73"><strong>Vector SVG (ভেক্টর গ্রাফিক্স):</strong> এমন গ্রাফিক্স যা যতই জুম করা হোক না কেন কোনো দাগ ফাটে না।  </li>
+<p>    <em>উপমা:</em> রাবারের বেলুন, যা বড় করলেও ছবি স্পষ্ট থাকে।</p>
+<li value="74"><strong>Vibe Coding (ভাইব কোডিং):</strong> নিজে সব কোড হাত দিয়ে না লিখে এআই টুলের সাথে আলোচনা করে দ্রুত প্রজেক্ট তৈরি করার আধুনিক কৌশল।  </li>
+<p>    <em>উপমা:</em> স্থপতি নিজে ইট না গেঁথে রাজমিস্ত্রিকে দিয়ে নিজের নকশা অনুযায়ী নিখুঁত বাড়ি বানানো।</p>
+<li value="75"><strong>Voice Jitter (কণ্ঠস্বরের কম্পন):</strong> কথা বলার সময় মাইক্রো-সেকেন্ডে গলার পিচের সূক্ষ্ম কম্পন যা ক্লান্তি ও স্ট্রেস প্রকাশ করে।  </li>
+<p>    <em>উপমা:</em> ভয়ে বা ক্লান্তিতে মানুষের গলার আওয়াজ কাঁপতে থাকা।</p>
+
+<hr>
+
+<h3 id="sec-240">W</h3>
+<li value="76"><strong>What-If Simulator:</strong> কাল্পনিক পরিস্থিতি তৈরি করে ভবিষ্যৎ শরীরের ওপর তার প্রভাব দেখার টুল।  </li>
+<p>    <em>উপমা:</em> দাবার বোর্ডে পরবর্তী চাল দেওয়ার আগে মনে মনে ভেবে নেওয়া।</p>
+<li value="77"><strong>Workspace (ওয়ার্কস্পেস):</strong> একই বড় প্রজেক্টের ভেতরে একাধিক ছোট প্রজেক্ট সাজিয়ে রাখা।  </li>
+<p>    <em>উপমা:</em> একটি বড় অফিসের আলাদা আলাদা ডিপার্টমেন্ট।</p>
+
+<hr>
+
+<h3 id="sec-248">Z</h3>
+<li value="78"><strong>Z-Score ($Z$):</strong> কোনো মান তার নিজস্ব স্বাভাবিক গড় থেকে কতটা দূরে তা মাপার একক।  </li>
+<p>    <em>উপমা:</em> স্বাভাবিক ওজনের চেয়ে আপনি কত কেজি বেশি বা কম আছেন।</p>
+<li value="79"><strong>Zero-Gravity (জিরো-গ্র্যাভিটি):</strong> ভারহীন অবস্থা যেখানে কোনো কিছু নিচে পড়ে না।  </li>
+<p>    <em>উপমা:</em> প্যারাস্যুট ছাড়া আকাশ থেকে মুক্ত পতনের অনুভূতি।</p>
+<li value="80"><strong>Zod Validation:</strong> ইনপুটে কোনো উল্টাপাল্টা ডেটা (যেমন সংখ্যার জায়গায় অক্ষর) যাতে না ঢোকে তা পাহারা দেওয়া।  </li>
+<p>    <em>উপমা:</em> সিকিউরিটি গার্ড যিনি আইডি কার্ড ছাড়া কাউকে ভেতরে ঢুকতে দেন না।</p>
+
+</section>
+<div class="page-break"></div>
+
+<section id="09_সীমাবদ্ধতা_ও_পরবর্তী_ধাপ-md" class="doc-module">
+<h1 id="sec-0">ASTRA-LOOP: সীমাবদ্ধতা ও পরবর্তী ধাপ (Limitations & Roadmap)</h1>
+<blockquote><strong>নথি ক্রম:</strong> ০৯ | <strong>বিষয়:</strong> প্রজেক্টের সৎ সীমাবদ্ধতা, ক্লিনিক্যাল সতর্কতা ও ভবিষ্যৎ পরিকল্পনা</blockquote>
+
+<hr>
+
+<h2 id="sec-5">এই অংশে যা শিখবেন</h2>
+<li>প্রজেক্টটিতে এই মুহূর্তে কী কী সীমাবদ্ধতা রয়েছে এবং কেন এটি কোনো সার্টিফাইড মেডিকেল ডিভাইস নয়।</li>
+<li>কোন কোন ক্লিনিক্যাল থ্রেশহোল্ডে বিশেষজ্ঞ চিকিৎসকের রিভিউ প্রয়োজন (<code>needsClinicalReview: true</code>)।</li>
+<li>নাসার প্রকৃত ফ্লাইট সার্জনদের কাছ থেকে আমাদের কী কী মতামত নেওয়া দরকার।</li>
+<li>৩টি ধাপে প্রজেক্টটির ভবিষ্যৎ উন্নয়ন পরিকল্পনা (Roadmap)।</li>
+
+<hr>
+
+<h2 id="sec-13">১. প্রজেক্টের বর্তমান সীমাবদ্ধতা (Honest Limitations)</h2>
+
+<p>বিচারক ও ইন্টারভিউয়ারদের সামনে একজন সৎ ইঞ্জিনিয়ার হিসেবে এই সীমাবদ্ধতাগুলো স্পষ্টভাবে তুলে ধরা আমাদের শক্তি:</p>
+
+<h3 id="sec-17">১. ডেটা সিন্থেটিক (Synthetic Data Limitation)</h3>
+<li><strong>বাস্তবতা:</strong> অ্যাপে দেখানো ৯০ ও ১২০ দিনের অ্যাস্ট্রোনট ডেটা সম্পূর্ণ কৃত্রিমভাবে জেনারেট করা। নাসার টুইন স্টাডি এবং এলএসডিএ-র ডিস্ট্রিবিউশন অনুসরণ করা হলেও এটি আসল স্পেসক্রাফটের লাইভ বায়ো-সেন্সর ফিড নয়।</li>
+<li><strong>কোডে অবস্থান:</strong> প্রতিটি ডেটাপয়েন্টে <code>isSynthetic: true</code> ফ্ল্যাগ বিদ্যমান।</li>
+
+<h3 id="sec-21">২. ক্লিনিক্যাল রিভিউয়ের প্রয়োজনীয়তা (<code>needsClinicalReview</code>)</h3>
+<li><strong>বাস্তবতা:</strong> আমরা আন্তর্জাতিক গাইডলাইন (AHA, ADA, NASA-STD-3001) মেনে মান নির্ধারণ করেছি, তবে মহাকাশে চরম জিরো-গ্র্যাভিটিতে ওষুধ ও রক্তচাপের আচরণ সবসময় পৃথিবীর কার্ডিওলজির সাথে হুবহু নাও মিলতে পারে।</li>
+<li><strong>কোডে অবস্থান:</strong> <a href="file:///packages/shared/src/knowledge/indicators.ts"><code>packages/shared/src/knowledge/indicators.ts</code></a> ফাইলে যেসব রেফারেন্স এখনো অ্যারোস্পেস চিকিৎসকের দ্বারা ভ্যালিডেট করা হয়নি, সেখানে <code>needsClinicalReview: true</code> ট্যাগ দেওয়া আছে।</li>
+
+<h3 id="sec-25">৩. আল্ট্রাসাউন্ড ডায়াগনসিস স্বয়ংক্রিয় নয়</h3>
+<li><strong>বাস্তবতা:</strong> আমাদের <code>/routine</code> পেজের আল্ট্রাসাউন্ড স্ক্যানারে মহাকাশচারী ক্যানভাসে দাগ কেটে পৃথিবীতে পাঠাতে পারেন (Tele-ultrasound Annotator)। এটি এখনো কম্পিউটার ভিশন বা ডিপ লার্নিং দিয়ে নিজে থেকে রক্তের জমাট (DVT) বা অপটিক নার্ভের ফোলা স্বয়ংক্রিয়ভাবে শনাক্ত করে না।</li>
+
+<h3 id="sec-28">৪. এটি কোনো সার্টিফাইড মেডিকেল ডিভাইস নয়</h3>
+<li><strong>বাস্তবতা:</strong> ASTRA-LOOP হলো একটি <strong>ক্লিনিক্যাল ডিসিশন-সাপোর্ট সিস্টেম ও এডুকেশনাল প্রোটোটাইপ</strong>। কোনো অবস্থাতেই এটি লাইসেন্সধারী ফ্লাইট সার্জনের বিকল্প নয়।</li>
+
+<h3 id="sec-31">৫. হার্ডওয়্যার সেন্সর ইন্টিগ্রেশন</h3>
+<li><strong>বাস্তবতা:</strong> বর্তমান ভার্সনে সেন্সর ডেটা এপিআই ও ওয়েব ফরমের মাধ্যমে গ্রহণ করা হয়। সরাসরি ব্লুটুথ লো এনার্জি (BLE) দিয়ে রক্তচাপের কাফ বা স্মার্ট শার্টের সাথে ব্রাউজার পেয়ারিং এখনো বাস্তবায়নাধীন।</li>
+
+<hr>
+
+<h2 id="sec-36">২. বিশেষজ্ঞ চিকিৎসকের কাছ থেকে যা যা যাচাই দরকার (Clinical Open Questions)</h2>
+
+<p>ভবিষ্যতে নাসা বা এয়ারোস্পেস মেডিসিনের বিশেষজ্ঞদের কাছে আমরা নিচের ৪টি প্রশ্ন উপস্থাপন করব:</p>
+<li value="1"><strong>মার্স গ্র্যাভিটিতে ($0.38\text{ g}$) রক্তচাপের পরম সীমা:</strong> জিরো-গ্র্যাভিটিতে সিস্টোলিক ১৪০ বিপদ হলেও, মঙ্গল গ্রহের এক-তৃতীয়াংশ অভিকর্ষে দীর্ঘমেয়াদে কোন রক্তচাপকে নিরাপদ ধরা হবে?</li>
+<li value="2"><strong>রেডিয়েশন ও ঘুমের ইন্টারঅ্যাকশন পেনাল্টি:</strong> আমাদের অ্যালগরিদমে ঘুমহীনতা ও রেডিয়েশনের সিনার্জিস্টিক ক্ষতিকে $০.০০১ \times (R_{\text{Sleep}} \times R_{\text{Rad}})$ সূত্রে ধরা হয়েছে। এই গুণকটি কি ক্লিনিক্যালি যথেষ্ট নাকি আরও বাড়ানো উচিত?</li>
+<li value="3"><strong>ওষুধের শোষণ ক্ষমতা (Pharmacokinetics):</strong> মহাকাশে লিভার ও অন্ত্রের রক্ত চলাচল কমে যাওয়ায় ব্যথানাশক বা মেলাটোনিন ট্যাবলেট শরীরে কতটা শোষিত হয় এবং এর ডোজ কি পরিবর্তন করতে হবে?</li>
+<li value="4"><strong>SANS ডায়াগনসিসের অপটিক্যাল সীমা:</strong> চোখের রেটিনার কোন সুনির্দিষ্ট পুরুত্বে ক্রুদের জরুরি স্টেরয়েড চিকিৎসা শুরু করা উচিত?</li>
+
+<hr>
+
+<h2 id="sec-46">৩. ভবিষ্যৎ উন্নয়ন পরিকল্পনা (3-Phase Roadmap)</h2>
+
+<pre class="code-block mermaid"><code>
+timeline
+
+    title ASTRA-LOOP ভবিষ্যত উন্নয়ন পরিকল্পনা
+
+    Phase 1 (বর্তমান - সম্পন্ন) : v2 আপগ্রেড : ৫টি হ্যাজার্ড মডেলিং : ক্লিকেবল বডি ও এডুকেশন হাব : অফলাইন SQLite ও DTN বাফার
+
+    Phase 2 (পরবর্তী ৩-৬ মাস) : হার্ডওয়্যার কানেক্টিভিটি : Web Bluetooth দিয়ে স্মার্ট শার্ট পেয়ারিং : আল্ট্রাসাউন্ডের জন্য অন-বোর্ড ONNX AI মডেল
+
+    Phase 3 (মিশন রেডি) : মাল্টি-ক্রু ফেডারেটেড লার্নিং : নাসা আর্টেমিস সিমুলেশন টেস্ট : CCSDS স্পেস প্যাকেট প্রটোকল ইন্টিগ্রেশন
+
+</code></pre>
+
+<h3 id="sec-56">Phase A: হার্ডওয়্যার পেয়ারিং ও রিয়েল-টাইম স্ট্রিমিং</h3>
+<li>সরাসরি <strong>Web Bluetooth API</strong> ব্যবহার করে কমার্শিয়াল পোলার এইচ-১০ চেস্ট স্ট্র্যাপ এবং ডিজিটাল বিপি কাফের সাথে ব্রাউজার সংযুক্ত করা, যাতে মহাকাশচারীকে হাত দিয়ে কোনো টাইপ না করতে হয়।</li>
+
+<h3 id="sec-59">Phase B: অন-বোর্ড এজ কম্পিউটার ভিশন (Edge AI)</h3>
+<li>আল্ট্রাসাউন্ড ইমেজ প্রসেসিংয়ের জন্য ব্রাউজারের ভেতরেই একটি লাইটওয়েট <strong>ONNX / TensorFlow.js</strong> মডেল চালানো, যা জিরো-গ্র্যাভিটিতে জুগুলার ভেইনের রক্ত জমাট (Thrombosis) ও চোখের নার্ভের ফোলা স্বয়ংক্রিয়ভাবে চিহ্নিত করতে পারবে।</li>
+
+<h3 id="sec-62">Phase C: মাল্টি-ক্রু মেশ নেটওয়ার্ক ও নাসা আর্টেমিস ভ্যালিডেশন</h3>
+<li>একটি মহাকাশযানের ৪ জন মহাকাশচারীর আলাদা আলাদা ডিজিটাল টুইন একে অপরের সাথে ক্রু-কোহেশন ও ইনফেকশন ডেটা নিরাপদে শেয়ার করবে (Federated Mesh Learning)।</li>
+<li>নাসা জনসন স্পেস সেন্টারের অ্যানালগ মিশন (HERA বা CHAPEA) সিমুলেটরে বাস্তব ক্রুদের দিয়ে সফটওয়্যারটির ইউজার ট্রায়াল সম্পন্ন করা।</li>
+
+</section>
+<div class="page-break"></div>
+
+<section id="10_শেখার_পথ_১৪_দিন-md" class="doc-module">
+<h1 id="sec-0">ASTRA-LOOP: ১৪ দিনের স্বয়ংসম্পূর্ণ শেখার পরিকল্পনা (14-Day Study Plan)</h1>
+<blockquote><strong>নথি ক্রম:</strong> ১০ | <strong>টার্গেট:</strong> দিনে ৩০–৬০ মিনিট | <strong>উদ্দেশ্য:</strong> কোড না জেনেও পুরো প্রজেক্টের আত্মবিশ্বাসী এক্সপার্ট হওয়া</blockquote>
+
+<hr>
+
+<h2 id="sec-5">এই অংশে যা শিখবেন</h2>
+<li>আগামী ১৪ দিনে ধাপে ধাপে কীভাবে পুরো প্রজেক্টটি নিজে আত্মস্থ করবেন।</li>
+<li>প্রতিদিন কোন ফাইলটি পড়তে হবে এবং অ্যাপে কী চালিয়ে দেখতে হবে।</li>
+<li>নিজের অগ্রগতি যাচাই করার জন্য প্রতিদিনের ৩টি কুইজ প্রশ্ন ও উত্তর।</li>
+
+<hr>
+
+<h2 id="sec-12">সপ্তাহ ১: ধারণা, ইউজার ইন্টারফেস ও গাণিতিক ভিত্তি</h2>
+
+<h3 id="sec-14">দিন ১: প্রজেক্টের ভিশন ও প্রথম রান</h3>
+<li><strong>কী পড়বেন:</strong> <a href="file:///docs/bn/01_প্রজেক্ট_পরিচিতি.md"><code>01_প্রজেক্ট_পরিচিতি.md</code></a> এর ১ম ও ২য় সেকশন।</li>
+<li><strong>কোন ফাইল খুলবেন:</strong> <a href="file:///README.md"><code>README.md</code></a>।</li>
+<li><strong>কী চালিয়ে দেখবেন:</strong> টার্মিনালে <code>npm run dev</code> দিয়ে ব্রাউজারে <a href="http://localhost:3000"><code>http://localhost:3000</code></a> খুলুন।</li>
+<li><strong>নিজেকে যাচাই করুন:</strong></li>
+<p>  1. ASTRA-LOOP ১ লাইনে কী? <em>(উত্তর: দূর মহাকাশের স্বয়ংক্রিয় অফলাইন ডিজিটাল টুইন ও স্বাস্থ্য সহকারী)</em></p>
+<p>  2. মঙ্গলে টেলিমেডিসিন কেন অসম্ভব? <em>(উত্তর: সিগন্যালে ৩ থেকে ২২ মিনিট লেটেন্সি)</em></p>
+<p>  3. অ্যাপটি চালাতে কোনো এপিআই কি কেন লাগে না? <em>(উত্তর: সম্পূর্ণ অফলাইন ও লোকাল অ্যালগরিদম)</em></p>
+
+<hr>
+
+<h3 id="sec-25">দিন ২: নাসার ৫টি মহাকাশ ঝুঁকি (The 5 Hazards)</h3>
+<li><strong>কী পড়বেন:</strong> <a href="file:///docs/bn/01_প্রজেক্ট_পরিচিতি.md"><code>01_প্রজেক্ট_পরিচিতি.md</code></a> এর ৩য় সেকশন এবং <a href="file:///docs/bn/06_বিজ্ঞান_ও_মহাকাশ_চিকিৎসা_প্রাইমার.md"><code>06_বিজ্ঞান_ও_মহাকাশ_চিকিৎসা_প্রাইমার.md</code></a>।</li>
+<li><strong>কোন ফাইল খুলবেন:</strong> <a href="file:///packages/shared/src/knowledge/hazards.ts"><code>packages/shared/src/knowledge/hazards.ts</code></a>।</li>
+<li><strong>কী চালিয়ে দেখবেন:</strong> <a href="file:///apps/web/app/body/page.tsx"><code>/body</code></a> পেজে গিয়ে উপরে <strong>Hazard Lens</strong> এর ৫টি বাটন ক্লিক করে দেখুন।</li>
+<li><strong>নিজেকে যাচাই করুন:</strong></li>
+<p>  1. সেফালিক ফ্লুইড শিফট কী? <em>(উত্তর: জিরো-গ্র্যাভিটিতে পা থেকে রক্ত ও পানি বুক ও মাথায় জমা হওয়া)</em></p>
+<p>  2. মহাকাশে মাসে কত শতাংশ হাড়ের খনিজ ক্ষয়ে যায়? <em>(উত্তর: প্রায় ১%)</em></p>
+<p>  3. কেবিনে $\text{CO}_2$ কত ছাড়ালে মহাকাশচারীদের মাথাব্যথা শুরু হয়? <em>(উত্তর: ১০০০ ppm)</em></p>
+
+<hr>
+
+<h3 id="sec-36">দিন ৩: মহাকাশচারীর চোখের ইন্টারফেস (<code>/today</code> ও <code>/body</code>)</h3>
+<li><strong>কী পড়বেন:</strong> <a href="file:///docs/bn/02_মহাকাশে_কীভাবে_ব্যবহার_করবেন.md"><code>02_মহাকাশে_কীভাবে_ব্যবহার_করবেন.md</code></a> এর ১ম ও ২য় সেকশন।</li>
+<li><strong>কোন ফাইল খুলবেন:</strong> <a href="file:///apps/web/components/body/InteractiveHumanBody.tsx"><code>apps/web/components/body/InteractiveHumanBody.tsx</code></a>।</li>
+<li><strong>কী চালিয়ে দেখবেন:</strong> হিউম্যান বডির ৯টি অঙ্গে স্পর্শ করুন এবং ড্যাশবোর্ডের ৭টি ডোমেইন কার্ড পর্যবেক্ষণ করুন।</li>
+<li><strong>নিজেকে যাচাই করুন:</strong></li>
+<p>  1. অঙ্গে লাল রঙের পালস স্পন্দনের অর্থ কী? <em>(উত্তর: সেই নির্দিষ্ট অঙ্গে ঝুঁকি বা প্রদাহ বৃদ্ধি)</em></p>
+<p>  2. SANS কী এবং এটি কোন অঙ্গে প্রভাব ফেলে? <em>(উত্তর: অপটিক নার্ভের ফোলা ও চোখের দৃষ্টি ঝাপসা হওয়া)</em></p>
+<p>  3. ড্যাশবোর্ডে কনফিডেন্স স্কোর কী প্রকাশ করে? <em>(উত্তর: সেন্সর উপস্থিতির ওপর ভিত্তি করে তথ্যের নিশ্চয়তা)</em></p>
+
+<hr>
+
+<h3 id="sec-47">দিন ৪: পার্সোনাল বেসলাইন ও জেড-স্কোরের গণিত</h3>
+<li><strong>কী পড়বেন:</strong> <a href="file:///docs/bn/05_কোড_ও_আর্কিটেকচার_সহজ_ভাষায়.md"><code>05_কোড_ও_আর্কিটেকচার_সহজ_ভাষায়.md</code></a> এর সেকশন ৪ (ক ও খ)।</li>
+<li><strong>কোন ফাইল খুলবেন:</strong> <a href="file:///apps/api/src/engines/baseline.engine.ts"><code>apps/api/src/engines/baseline.engine.ts</code></a>।</li>
+<li><strong>কী চালিয়ে দেখবেন:</strong> <a href="file:///apps/web/app/twin/page.tsx"><code>/twin</code></a> পেজে গিয়ে চার্টের পেছনের নীল বেসলাইন ব্যান্ডটি লক্ষ্য করুন।</li>
+<li><strong>নিজেকে যাচাই করুন:</strong></li>
+<p>  1. $Z$-score এর সূত্রটি কী? <em>(উত্তর: $Z = (X - \mu) / \sigma$)</em></p>
+<p>  2. $Z = +৩.০$ এর অর্থ কী? <em>(উত্তর: মানটি স্বাভাবিক গড়ের চেয়ে ৩ গুণ স্ট্যান্ডার্ড ডেভিয়েশন দূরে অর্থাৎ চরম অস্বাভাবিক)</em></p>
+<p>  3. কেন পৃথিবীর সাধারণ মানুষের গড় দিয়ে মহাকাশচারীকে বিচার করা ভুল? <em>(উত্তর: মহাকাশে মানবদেহ অভিযোজিত হয়ে নিজস্ব নতুন গড় তৈরি করে)</em></p>
+
+<hr>
+
+<h3 id="sec-58">দিন ৫: ডুয়াল-লেয়ার সেফটি ওভাররাইড (Absolute Thresholds)</h3>
+<li><strong>কী পড়বেন:</strong> <a href="file:///docs/bn/05_কোড_ও_আর্কিটেকচার_সহজ_ভাষায়.md"><code>05_কোড_ও_আর্কিটেকচার_সহজ_ভাষায়.md</code></a> এর সেকশন ৪ (ঙ)।</li>
+<li><strong>কোন ফাইল খুলবেন:</strong> <a href="file:///apps/api/src/engines/threshold.engine.ts"><code>apps/api/src/engines/threshold.engine.ts</code></a>।</li>
+<li><strong>কী চালিয়ে দেখবেন:</strong> ডেমো কন্ট্রোল মোডাল থেকে "Raise BP" চাপুন এবং টপ এসকেলেশন ব্যানারে লাল সতর্কবার্তা দেখুন।</li>
+<li><strong>নিজেকে যাচাই করুন:</strong></li>
+<p>  1. বেসলাইন ড্রাফটের বিপদ কী? <em>(উত্তর: প্রতিদিন ধীরে ধীরে রোগ বাড়লে সিস্টেম ভুলবশত তাকেই স্বাভাবিক ভাবতে শুরু করে)</em></p>
+<p>  2. ডুয়াল-লেয়ার কীভাবে জীবন বাঁচায়? <em>(উত্তর: বেসলাইনের পাশাপাশি আন্তর্জাতিক পরম সীমা প্রয়োগ করে তাৎক্ষণিক লাল অ্যালার্ট দেয়)</em></p>
+<p>  3. AHA অনুযায়ী হাইপারটেনশন স্টেজ-২ শুরু হয় কত সিস্টোলিক চাপে? <em>(উত্তর: ১৪০ mmHg)</em></p>
+
+<hr>
+
+<h3 id="sec-69">দিন ৬: কম্পোজিট রিস্ক ইঞ্জিন ও সিনারজিস্টিক ইন্টারঅ্যাকশন</h3>
+<li><strong>কী পড়বেন:</strong> <a href="file:///docs/bn/05_কোড_ও_আর্কিটেকচার_সহজ_ভাষায়.md"><code>05_কোড_ও_আর্কিটেকচার_সহজ_ভাষায়.md</code></a> এর সেকশন ৪ (ঘ)।</li>
+<li><strong>কোন ফাইল খুলবেন:</strong> <a href="file:///apps/api/src/engines/risk.engine.ts"><code>apps/api/src/engines/risk.engine.ts</code></a>।</li>
+<li><strong>কী চালিয়ে দেখবেন:</strong> <a href="file:///apps/web/app/what-if/page.tsx"><code>/what-if</code></a> পেজে গিয়ে ঘুম ও রেডিয়েশন স্লাইডার একসাথে বাড়িয়ে দেখুন রিস্ক কীভাবে গুণিতক হারে বাড়ে।</li>
+<li><strong>নিজেকে যাচাই করুন:</strong></li>
+<p>  1. ইন্টারঅ্যাকশন টার্ম কেন দরকার? <em>(উত্তর: দুটি বিপদ একসাথে হলে সামগ্রিক ক্ষতি তাদের সাধারণ যোগফলের চেয়ে বেশি হয়)</em></p>
+<p>  2. সব ডোমেইন ওয়েটের যোগফল সর্বদা কত হতে হয়? <em>(উত্তর: ১.০০০০)</em></p>
+<p>  3. ৭টি মেডিকেল ডোমেইনের মধ্যে ৩টির নাম বলুন? <em>(উত্তর: কার্ডিও, অটোনমিক/ঘুম, ইমিউন)</em></p>
+
+<hr>
+
+<h3 id="sec-80">দিন ৭: রেডিয়েশন ওয়াচ ও ৬১তম দিনের হিরো স্টোরি</h3>
+<li><strong>কী পড়বেন:</strong> <a href="file:///docs/bn/02_মহাকাশে_কীভাবে_ব্যবহার_করবেন.md"><code>02_মহাকাশে_কীভাবে_ব্যবহার_করবেন.md</code></a> এর সেকশন ৬ (দৃশ্যকল্প খ)।</li>
+<li><strong>কোন ফাইল খুলবেন:</strong> <a href="file:///apps/api/src/engines/radiationWatch.engine.ts"><code>apps/api/src/engines/radiationWatch.engine.ts</code></a>।</li>
+<li><strong>কী চালিয়ে দেখবেন:</strong> ড্যাশবোর্ডে গিয়ে "Day 61" সিলেক্ট করুন এবং <a href="file:///apps/web/app/radiation/page.tsx"><code>/radiation</code></a> পেজটি ঘুরে দেখুন।</li>
+<li><strong>নিজেকে যাচাই করুন:</strong></li>
+<p>  1. SPE কী? <em>(উত্তর: সোলার পার্টিকেল ইভেন্ট বা সূর্যের তীব্র প্রোটন ঝড়)</em></p>
+<p>  2. রেডিয়েশন পরিমাপের এককের নাম কী? <em>(উত্তর: মিলিসিভার্ট বা mSv)</em></p>
+<p>  3. সৌর ঝড় এলে মহাকাশচারীকে অ্যাপ কোথায় যেতে বলে? <em>(উত্তর: ওয়াটার-শিল্ডেড স্টর্ম শেল্টারে)</em></p>
+
+<hr>
+
+<h2 id="sec-91">সপ্তাহ ২: ক্লিনিক্যাল গাইডেন্স, আর্কিটেকচার ও ইন্টারভিউ জয়</h2>
+
+<h3 id="sec-93">দিন ৮: ক্লিনিক্যাল ডিসিশন-ট্রি ও গাইডেন্স উইজার্ড</h3>
+<li><strong>কী পড়বেন:</strong> <a href="file:///docs/bn/03_ফিচার_গাইড.md"><code>03_ফিচার_গাইড.md</code></a> এর ১০ নম্বর ফিচার।</li>
+<li><strong>কোন ফাইল খুলবেন:</strong> <a href="file:///apps/web/components/guidance/TreatmentWizard.tsx"><code>apps/web/components/guidance/TreatmentWizard.tsx</code></a>।</li>
+<li><strong>কী চালিয়ে দেখবেন:</strong> <a href="file:///apps/web/app/guidance/page.tsx"><code>/guidance</code></a> পেজে গিয়ে একটি ডায়াগনসিস সম্পন্ন করে প্রেসক্রিপশন দেখুন।</li>
+<li><strong>নিজেকে যাচাই করুন:</strong></li>
+<p>  1. গাইডেন্স উইজার্ডের ৪টি এসকেলেশন টিয়ার কী কী? <em>(উত্তর: Self-Manage, Monitor, Contact Surgeon, Emergency)</em></p>
+<p>  2. নন-ডাক্তার ক্রুদের জন্য কেন ডিসিশন-ট্রি আদর্শ? <em>(উত্তর: সহজ হ্যাঁ/না প্রশ্নের মাধ্যমে বিভ্রান্তি ছাড়া চিকিৎসা দেয়)</em></p>
+<p>  3. টিয়ার ৪ এর সময় মহাকাশচারীর প্রধান কাজ কী? <em>(উত্তর: ক্রুমেটদের সতর্ক করে জরুরি লাইফ-সাপোর্ট প্রটোকল নেওয়া)</em></p>
+
+<hr>
+
+<h3 id="sec-104">দিন ৯: কাউন্টারমেজার ও লার্ন লুপ ("Did it work?")</h3>
+<li><strong>কী পড়বেন:</strong> <a href="file:///docs/bn/03_ফিচার_গাইড.md"><code>03_ফিচার_গাইড.md</code></a> এর ৭ নম্বর ফিচার।</li>
+<li><strong>কোন ফাইল খুলবেন:</strong> <a href="file:///apps/api/src/engines/learnLoop.engine.ts"><code>apps/api/src/engines/learnLoop.engine.ts</code></a>।</li>
+<li><strong>কী চালিয়ে দেখবেন:</strong> ড্যাশবোর্ডে মিশন ডে ৬৫ তে গিয়ে হিস্ট্রি কার্ডে সবুজ <strong>PROMISING</strong> ব্যাজটি দেখুন।</li>
+<li><strong>নিজেকে যাচাই করুন:</strong></li>
+<p>  1. লার্ন লুপের মূল কাজ কী? <em>(উত্তর: চিকিৎসা নেওয়ার পর মহাকাশচারীর স্বাস্থ্যের উন্নতি হয়েছে কি না তা মূল্যায়ন করা)</em></p>
+<p>  2. লার্ন লুপের ৩টি ফলাফল স্ট্যাটাস কী কী? <em>(উত্তর: PROMISING, INCONCLUSIVE, INEFFECTIVE)</em></p>
+<p>  3. $\Delta Z$ কীভাবে হিসাব করা হয়? <em>(উত্তর: চিকিৎসার আগের ৩ দিনের গড় বিচ্যুতি থেকে পরের ৩ দিনের গড় বিচ্যুতির পরিবর্তন)</em></p>
+
+<hr>
+
+<h3 id="sec-115">দিন ১০: পাঁচটি মহাকাশ পরিবেশ মোড (Environment Engine)</h3>
+<li><strong>কী পড়বেন:</strong> <a href="file:///docs/bn/03_ফিচার_গাইড.md"><code>03_ফিচার_গাইড.md</code></a> এর ১১ নম্বর ফিচার।</li>
+<li><strong>কোন ফাইল খুলবেন:</strong> <a href="file:///apps/api/src/engines/environment.engine.ts"><code>apps/api/src/engines/environment.engine.ts</code></a>।</li>
+<li><strong>কী চালিয়ে দেখবেন:</strong> টপবারের ডানদিকের পিল ক্লিক করে "Mars Surface Base" সিলেক্ট করুন এবং গ্র্যাভিটি $0.38\text{ g}$ দেখুন।</li>
+<li><strong>নিজেকে যাচাই করুন:</strong></li>
+<p>  1. চাঁদের অভিকর্ষ পৃথিবীর তুলনায় কত? <em>(উত্তর: প্রায় এক-ষষ্ঠমাংশ বা $0.16\text{ g}$)</em></p>
+<p>  2. মঙ্গলের পৃষ্ঠে অভিকর্ষ কত? <em>(উত্তর: $0.38\text{ g}$)</em></p>
+<p>  3. মার্স বেস মোডে গেলে কোন কোন রিস্কের গুরুত্ব বাড়ে? <em>(উত্তর: একাকীত্ব ও দীর্ঘমেয়াদী হাড়ের ক্ষয়)</em></p>
+
+<hr>
+
+<h3 id="sec-126">দিন ১১: অফলাইন-ফার্স্ট, ইনডেক্সড-ডিবি ও ডিটিএন সিঙ্ক</h3>
+<li><strong>কী পড়বেন:</strong> <a href="file:///docs/bn/02_মহাকাশে_কীভাবে_ব্যবহার_করবেন.md"><code>02_মহাকাশে_কীভাবে_ব্যবহার_করবেন.md</code></a> এর সেকশন ৫।</li>
+<li><strong>কোন ফাইল খুলবেন:</strong> <a href="file:///apps/web/lib/indexeddb.ts"><code>apps/web/lib/indexeddb.ts</code></a>।</li>
+<li><strong>কী চালিয়ে দেখবেন:</strong> ল্যাপটপের ওয়াইফাই বন্ধ করে ব্রাউজারে রিফ্রেশ দিন এবং একটি চেকলিস্ট সেভ করে দেখুন অফলাইনে কাজ করছে।</li>
+<li><strong>নিজেকে যাচাই করুন:</strong></li>
+<p>  1. অফলাইন-ফার্স্ট কেন মহাকাশের জন্য বাধ্যতামূলক? <em>(উত্তর: ডিপ-স্পেসে কোনো ওয়াইফাই বা ইন্টারনেট থাকে না)</em></p>
+<p>  2. ব্রাউজারে অফলাইনে ডেটা কোথায় জমা থাকে? <em>(উত্তর: IndexedDB মেমরিতে)</em></p>
+<p>  3. DTN এর পূর্ণরূপ কী? <em>(উত্তর: Delay-Tolerant Networking)</em></p>
+
+<hr>
+
+<h3 id="sec-137">দিন ১২: ডেইলি চেকলিস্ট, আল্ট্রাসাউন্ড স্ক্যানার ও গেমিফিকেশন</h3>
+<li><strong>কী পড়বেন:</strong> <a href="file:///docs/bn/03_ফিচার_গাইড.md"><code>03_ফিচার_গাইড.md</code></a> এর ১২ ও ১৩ নম্বর ফিচার।</li>
+<li><strong>কোন ফাইল খুলবেন:</strong> <a href="file:///apps/web/components/routine/ImageCaptureModal.tsx"><code>apps/web/components/routine/ImageCaptureModal.tsx</code></a>।</li>
+<li><strong>কী চালিয়ে দেখবেন:</strong> <a href="file:///apps/web/app/routine/page.tsx"><code>/routine</code></a> পেজে গিয়ে আল্ট্রাসাউন্ড স্ক্যানারে দাগ কেটে সেভ করুন এবং <a href="file:///apps/web/app/progress/page.tsx"><code>/progress</code></a> এ গিয়ে আপনার এক্সপি ও ব্যাজ দেখুন।</li>
+<li><strong>নিজেকে যাচাই করুন:</strong></li>
+<p>  1. মহাকাশে আল্ট্রাসাউন্ড দিয়ে কী দেখা হয়? <em>(উত্তর: জুগুলার ভেইনের ফ্লুইড ও অপটিক নার্ভের রেটিনা)</em></p>
+<p>  2. অতিরিক্ত ক্লান্ত থাকলে গেমিফিকেশন ইঞ্জিন কেন এক্সপি দেওয়া বন্ধ রাখে? <em>(উত্তর: যাতে মহাকাশচারী পয়েন্টের লোভে অসুস্থ শরীরে অতিরিক্ত ব্যায়াম না করেন)</em></p>
+<p>  3. অ্যাপে সকালের রুটিন শেষ করতে আনুমানিক কতক্ষণ লাগে? <em>(উত্তর: ১০ থেকে ১৫ মিনিট)</em></p>
+
+<hr>
+
+<h3 id="sec-148">দিন ১৩: কোড আর্কিটেকচার ও ডেটার সম্পূর্ণ যাত্রা</h3>
+<li><strong>কী পড়বেন:</strong> <a href="file:///docs/bn/05_কোড_ও_আর্কিটেকচার_সহজ_ভাষায়.md"><code>05_কোড_ও_আর্কিটেকচার_সহজ_ভাষায়.md</code></a> এর সেকশন ১, ২ ও ৩।</li>
+<li><strong>কোন ফাইল খুলবেন:</strong> <a href="file:///apps/api/src/server.ts"><code>apps/api/src/server.ts</code></a> এবং <a href="file:///apps/web/app/today/page.tsx"><code>apps/web/app/today/page.tsx</code></a>।</li>
+<li><strong>কী চালিয়ে দেখবেন:</strong> টার্মিনালে টেস্ট চালান: <code>npm run test -w apps/api</code> (৩৪টি টেস্ট পাস হতে দেখুন)।</li>
+<li><strong>নিজেকে যাচাই করুন:</strong></li>
+<p>  1. ফ্রন্টএন্ড এবং ব্যাকএন্ড কোন কোন ফ্রেমে তৈরি? <em>(উত্তর: Next.js 14 এবং Express/Node.js)</em></p>
+<p>  2. ডাটাবেজ ফাইলের নাম কী? <em>(উত্তর: <code>dev.db</code> - SQLite)</em></p>
+<p>  3. আমাদের টেস্ট ফাইলে মোট কয়টি টেস্ট আছে এবং স্ট্যাটাস কী? <em>(উত্তর: ৩৪টি টেস্ট, ৩৪টিই সফল)</em></p>
+
+<hr>
+
+<h3 id="sec-159">দিন ১৪: ৩ মিনিটের লাইভ ডেমো ও ইন্টারভিউ জয়!</h3>
+<li><strong>কী পড়বেন:</strong> <a href="file:///docs/bn/07_ইন্টারভিউ_প্রস্তুতি.md"><code>07_ইন্টারভিউ_প্রস্তুতি.md</code></a> সম্পূর্ণ ফাইলটি।</li>
+<li><strong>কোন ফাইল খুলবেন:</strong> <a href="file:///docs/bn/07_ইন্টারভিউ_প্রস্তুতি.md"><code>docs/bn/07_ইন্টারভিউ_প্রস্তুতি.md</code></a> এর সেকশন ৪।</li>
+<li><strong>কী চালিয়ে দেখবেন:</strong> আয়নার সামনে দাঁড়িয়ে বা ফোনে ভিডিও অন করে ৩ মিনিটের লাইভ ডেমো স্ক্রিপ্টটি হুবহু রিহার্সাল দিন।</li>
+<li><strong>নিজেকে যাচাই করুন:</strong></li>
+<p>  1. বিচারক যদি জিজ্ঞেস করেন "কোড কি নিজে লিখেছেন নাকি এআই ব্যবহার করেছেন?", আপনার উত্তর কী হবে? <em>(উত্তর: "আমি এআই টুলের সাহায্যে দ্রুত আর্কিটেকচার দাঁড় করিয়েছি, তবে বায়োমেডিক্যাল অ্যালগরিদম, ডুয়াল-লেয়ার সেফটি ও সিস্টেম ডিজাইন আমার নিজের তৈরি এবং সম্পূর্ণ টেস্ট করা")</em></p>
+<p>  2. ইন্টারভিউ চলাকালীন ল্যাপটপ ক্র্যাশ করলে আপনার বিকল্প প্ল্যান কী? <em>(উত্তর: শান্ত থেকে স্ক্রিনশট ও আর্কিটেকচার ডসিয়ার বের করা)</em></p>
+<p>  3. আপনি কি যেকোনো প্রশ্নের উত্তর দিতে মানসিকভাবে প্রস্তুত? <em>(উত্তর: হ্যাঁ, ১০০% আত্মবিশ্বাসী!)</em></p>
+
+</section>
+<div class="page-break"></div>
+
+  </div>
+
+  <button class="print-button" onclick="window.print()">
+    🖨️ PDF / প্রিন্ট করুন
+  </button>
+
+</body>
+</html>
