@@ -29,7 +29,7 @@ exports.INDICATOR_CATALOG = [
             feasibilityNotes: 'Standard medical kit on ISS and Orion vehicles.',
         },
         referenceRange: { min: 90, max: 120, nominalText: '90 - 120 mmHg' },
-        warningRange: { low: 85, high: 140, warningText: '< 90 mmHg (hypotension) or 130 - 139 mmHg (Stage 1)' },
+        warningRange: { low: 89, high: 130, warningText: '< 90 mmHg (hypotension) or 130 - 139 mmHg (Stage 1)' },
         criticalRange: { low: 75, high: 180, criticalText: '< 80 mmHg (shock risk) or ≥ 180 mmHg (hypertensive crisis)' },
         escalation: {
             selfManageGuidance: 'Rest in quarters, drink 500 mL electrolyte solution, avoid intense workout for 2 hours.',
@@ -62,7 +62,7 @@ exports.INDICATOR_CATALOG = [
             feasibilityNotes: 'Standard operational equipment.',
         },
         referenceRange: { min: 60, max: 80, nominalText: '60 - 80 mmHg' },
-        warningRange: { low: 55, high: 90, warningText: '< 60 mmHg or 80 - 89 mmHg' },
+        warningRange: { low: 59, high: 80, warningText: '< 60 mmHg or 80 - 89 mmHg (Stage 1)' },
         criticalRange: { low: 45, high: 120, criticalText: '< 50 mmHg or ≥ 120 mmHg (Hypertensive Crisis)' },
         escalation: {
             selfManageGuidance: 'Maintain hydration and nominal fluid intake.',

@@ -21,9 +21,16 @@ export class LearnLoopEngine {
     metrics: HealthMetric[],
     targetMetric: keyof HealthMetric = 'sleepHours'
   ): EvaluationOutcomeResult {
-    const startedDay = countermeasure.startedAt
-      ? new Date(countermeasure.startedAt).getUTCDate()
-      : 62;
+    let startedDay = 63;
+    if ((countermeasure as any).startedMissionDay) {
+      startedDay = (countermeasure as any).startedMissionDay;
+    } else if (countermeasure.startedAt) {
+      const diffMs =
+        new Date(countermeasure.startedAt).getTime() -
+        new Date('2026-08-01T00:00:00Z').getTime();
+      const calcDay = Math.round(diffMs / (24 * 3600 * 1000)) + 1;
+      startedDay = calcDay > 0 && calcDay <= 365 ? calcDay : 63;
+    }
 
     // Baseline calculation for target metric
     const stats = BaselineEngine.evaluateMetricBaseline(metrics, targetMetric, true);
