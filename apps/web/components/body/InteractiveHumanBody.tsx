@@ -563,3 +563,4 @@ export const InteractiveHumanBody: React.FC<InteractiveHumanBodyProps> = ({
     </div>
   );
 };
+

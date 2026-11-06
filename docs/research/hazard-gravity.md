@@ -26,3 +26,4 @@ Exploration missions encounter multiple distinct gravitational regimes:
 - **Moon ($0.16\text{g}$):** Partial loading offset: $120\text{ min/day}$ exercise requirement.
 - **Mars ($0.38\text{g}$):** Partial loading offset: $90-100\text{ min/day}$ exercise requirement.
 - **Pre-entry Fluid Loading:** Ingestion of isotonic electrolyte solutions ($1\text{ liter}$ water with $8\text{ g}$ sodium chloride) $2\text{ hours}$ before gravitational transition to restore intravascular blood volume.
+

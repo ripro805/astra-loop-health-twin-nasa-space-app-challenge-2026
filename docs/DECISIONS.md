@@ -34,3 +34,4 @@ This document records all architectural, clinical, and technical decisions made 
 ### ADR-004: Offline-First Image Capture for Telemedicine
 - **Context:** Astronauts need visual documentation tools (e.g. skin rash, eye ultrasound, conjunctival redness, face swelling from cephalad fluid shift), but automated diagnostic AI without clinical oversight violates medical safety.
 - **Decision:** The camera and image capture system functions strictly as a telemedicine acquisition and packaging pipeline. Captured ultrasound/camera imagery is encrypted and stored locally in IndexedDB, annotated with physiological context, queued for ground transmission, and rendered on the printable Flight Surgeon Report without automated diagnostic claims.
+

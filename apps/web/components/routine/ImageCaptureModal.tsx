@@ -251,3 +251,4 @@ export const ImageCaptureModal: React.FC<ImageCaptureModalProps> = ({ isOpen, on
     </div>
   );
 };
+

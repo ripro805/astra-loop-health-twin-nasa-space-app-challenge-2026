@@ -13,3 +13,4 @@ As a spacecraft ventures towards Mars, the one-way speed-of-light communication 
 - **Offline-First & Delay-Tolerant Networking (DTN):** The system must execute all baseline evaluations, risk computations, and treatment trees completely locally on spacecraft edge nodes.
 - **Self-Contained Autonomous Clinical Decision Trees:** When acute issues arise (e.g. fever, acute hypertensive episode, radiation alert), the software must provide immediate, step-by-step, self-executable guidance without awaiting terrestrial packets.
 - **Asynchronous Telemedicine Reporting:** Once connection is established, consolidated Flight Surgeon Reports and telemetry batches are transmitted via DTN queue bundles.
+

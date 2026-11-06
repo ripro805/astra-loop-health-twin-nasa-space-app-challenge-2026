@@ -10,3 +10,4 @@ router.get('/hazards/:id', KnowledgeController.getHazardById);
 router.get('/reference-stats', KnowledgeController.getReferenceStats);
 
 export default router;
+

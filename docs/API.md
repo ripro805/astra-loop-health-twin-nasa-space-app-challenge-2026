@@ -203,3 +203,4 @@ Generates a printable clinical dossier formatted for ground flight surgeons.
 
 ### `POST /api/sync`
 Flushes queued offline actions (`CHECK_IN`, `ROUTINE_TASK_COMPLETE`, `IMAGE_CAPTURE`, `ESCALATION_ACK`) buffered during communication blackouts.
+

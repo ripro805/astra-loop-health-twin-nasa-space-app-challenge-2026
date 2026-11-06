@@ -26,3 +26,4 @@ foreach ($page in $pages) {
 }
 
 Write-Host "Screenshots captured successfully."
+

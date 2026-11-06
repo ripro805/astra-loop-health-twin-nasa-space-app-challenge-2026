@@ -202,3 +202,4 @@ export const HRP_HAZARDS: Record<HRPHazard, HRPHazardInfo> = {
     keyReference: 'NASA-STD-3001 Vol 2 Habitability Standards & SMAC Guidelines',
   },
 };
+

@@ -7,3 +7,4 @@ router.get('/:id/body', BodyController.getBodyStatus);
 router.get('/demo/body', BodyController.getBodyStatus);
 
 export default router;
+

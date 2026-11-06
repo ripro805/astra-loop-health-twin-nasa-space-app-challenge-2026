@@ -273,3 +273,4 @@ export const TreatmentWizard: React.FC<TreatmentWizardProps> = ({ initialTrees }
     </div>
   );
 };
+

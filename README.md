@@ -146,3 +146,4 @@ ASTRA-LOOP is a decision-support, research, and educational demonstration tool d
 
 ## 📄 License
 MIT License. Developed for the NASA International Space Apps Challenge 2026.
+

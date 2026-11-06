@@ -6,3 +6,4 @@ const router = Router();
 router.get('/current', SpaceWeatherController.getCurrent);
 
 export default router;
+

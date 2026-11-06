@@ -22,3 +22,4 @@ Space radiation consists of three distinct ionizing radiation components:
 - **Warning Threshold:** $\ge 0.20\text{ mSv/h}$ (triggering 72-hour multi-sensor watch window).
 - **Critical SPE Threshold:** $\ge 1.0\text{ mSv/h}$ (triggering immediate storm shelter protocol).
 - **Countermeasures:** Move to radiation-shielded habitat storm shelter (surrounded by water reservoirs and polyethylene shielding); reschedule extravehicular activities (EVA); monitor peripheral blood counts and clinical symptoms; administer targeted antioxidant and supportive hydration regimens.
+

@@ -20,3 +20,4 @@ In long-duration spaceflight (e.g. Mars transit, Lunar Gateway), a small crew (4
 - **Warning Thresholds:** PVT latency $> 280\text{ ms}$ ($+50\text{ ms}$ over baseline); mood score $< 4/10$; sustained stress $> 7/10$ for $\ge 3$ consecutive days.
 - **Critical Threshold:** PVT latency $> 350\text{ ms}$; severe withdrawal; sleep $< 4.5\text{ hours}$ for 2 consecutive nights.
 - **Countermeasures:** Dynamic circadian spectrum lighting (high-intensity $480\text{ nm}$ blue-enriched morning wake light; warm red-shifted pre-sleep light); structured sensory quiet recovery windows; family voice/video mail packages; recreational media and mindfulness protocols; workload pacing adjustment.
+

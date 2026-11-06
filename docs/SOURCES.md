@@ -87,3 +87,4 @@ The clinical thresholds, indicator definitions, operational ranges, and treatmen
 25. **NASA Space Flight Resource: Crew Health and Performance Exploration Dietary Supplementation Guidelines (2022)** — *NASA Nutritional Biochemistry Laboratory.*
     - **URL:** https://www.nasa.gov/johnson/HHP
     - **Application in ASTRA-LOOP:** Microgravity electrolyte balance, hydration score tracking, and fluid shift compensation.
+

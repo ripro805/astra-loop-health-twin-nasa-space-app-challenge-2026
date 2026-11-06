@@ -60,3 +60,4 @@ $$R_d = \text{round}\left(\frac{\text{clamp}(Z_{\text{effective}}, -3, 3) + 3}{6
 2. **Cabin $\text{CO}_2 \times$ Sleep Debt Interaction:**
    $$\text{NormCO}_2 = \min\left(1.0, \max\left(0, \frac{\text{CO}_2\text{ ppm} - 1800}{2200}\right)\right)$$
    $$I_{\text{co2}\times\text{sleep}} = \text{round}(\text{NormCO}_2 \times \text{NormSleepDebt} \times 100)$$
+

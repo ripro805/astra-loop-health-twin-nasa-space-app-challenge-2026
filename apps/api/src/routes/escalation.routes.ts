@@ -8,3 +8,4 @@ router.get('/demo/escalation', EscalationController.getEscalationStatus);
 router.post('/events/:id/acknowledge', EscalationController.acknowledgeEvent);
 
 export default router;
+

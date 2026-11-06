@@ -17,3 +17,4 @@ Spacecraft cabins are sealed, recirculated artificial ecosystems. Without natura
 - **Acoustic Sleep Environment:** Maximum continuous sound level $< 45\text{ dBA}$ in crew quarters (NC-40).
 - **Cabin Humidity:** Nominal $35 - 60\%$.
 - **Cabin Temperature:** Nominal $20 - 24^\circ\text{C}$.
+

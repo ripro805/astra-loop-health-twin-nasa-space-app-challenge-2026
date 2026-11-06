@@ -8,3 +8,4 @@ router.post('/:id/environment', EnvironmentController.switchAstronautEnvironment
 router.post('/demo/environment', EnvironmentController.switchAstronautEnvironment);
 
 export default router;
+

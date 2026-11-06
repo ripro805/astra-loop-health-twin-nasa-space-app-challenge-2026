@@ -297,3 +297,4 @@ export const DynamicTimeSeriesChart: React.FC = () => {
     </div>
   );
 };
+

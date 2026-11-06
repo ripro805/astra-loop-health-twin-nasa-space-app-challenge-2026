@@ -7,3 +7,4 @@ router.get('/:id/gamification', GamificationController.getProfile);
 router.get('/demo/gamification', GamificationController.getProfile);
 
 export default router;
+

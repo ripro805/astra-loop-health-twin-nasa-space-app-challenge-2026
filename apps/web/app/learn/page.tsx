@@ -78,3 +78,4 @@ export default function LearnPage() {
     </AppShell>
   );
 }
+

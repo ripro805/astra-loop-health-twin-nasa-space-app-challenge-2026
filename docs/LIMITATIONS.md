@@ -14,3 +14,4 @@
 
 ### 3. Escalation Protocol
 When the system identifies a `CRITICAL` absolute metric or enters an `EMERGENCY` tier, autonomous protocols guide the astronaut to immediate self-contained stabilization steps while simultaneously queuing a high-priority packet for Ground Flight Surgeon review via Delay-Tolerant Networking.
+

@@ -98,3 +98,4 @@ export const SPACEFLIGHT_REFERENCE_STATS: Record<string, SpaceflightMetricNorms>
     citation: 'NCRP Report 153 & NASA Space Radiation Program',
   },
 };
+
