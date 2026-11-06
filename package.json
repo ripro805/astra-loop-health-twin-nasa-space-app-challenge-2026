@@ -8,6 +8,7 @@
     "apps/*"
   ],
   "scripts": {
+    "setup": "npm install && npm run build --workspace=packages/shared && npm run prisma:push --workspace=apps/api && npm run seed --workspace=apps/api",
     "dev": "npm run dev:api & npm run dev:web",
     "dev:web": "npm run dev --workspace=apps/web",
     "dev:api": "npm run dev --workspace=apps/api",
@@ -15,6 +16,7 @@
     "build:web": "npm run build --workspace=apps/web",
     "build:api": "npm run build --workspace=apps/api",
     "seed": "npm run seed --workspace=apps/api",
+    "test": "npm run test --workspace=apps/api",
     "lint": "npm run lint --workspaces"
   },
   "keywords": [

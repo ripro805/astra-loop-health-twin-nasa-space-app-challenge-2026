@@ -70,4 +70,59 @@ export class DemoController {
       next(err);
     }
   }
+
+  public static async spikeCO2(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { ppm = 3400 } = req.body;
+      const astronaut = await AstronautService.getPrimaryAstronaut();
+      const result = await DemoService.spikeCO2(astronaut.id, Number(ppm));
+      res.json({ success: true, ...result });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  public static async raiseBP(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { systolic = 145, diastolic = 92 } = req.body;
+      const astronaut = await AstronautService.getPrimaryAstronaut();
+      const result = await DemoService.raiseBP(astronaut.id, Number(systolic), Number(diastolic));
+      res.json({ success: true, ...result });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  public static async triggerGlucoseExcursion(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { glucose = 165 } = req.body;
+      const astronaut = await AstronautService.getPrimaryAstronaut();
+      const result = await DemoService.triggerGlucoseExcursion(astronaut.id, Number(glucose));
+      res.json({ success: true, ...result });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  public static async triggerFeverSigns(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { temp = 38.2 } = req.body;
+      const astronaut = await AstronautService.getPrimaryAstronaut();
+      const result = await DemoService.triggerFeverSigns(astronaut.id, Number(temp));
+      res.json({ success: true, ...result });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  public static async switchEnvironment(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { environmentType } = req.body;
+      const astronaut = await AstronautService.getPrimaryAstronaut();
+      const result = await DemoService.switchEnvironment(astronaut.id, environmentType);
+      res.json({ success: true, ...result });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
