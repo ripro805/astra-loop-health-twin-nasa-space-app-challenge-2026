@@ -1,99 +1,90 @@
-ASTRA-LOOP — Detailed Presentation Video Script
+# ASTRA-LOOP v2 — NASA Space Apps Challenge 2026 Presentation Script
 
-[Opening visual: dark space-themed background, NASA-inspired UI, title "ASTRA-LOOP" with subtitle "Closed-Loop Astronaut Health Twin"]
+---
 
-Narrator:
-"In long-duration deep-space missions, astronauts are not only dealing with isolation and distance from Earth—they are dealing with a constantly changing body, a changing environment, and a growing risk of health deterioration. Traditional monitoring tools often give fragmented updates. They tell us what happened, but not what is likely to happen next. That gap is exactly what ASTRA-LOOP was built to solve."
+## Part 1: 60-Second Elevator Pitch (Lightning Video / Demo Reel)
 
-[Scene: mission dashboard with health metrics, z-scores, risk indicators, radiation watch, mission day timeline]
+[00:00 - 00:08] Visual: Deep space transit habitat. Earth shrinking in the rear camera.
+Speaker (confident, urgent):
+"On a 3-year mission to Mars, Earth is a 14-minute speed-of-light radio delay away. If an astronaut’s blood pressure spikes or cabin CO2 saturates, a flight surgeon on Earth cannot intervene in real time. The crew must assess their own health and act immediately."
 
-Narrator:
-"ASTRA-LOOP is a closed-loop astronaut health twin. It collects mission health signals, compares them against each astronaut’s own history, predicts potential risks, suggests actions, and helps evaluate whether those actions actually improved the situation."
+[00:08 - 00:20] Visual: Clickable Human Body interface (`/body`). Glowing heart and optic nerves.
+Speaker:
+"Welcome to ASTRA-LOOP v2. We built an autonomous closed-loop bio-twin. At its heart is an interactive human body interface that connects 12 clinical indicators directly to NASA’s 5 spaceflight hazards—from microgravity fluid shifts to radiation-induced DNA stress."
 
-[Scene: animated loop graphic: SENSE → UNDERSTAND → PREDICT → ACT → LEARN]
+[00:20 - 00:35] Visual: Today dashboard with 7 domains, then jumping to Treatment Wizard (`/guidance`).
+Speaker:
+"Unlike naive statistical tools, ASTRA-LOOP pairs personal 14-day baselines with absolute NASA-STD-3001 clinical safety envelopes. When a threshold breaches, our interactive clinical decision wizard guides the crew step-by-step through immediate autonomous countermeasures."
 
-Narrator:
-"The system follows a continuous five-step loop: sense what is happening, understand the change, predict the likely future state, act with the right countermeasure, and learn from the outcome. This makes the platform more than a dashboard—it becomes a decision-support tool for mission operations."
+[00:35 - 00:48] Visual: Learn Loop before/after ΔZ recovery + Gamification badges (`/progress`).
+Speaker:
+"And the loop closes with our Learn Loop engine: 48 hours later, it verifies whether the countermeasure actually restored homeostasis. With daily routine checklists, ultrasound image capture, and gamified adherence streaks, astronauts stay vigilant and mission-ready."
 
-[Scene: dashboard showing astronaut vitals, sleep, HRV, reaction time, voice cadence, radiation exposure]
+[00:48 - 01:00] Visual: Flight Surgeon Consolidated Report (`/report`).
+Speaker:
+"ASTRA-LOOP: Sense. Understand. Predict. Act. Learn. Keeping deep space crews alive and autonomous all the way to Mars."
 
-Narrator:
-"At the center of the project is the astronaut health twin. It monitors multiple data streams such as heart and cardiovascular health, sleep behavior, activity, voice and behavioral patterns, and radiation exposure. Instead of comparing the astronaut to a generic average, the system compares them to their own personal baseline over recent days and weeks. That means the model is more accurate, more human-centered, and more mission-relevant."
+---
 
-[Scene: highlight risk score and anomaly chart]
+## Part 2: 5-Minute Comprehensive Judge Walk-Through
 
-Narrator:
-"When one metric starts drifting, ASTRA-LOOP identifies the deviation in context. It evaluates whether changes are unusual, whether the risk is increasing, and which aspects of the astronaut’s physiology are most affected. This gives mission teams a clearer understanding of whether risk is rising slowly, suddenly, or only under a specific condition."
+### Scene 1: Problem Definition & Operational Context (0:00 – 0:45)
+- **Visual:** Landing Page (`/`) with the 5 NASA HRP Hazards mapped across deep space transit, Moon base, and Mars surface.
+- **Narrator:**
+  "Long-duration exploration missions fundamentally alter human physiology. Under microgravity, fluids shift toward the head, elevating intracranial pressure and causing SANS vision deterioration. Cosmic radiation and solar particle events damage bone marrow and immune cells. Prolonged isolation in hostile closed environments degrades sleep, mood, and cognitive latency.
+  NASA's Human Research Program explicitly states: astronauts must be equipped to assess their own health. But astronauts are engineers and pilots, not necessarily flight surgeons. They need an intelligent, visually compelling, explainable system that translates raw sensor streams into actionable clinical decisions without fabricating data."
 
-[Scene: radiation monitor and alert card]
+### Scene 2: The Interactive Clickable Human Body (0:45 – 1:30)
+- **Visual:** Navigate to `/body`. Show hover effects, color-coded regions, and the Hazard Lens toggle.
+- **Narrator:**
+  "We address the challenge's request for a visual, interactive human body figure. Here in `/body`, our vector anatomical twin models 9 organ systems. 
+  Notice the color codes: Green indicates nominal stability; Amber reflects monitoring; Red flags clinical attention. 
+  When we toggle the **Hazard Lens**, the body dynamically re-colors to highlight which organs are under siege from specific hazards: Gravity unloading highlights cardiovascular baroreceptors and cancellous bone; Hostile Environment highlights respiratory ventilation and brain CO2; Radiation highlights immune lymphocytes and the lens.
+  Clicking any organ system—like the Cardiovascular system—opens a detailed clinical dossier: resting heart rate, arterial blood pressure, biological mechanism of action, recommended countermeasures, and NASA-STD-3001 evidence citations."
 
-Narrator:
-"The project also includes a radiation watch module. During deep-space exploration, radiation exposure can affect sleep, cognition, recovery, and emotional stability. ASTRA-LOOP tracks these changes over a 72-hour period and highlights patterns that could indicate a delayed impact after a solar event or a dose spike."
+### Scene 3: Mission Control Hero Dashboard & Dual-Layer Safety (1:30 – 2:30)
+- **Visual:** Navigate to `/today`. Demonstrate persistent Escalation Banner and 7 domain cards.
+- **Narrator:**
+  "On the `/today` dashboard, we monitor 7 physiological domains: Cardio, Sleep, Mind, Muscle-Bone, Immune, Metabolic, and Environment.
+  Here lies our key medical innovation: **Dual-Layer Safety Resolution**. 
+  Most predictive AI uses purely personal baselines. But if an astronaut’s baseline is already abnormal—for example, chronic hypercapnia or creeping hypertension—a baseline-only model would falsely show 'Green'.
+  ASTRA-LOOP pairs 14-day flight baseline EWMA Z-scores with **absolute clinical safety floors and ceilings** from NASA-STD-3001. If systolic blood pressure exceeds 140 mmHg or cabin CO2 crosses 3,000 ppm, absolute clinical safety immediately overrides personal baselines, triggering our prominent persistent Escalation Banner."
 
-[Scene: countermeasures table with recommended actions and rankings]
+### Scene 4: Daily Routine Checklist & Ultrasound Scanner (2:30 – 3:15)
+- **Visual:** Navigate to `/routine`. Complete a blood pressure task via quick entry, then open Camera/Ultrasound modal.
+- **Narrator:**
+  "NASA asked: How do we prompt astronauts to assess their health as part of daily routine?
+  In `/routine`, tasks are structured into Morning, Afternoon, Evening, and Bedtime buckets. 
+  Crew members enter readings with automated clinical safety checks. 
+  Furthermore, we support camera and ultrasound image capture directly in the browser—allowing astronauts to record optic nerve sheath diameter (ONSD) scans or facial fatigue metrics, which are buffered in offline Delay-Tolerant Networking storage and transmitted to ground when link budget permits."
 
-Narrator:
-"One of the most important features is the countermeasure engine. When the system detects a rising risk, it can recommend actions such as sleep phase adjustment, workload modulation, hydration guidance, behavioral changes, or recovery support. Each option is ranked based on its expected effectiveness, urgency, and estimated benefit. This helps mission operators move from passive monitoring to informed intervention."
+### Scene 5: Clinical Decision Trees & Learn Loop Verification (3:15 – 4:15)
+- **Visual:** Navigate to `/guidance`, step through a Sleep Loss / Hypercapnia decision tree. Then show `/progress` gamification.
+- **Narrator:**
+  "When an anomaly is flagged, crew members don't have to guess what to do. The **Treatment Wizard** (`/guidance`) provides interactive decision trees for acute in-flight scenarios. Astronauts answer branching diagnostic questions and receive clear, tiered action protocols with exact countermeasure prescriptions and ground flight surgeon transmission notes.
+  In `/progress`, we incorporate gamification with adherence streaks, level progression, and mission badges like 'Bone Guardian' and 'Steady Heart'—with safety caps ensuring astronauts are never rewarded for physical over-exertion.
+  And in `/report`, a single click generates a consolidated flight surgeon medical dossier formatted for Earth medical operations."
 
-[Scene: before/after comparison and learning panel]
+### Scene 6: Conclusion (4:15 – 5:00)
+- **Visual:** Demo modal switching from Spacecraft (0g) to Mars Base (0.38g).
+- **Narrator:**
+  "With multi-environment support across transit spacecraft, lunar stations, and Martian bases, ASTRA-LOOP provides a medically honest, fully explainable, offline-first health twin for humanity’s next giant leap. Thank you."
 
-Narrator:
-"After a countermeasure is applied, the system does not stop there. It evaluates the response and asks the question: Did the intervention help? By comparing the before and after pattern, the platform measures improvements and feeds that insight back into the learning loop. This is a critical part of making decisions more evidence-based over time."
+---
 
-[Scene: what-if simulation panel]
+## Part 3: Challenge Requirements Traceability Matrix
 
-Narrator:
-"The platform also supports what-if analysis. Mission teams can simulate scenarios such as increased radiation exposure, delayed sleep, or reduced recovery time, and immediately see how the astronaut’s projected health status could change. This makes the system useful not only for current emergencies, but also for proactive planning."
-
-[Scene: offline mode indicator and local queue system]
-
-Narrator:
-"In a real space mission, connectivity is unpredictable. ASTRA-LOOP is designed with offline-first behavior in mind. It can store data locally, queue actions, and synchronize when the connection is restored. That ensures continuity and resilience in challenging mission conditions."
-
-[Scene: architecture diagram with web app, API, database, Prisma, Postgres]
-
-Narrator:
-"From a technical perspective, the project combines a modern web front end with a dedicated API layer and a PostgreSQL database. The application is built in a modular structure, making it easier to scale, maintain, and extend. The data layer is modeled around mission health information, risk predictions, and countermeasure tracking, while the front end presents the information in a clean, mission-ready interface."
-
-[Scene: mission control UI with tabs for Today, Twin, Radiation, Countermeasures, Check-in, What Changed]
-
-Narrator:
-"The user experience is centered on operational clarity. Users can view today’s health overview, compare changes in the astronaut’s condition, review radiation risks, assess countermeasures, and examine the health twin forecast. The result is a system that supports both quick decisions and deeper analysis."
-
-[Scene: closing with title and mission impact]
-
-Narrator:
-"ASTRA-LOOP represents a vision for the future of space medicine: a proactive, intelligent health monitoring system that supports astronauts before problems become critical. By combining personal baselines, predictive modeling, operational decision support, and adaptive learning, the project brings us closer to safer and more resilient long-duration exploration missions."
-
-[Final on-screen text: "ASTRA-LOOP | Safer missions through predictive health intelligence"]
-
-Narrator:
-"Thank you."
-
-----------------------------------------
-Detailed shot-by-shot plan for video editing:
-
-1. 0:00–0:15 — Opening title sequence with deep-space visuals and mission branding
-2. 0:15–0:45 — Problem statement: health risks during long-duration missions
-3. 0:45–1:15 — Explain the ASTRA-LOOP loop: sense, understand, predict, act, learn
-4. 1:15–2:00 — Show dashboard metrics and baseline comparison
-5. 2:00–2:45 — Radiation watch and anomaly detection
-6. 2:45–3:30 — Countermeasure recommendations and ranking
-7. 3:30–4:15 — Before/after impact and learning loop
-8. 4:15–5:00 — What-if simulation and offline resilience
-9. 5:00–5:45 — Technical architecture and project stack
-10. 5:45–6:15 — Closing impact statement and final title
-
-----------------------------------------
-Short 60-second version:
-
-"ASTRA-LOOP is a closed-loop astronaut health twin designed for long-duration deep-space missions. It monitors key health signals, compares them to each astronaut’s personal baseline, predicts future risk, recommends countermeasures, and evaluates whether the intervention improved the astronaut’s condition. The system includes radiation monitoring, health trend analysis, what-if simulations, and offline-first support for mission resilience. Built with a modern web front end, API layer, and PostgreSQL database, ASTRA-LOOP helps turn complex biomedical data into actionable decision support for safer space exploration."
-
-----------------------------------------
-Tips for presentation delivery:
-
-- Use a calm, confident voice with a slightly futuristic tone.
-- Keep visuals clean and technical, with space-themed color accents.
-- Emphasize the value of proactive healthcare and mission safety.
-- Include product screenshots from the dashboard to make the pitch more tangible.
-- If presenting to judges or stakeholders, focus on real-world impact, technical quality, and resilience under mission constraints.
+| NASA Space Apps Challenge Requirement | ASTRA-LOOP v2 Feature / Implementation | Verification Route / Proof |
+| :--- | :--- | :--- |
+| **Which measurements can be performed in space?** | 12 mapped indicators with certified spaceflight device classes (Welch Allyn cuff, fingerstick glucometer, infrared tympanic probe, Butterfly iQ ultrasound). | `/learn` & `packages/shared/src/knowledge/indicators.ts` |
+| **Why is each exam needed?** | Clinical imperatives and aerospace medical significance documented for every indicator. | `/learn` (Question #2) |
+| **How spaceflight hazards affect each indicator?** | Biological mechanisms mapped for all 5 HRP hazards (Radiation, Isolation, Distance, Gravity, Hostile Environment). | `/body` (Hazard Lens) & `/learn` |
+| **When a result needs attention (flight rules)?** | Dual-layer safety engine combining personal baseline Z-score with NASA-STD-3001 absolute clinical limits. | `ThresholdEngine` & `/today` Escalation Banner |
+| **What actions prevent critical conditions?** | Interactive clinical decision trees providing immediate tiered countermeasure protocols. | `/guidance` (Treatment Wizard) |
+| **Clickable human body interface** | Interactive SVG silhouette with 9 clickable organ systems, real-time color coding, and pulsing animations. | `/body` (`InteractiveHumanBody.tsx`) |
+| **Support different environments** | 5 environments: Spacecraft (0g), Station (0g), Rover (0.38g), Moon Base (0.16g), Mars Base (0.38g) with dynamic gravity & comms delay. | `TopBar` Environment Switcher & `EnvironmentEngine` |
+| **Prompt astronauts in daily routine** | Structured daily measurement checklist (Morning, Afternoon, Evening, Bedtime) with overdue penalties. | `/routine` (`RoutineChecklist.tsx`) |
+| **Gamification** | Adherence streaks, sub-quadratic XP leveling, and 5 NASA lore badges with exercise safety caps. | `/progress` (`GamificationDashboard.tsx`) |
+| **Dynamic charts over time** | Multi-axis time-series charts with personal baseline bands ($\pm 1.5$ SD), warning/critical zones, and 7-day forecast cone. | `/twin` & `/radiation` (`recharts`) |
+| **Simple instructions / No medical assumptions** | Step-by-step visual "How to Measure" cards in plain English without assuming medical background. | `/learn` (Step Cards) |
+| **Camera / Ultrasound image input** | Onboard image scanner supporting device camera stream and file upload with offline DTN buffering. | `/routine` (`ImageCaptureModal.tsx`) |
