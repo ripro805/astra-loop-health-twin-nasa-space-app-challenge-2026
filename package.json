@@ -27,5 +27,8 @@
     "nasa-space-apps"
   ],
   "author": "ASTRA-LOOP Engineering Team",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "playwright": "^1.65.0"
+  }
 }
