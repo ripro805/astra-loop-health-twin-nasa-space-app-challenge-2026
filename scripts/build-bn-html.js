@@ -444,3 +444,4 @@ const htmlDoc = `<!DOCTYPE html>
 
 fs.writeFileSync(outFile, htmlDoc, 'utf8');
 console.log('✅ Generated standalone printable HTML guide at: ' + outFile);
+
