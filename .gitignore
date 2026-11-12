@@ -38,3 +38,7 @@ yarn-error.log*
 *.swp
 *.swo
 thumbs.db
+
+# Documents
+*.docx
+*.doc
