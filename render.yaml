@@ -4,7 +4,7 @@ services:
     runtime: node
     plan: free
     region: oregon
-    buildCommand: npm install && npm run build --workspace=packages/shared && cd apps/api && npx prisma generate && npx prisma db push && npm run seed && npx tsc
+    buildCommand: npm install --include=dev && npm run build --workspace=packages/shared && cd apps/api && npx prisma generate && npx prisma db push && npm run seed && npx tsc
     startCommand: cd apps/api && node dist/src/server.js
     envVars:
       - key: NODE_ENV
