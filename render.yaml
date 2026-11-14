@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: astra-loop-api
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: npm install && npm run build --workspace=packages/shared && cd apps/api && npx prisma generate && npx prisma db push && npm run seed && npx tsc
+    startCommand: cd apps/api && node dist/src/server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: DATABASE_URL
+        value: file:./dev.db
