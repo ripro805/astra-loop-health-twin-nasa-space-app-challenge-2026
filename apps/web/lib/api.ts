@@ -24,7 +24,8 @@ import {
   clearQueuedActions,
 } from './indexeddb';
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api';
+const rawApiUrl = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api').trim().replace(/\/+$/, '');
+const API_BASE = rawApiUrl.endsWith('/api') ? rawApiUrl : `${rawApiUrl}/api`;
 
 // Offline simulation state stored in memory / localStorage
 let simulatedOffline = false;
